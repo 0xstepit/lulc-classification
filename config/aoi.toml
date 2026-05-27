@@ -1,0 +1,11 @@
+[contrainst]
+max_cloud_coverage = 20
+min_scenes = 30
+min_classes = 5
+year = 2021
+
+[candidate_points]
+# latitude/longitued point used in the STAC intersection filter.
+bavaria = [10, 10]
+brescia = [11, 11]
+andalusia = [12, 12]

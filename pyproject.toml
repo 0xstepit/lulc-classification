@@ -1,10 +1,30 @@
 [project]
-name = "lulc-classification-with-unet"
+name = "lu-lc-classification-with-unet"
 version = "0.1.0"
-description = "Add your description here"
+description = "Land usage and land cover classification with Sentinel-2 imagery an U-Net"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "mdformat>=1.0.0",
+  "mdformat>=1.0.0",
+  "pre-commit>=4.6.0",
+  "pytest>=9.0.3",
+  "ruff>=0.15.14",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[tool.ruff.lint]
+select = ["D", "I"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.format]
+docstring-code-format = true
+docstring-code-line-length = 80
+
+[dependency-groups]
+dev = [
     "pre-commit>=4.6.0",
 ]
