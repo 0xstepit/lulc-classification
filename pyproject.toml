@@ -5,10 +5,15 @@ description = "Land usage and land cover classification with Sentinel-2 imagery 
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+  "dotenv>=0.9.9",
+  "jupyterlab>=4.5.7",
   "mdformat>=1.0.0",
+  "numpy>=2.4.6",
   "pre-commit>=4.6.0",
+  "pystac>=1.14.3",
   "pystac-client>=0.9.0",
   "pytest>=9.0.3",
+  "rasterio>=1.5.0",
   "ruff>=0.15.14",
 ]
 

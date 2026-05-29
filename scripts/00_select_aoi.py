@@ -4,21 +4,21 @@ This script is used to run a preliminary investigation of the candidate Area of 
 
 import json
 import logging
-from math import cos, pi, radians
+from math import cos, radians
 from ntpath import exists
 from pathlib import Path
 
 from pystac_client import Client
 
 from src.data.sentinel2 import SentinelClient
+from src.io import ANALYSIS_DIR
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("select_aoi")
 
 from src.config import BBOX, Sentinel2Config, load_sentinel2_config
 
-ANALYSIS_DIR = Path(__file__).parent.parent / "data/analysis"
-RESULTS_FILE_NAME = "preliminary_aoi_results.json"
+PRELIMINARY_AOI_FILENAME = "preliminary_aoi_results.json"
 SEASON_MONTHS = {
     "DJF": {12, 1, 2},
     "MAM": {3, 4, 5},
@@ -85,11 +85,12 @@ def evaluate_candidate_validity(cfg: Sentinel2Config, analysis: dict) -> bool:
 
 def save_results(data: dict):
     logger.info("saving results to file")
-    with open(ANALYSIS_DIR / RESULTS_FILE_NAME, "w") as file:
+    with open(ANALYSIS_DIR / PRELIMINARY_AOI_FILENAME, "w") as file:
         json.dump(data, file, indent=4, sort_keys=True)
 
 
 def main():
+    # Create folder to store preliminary analysis if it does not exist yet.
     ANALYSIS_DIR.mkdir(parents=True, exist_ok=True)
 
     cfg = load_sentinel2_config()

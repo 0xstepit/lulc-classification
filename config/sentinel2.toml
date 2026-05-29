@@ -26,3 +26,24 @@ candidates = { brandeburg = [
 [stac]
 url = "https://stac.dataspace.copernicus.eu/v1"
 collection = "sentinel-2-l2a"
+
+[msi]
+# Bands are identified with the Coperinicus ID.
+#
+# 10: blue, green, red, NIR.
+# 20: red edge 1, red edge 2, red edge 3, narrow NIR, SWIR 1, SWIR 2.
+bands = { 10 = [
+  "B02_10m",
+  "B03_10m",
+  "B04_10m",
+  "B08_10m",
+], 20 = [
+  "B05_20m",
+  "B06_20m",
+  "B07_20m",
+  "B08A_20m",
+  "B11_20m",
+  "B12_20m",
+  "SCL_20m",
+] }
+target_resolution = 10

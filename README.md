@@ -12,3 +12,19 @@ Learn the spectro-temporal pattern
 ```sh
 make run-script script=00_select_aoi
 ```
+
+## Notebooks
+
+Please, first install a new IPython kernel:
+
+```sh
+make create-notebook-kernel
+```
+
+Start Jupyter to access the notebooks:
+
+```sh
+make start-notebook
+```
+
+Then select the just created kernel when opening the notebook.
