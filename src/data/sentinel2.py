@@ -18,4 +18,4 @@ class SentinelClient:
             query={"eo:cloud_cover": {"lt": self._cfg.aoi.max_cloud_coverage}},
         )
 
-        return list(search.item_collection())
+        return list(search.items())

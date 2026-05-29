@@ -10,6 +10,8 @@ from pathlib import Path
 
 from pystac_client import Client
 
+from src.data.sentinel2 import SentinelClient
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("select_aoi")
 
@@ -53,20 +55,15 @@ def create_bbox(center_lon: float, center_lat: float, size_km: float) -> BBOX:
     )
 
 
-def get_scene_counts(client, cfg: Sentinel2Config, bbox: BBOX) -> dict:
-    search = client.search(
-        collections=[cfg.stac.collection],
-        bbox=list(bbox),
-        datetime=f"{cfg.aoi.year}-01-01/{cfg.aoi.year}-12-31",
-        query={"eo:cloud_cover": {"lt": cfg.aoi.max_cloud_coverage}},
-    )
+def get_scene_counts(client: SentinelClient, bbox: BBOX) -> dict:
+    items = client.search_scenes(bbox)
 
     # It seems that mathced does not work here ???
     # total = search.matched()
     total = 0
     by_season = {"DJF": 0, "MAM": 0, "JJA": 0, "SON": 0}
 
-    for item in search.items():
+    for item in items:
         month = item.datetime.month
         for season, months in SEASON_MONTHS.items():
             if month in months:
@@ -96,7 +93,8 @@ def main():
     ANALYSIS_DIR.mkdir(parents=True, exist_ok=True)
 
     cfg = load_sentinel2_config()
-    client = Client.open(cfg.stac.url)
+
+    client = SentinelClient(cfg)
 
     valid_candidates = []
     candidate_analysis = {}
@@ -104,7 +102,7 @@ def main():
         logger.info(f"starting STAC requests for {name}")
 
         bbox = create_bbox(point[0], point[1], cfg.aoi.size)
-        result = get_scene_counts(client, cfg, bbox)
+        result = get_scene_counts(client, bbox)
         result["bbox"] = bbox
         candidate_analysis[name] = result
         if evaluate_candidate_validity(cfg, result):
