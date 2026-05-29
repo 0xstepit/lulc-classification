@@ -1,0 +1,28 @@
+[aoi]
+name = ""
+bounding_box = [
+  -6.362565950090263,
+  37.00620706676072,
+  -5.798434049909736,
+  37.45839293323928,
+]
+size = 50_000 # [m]
+year = 2021
+max_cloud_coverage = 20.0
+min_scenes = 30
+min_scenes_per_season = 5 # this actually is visually selected from the https://viewer.esa-worldcover.org/worldcover/
+# longitude/latitude (x, y) points of the candidate regions.
+candidates = { brandeburg = [
+  13.4402,
+  52.7654,
+], lombardy = [
+  10.0509,
+  45.6435,
+], andalusia = [
+  -6.0805,
+  37.2323,
+] }
+
+[stac]
+url = "https://stac.dataspace.copernicus.eu/v1"
+collection = "sentinel-2-l2a"
