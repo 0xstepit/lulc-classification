@@ -1,5 +1,6 @@
 [aoi]
 name = ""
+# Bounding box expressed in the EPSG: 4326.
 bounding_box = [
   -6.362565950090263,
   37.00620706676072,
@@ -7,8 +8,8 @@ bounding_box = [
   37.45839293323928,
 ]
 size = 50_000 # [m]
-year = 2021
-max_cloud_coverage = 20.0
+year = 2022
+max_cloud_coverage = 10.0
 min_scenes = 30
 min_scenes_per_season = 5 # this actually is visually selected from the https://viewer.esa-worldcover.org/worldcover/
 # longitude/latitude (x, y) points of the candidate regions.
@@ -41,9 +42,28 @@ bands = { 10 = [
   "B05_20m",
   "B06_20m",
   "B07_20m",
-  "B08A_20m",
+  "B8A_20m",
   "B11_20m",
   "B12_20m",
   "SCL_20m",
 ] }
 target_resolution = 10
+
+[composites]
+max_scenes_per_season = 10 # we could need it to limit computational resources.
+strategy = "seasonal"
+seasons = { DJF = [
+  "2021-12-01",
+  "2022-02-28",
+], MAM = [
+  "2022-03-01",
+  "2022-05-31",
+], JJA = [
+  "2022-06-01",
+  "2022-08-31",
+], SON = [
+  "2022-09-01",
+  "2022-11-30",
+] }
+statistic = "median" # Per-season aggregation
+indices = ["NDVI", "NDBI", "NDWI"] # Computed per season

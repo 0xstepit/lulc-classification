@@ -16,7 +16,7 @@ from src.io import ANALYSIS_DIR
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("select_aoi")
 
-from src.config import BBOX, Sentinel2Config, load_sentinel2_config
+from src.config import BBox, Sentinel2Config, load_sentinel2_config
 
 PRELIMINARY_AOI_FILENAME = "preliminary_aoi_results.json"
 SEASON_MONTHS = {
@@ -39,7 +39,7 @@ def deg_per_km(size_km: float, center_lat: float) -> tuple[float, float]:
     return lon_deg, lat_deg
 
 
-def create_bbox(center_lon: float, center_lat: float, size_km: float) -> BBOX:
+def create_bbox(center_lon: float, center_lat: float, size_km: float) -> BBox:
     """
     Create a bounding box around the provided center of the specified size.
     """
@@ -55,7 +55,7 @@ def create_bbox(center_lon: float, center_lat: float, size_km: float) -> BBOX:
     )
 
 
-def get_scene_counts(client: SentinelClient, bbox: BBOX) -> dict:
+def get_scene_counts(client: SentinelClient, bbox: BBox) -> dict:
     items = client.search_scenes(bbox)
 
     # It seems that mathced does not work here ???

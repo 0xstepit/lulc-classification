@@ -6,7 +6,7 @@ from typing import TypeAlias
 from src.io import CONFIG_DIR
 
 # Helper alias for  w | s | e | n
-BBOX: TypeAlias = tuple[float, float, float, float]
+BBox: TypeAlias = tuple[float, float, float, float]
 
 SENTINEL_CONFIG = "sentinel2.toml"
 
@@ -19,7 +19,7 @@ class AoIConfig:
     min_scenes: int
     min_scenes_per_season: int
     candidates: dict[str, list[float]]
-    bounding_box: BBOX | None = None
+    bounding_box: BBox | None = None
     size: float = 50
 
     def __post_init__(self) -> None:
@@ -61,6 +61,10 @@ class MSIConfig:
 
     def __post_init__(self):
         self.num_bands = len([band for res in self.bands for band in self.bands[res]])
+        self.bands = {int(k): v for k, v in self.bands.items()}
+
+    def get_bands(self):
+        return sorted([band for res in self.bands for band in self.bands[res]])
 
 
 @dataclass(frozen=True)

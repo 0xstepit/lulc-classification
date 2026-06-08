@@ -2,18 +2,25 @@
 This script is used to download all the required images from the Sentinel2 mission database.
 """
 
-import os
+import logging
 
 import rasterio
 from dotenv import load_dotenv
 
 from src.config import load_sentinel2_config
-from src.data.sentinel2 import SentinelClient, get_data_profile, get_scene
+from src.data.sentinel2 import (
+    SentinelClient,
+    download_scene,
+    get_data_profile,
+    get_scene,
+)
 from src.io import RAW_DIR
 
 # We access the Copernicus DB so we need the env variable for the S3-like access.
 load_dotenv()
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("download_sentinel2")
 
 COMPOSED_SCENE_SUFFIX = "_ALLBANDS.tif"
 
@@ -34,18 +41,27 @@ def main():
     assets = item.assets
 
     # We need the profile for an asset mathching the target resolution
-    # to specify the profile for the target composed scene.
+    # to specify the profile for the target composed scene. We use the first
+    # image of the desired resolution.
     ref_assets = assets[cfg.msi.bands[cfg.msi.target_resolution][0]].href
-    profile = get_data_profile(ref_assets)
-    profile.update(count=cfg.msi.num_bands, compress="lzw")
+    profile = get_data_profile(ref_assets, cfg.aoi.bounding_box)
 
-    with rasterio.open(
-        RAW_DIR / f"{item.id}{COMPOSED_SCENE_SUFFIX}", "w", **profile
-    ) as dst:
-        data = get_scene(href)
-        dst.write(data, 1)
+    # The final image will have one channel for each band of interested for the
+    # considered tile.
+    profile.update(count=cfg.msi.num_bands, driver="GTiff", compress="lzw", tiled=True)
 
-    # get_scene(items[0].href)
+    out_file = RAW_DIR / f"{item.id}{COMPOSED_SCENE_SUFFIX}"
+    if out_file.exists():
+        logger.info(f"output file {out_file} already exists, skipping")
+    else:
+        download_scene(
+            out_file,
+            profile,
+            cfg.aoi.bounding_box,
+            cfg.msi.target_resolution,
+            assets,
+            cfg.msi.get_bands(),
+        )
 
 
 if __name__ == "__main__":

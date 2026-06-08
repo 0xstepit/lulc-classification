@@ -8,12 +8,12 @@
                 37.45839293323928
             ],
             "by_season": {
-                "DJF": 28,
-                "JJA": 55,
-                "MAM": 30,
-                "SON": 48
+                "DJF": 30,
+                "JJA": 45,
+                "MAM": 25,
+                "SON": 29
             },
-            "total": 161
+            "total": 129
         },
         "brandeburg": {
             "bbox": [
@@ -23,12 +23,12 @@
                 52.99149293323928
             ],
             "by_season": {
-                "DJF": 14,
-                "JJA": 9,
-                "MAM": 11,
-                "SON": 22
+                "DJF": 5,
+                "JJA": 14,
+                "MAM": 18,
+                "SON": 9
             },
-            "total": 56
+            "total": 46
         },
         "lombardy": {
             "bbox": [
@@ -38,12 +38,12 @@
                 45.86959293323928
             ],
             "by_season": {
-                "DJF": 26,
-                "JJA": 29,
-                "MAM": 17,
-                "SON": 25
+                "DJF": 17,
+                "JJA": 28,
+                "MAM": 13,
+                "SON": 15
             },
-            "total": 97
+            "total": 73
         }
     },
     "valid_candidates": [
