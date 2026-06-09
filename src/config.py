@@ -68,10 +68,32 @@ class MSIConfig:
 
 
 @dataclass(frozen=True)
+class Composites:
+    """Seasonal composite raster configuration.
+
+    Attributes
+    ----------
+        max_scenes_per_season: Max number of scenes to use per season.
+        seasons: Start and date of each season.
+        statistic: Statistic to use within each seasons.
+    """
+
+    max_scenes_per_season: int
+    seasons: dict[str, list[str]]
+    statistic: str
+
+    def __post_init__(self):
+        for name, dates in self.seasons.items():
+            if len(dates) != 2:
+                raise ValueError(f"season {name} should have exactly two dates")
+
+
+@dataclass(frozen=True)
 class Sentinel2Config:
     aoi: AoIConfig
     stac: StacConfig
     msi: MSIConfig
+    composites: Composites
 
 
 def load_sentinel2_config(path: Path = CONFIG_DIR) -> Sentinel2Config:
@@ -88,5 +110,6 @@ def load_sentinel2_config(path: Path = CONFIG_DIR) -> Sentinel2Config:
         aoi = AoIConfig(**_cfg.pop("aoi"))
         stac = StacConfig(**_cfg.pop("stac"))
         msi = MSIConfig(**_cfg.pop("msi"))
+        composites = Composites(**_cfg.pop("composites"))
 
-    return Sentinel2Config(aoi, stac, msi)
+    return Sentinel2Config(aoi, stac, msi, composites)

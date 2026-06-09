@@ -50,20 +50,20 @@ bands = { 10 = [
 target_resolution = 10
 
 [composites]
-max_scenes_per_season = 10 # we could need it to limit computational resources.
-strategy = "seasonal"
-seasons = { DJF = [
-  "2021-12-01",
-  "2022-02-28",
-], MAM = [
-  "2022-03-01",
-  "2022-05-31",
-], JJA = [
-  "2022-06-01",
-  "2022-08-31",
-], SON = [
-  "2022-09-01",
-  "2022-11-30",
-] }
+max_scenes_per_season = 1                        # we could need it to limit computational resources.
+seasons = { DJF = ["2021-12-01", "2022-02-28"] }
+# seasons = { DJF = [
+#   "2021-12-01",
+#   "2022-02-28",
+# ], MAM = [
+#   "2022-03-01",
+#   "2022-05-31",
+# ], JJA = [
+#   "2022-06-01",
+#   "2022-08-31",
+# ], SON = [
+#   "2022-09-01",
+#   "2022-11-30",
+# ] }
 statistic = "median" # Per-season aggregation
-indices = ["NDVI", "NDBI", "NDWI"] # Computed per season
+# indices = ["NDVI", "NDBI", "NDWI"] # Computed per season

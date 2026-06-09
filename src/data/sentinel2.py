@@ -6,10 +6,11 @@ import numpy as np
 import pystac
 import rasterio
 from pystac_client import Client
-from rasterio import warp
+from rasterio import Affine, transform, warp
 from rasterio.enums import Resampling
 from rasterio.profiles import Profile
-from rasterio.windows import from_bounds
+from rasterio.windows import Window, from_bounds
+from rasterio.windows import transform as window_transform
 
 from src.config import BBox, Sentinel2Config
 from src.logger import setup_logging
@@ -60,38 +61,35 @@ class SentinelClient:
         return list(search.items())
 
 
-def get_data_profile(item_path: str, window_bbox: list | None = None) -> Profile:
+def get_data_profile(item_path: str) -> Profile:
     """Return the rasterio Profile for the raster at the provided path."""
     with rasterio.open(item_path) as src:
-        if window_bbox is not None:
-            # Transform from degree to meters.
-            left, bottom, right, top = warp.transform_bounds(
-                "EPSG:4326", src.crs, *window_bbox
-            )
-
-            window = from_bounds(
-                left=left,
-                bottom=bottom,
-                right=right,
-                top=top,
-                transform=src.transform,
-            )
         profile = src.profile
-
-        # Height and width of the output shape are influenced by cropping
-        height = int(window.height) if window_bbox else src.height
-        width = int(window.width) if window_bbox else src.width
-
-    profile["width"] = width
-    profile["height"] = height
 
     return profile
 
 
-def download_scene(
+def create_window_from_bbox(bbox: BBox, crs, transform) -> tuple[Window, Affine]:
+    # Transform from degree to meters.
+    left, bottom, right, top = warp.transform_bounds("EPSG:4326", crs, *bbox)
+
+    window = from_bounds(
+        left=left,
+        bottom=bottom,
+        right=right,
+        top=top,
+        transform=transform,
+    )
+    window = window.round_offsets(op="floor").round_lengths(op="ceil")
+    cropped_transform = window_transform(window, transform)
+
+    return window, cropped_transform
+
+
+def download_all_bands_scene(
     out_file: Path,
     profile: Profile,
-    bbox: BBox,
+    window: Window,
     target_res: float,
     assets: dict,
     bands: list[str],
@@ -101,7 +99,7 @@ def download_scene(
 
     Parameters
     ----------
-    bbox: BBox
+    : BBox
         Window to apply to the original raster to get a subset of the data.
 
     Returns
@@ -121,7 +119,7 @@ def download_scene(
                 Resampling.bilinear if "SCL" not in band else Resampling.nearest,
             )
 
-            data = get_scene(assets[band].href, bbox, resampling_strategy)
+            data = get_scene(assets[band].href, window, resampling_strategy)
 
             validate_scene_band(profile, data)
 
@@ -177,42 +175,50 @@ def get_resolution_from_band_name(band: str) -> float:
 
 def get_scene(
     item_path: str,
-    window_bbox: BBox | None = None,  # EPSG: 4326
+    window: Window,
     resampling_strategy: ResamplingStrategy = ResamplingStrategy(),
 ) -> np.ndarray:
     """Get the data associated with a scene with support for windowing and resampling."""
-    window = None
-
     resampling_factor = resampling_strategy.get_factor()
     resampling_method = resampling_strategy.get_method()
 
     with rasterio.open(item_path) as src:
-        if window_bbox is not None:
-            # Transform from degree to meters.
-            left, bottom, right, top = warp.transform_bounds(
-                "EPSG:4326", src.crs, *window_bbox
-            )
-
-            window = from_bounds(
-                left=left,
-                bottom=bottom,
-                right=right,
-                top=top,
-                transform=src.transform,
-            )
-
-        # Height and width of the outpur shape are influenced both by cropping and by
-        # resampling.
-        height = int((window.height if window else src.height) * resampling_factor)
-        width = int((window.width if window else src.width) * resampling_factor)
+        scaled_window = Window(
+            col_off=window.col_off / resampling_factor,
+            row_off=window.row_off / resampling_factor,
+            width=window.width / resampling_factor,
+            height=window.height / resampling_factor,
+        )
 
         # An output shape is always created and used, so it should be ok to always set it here,
         # even with the original size.
         # https://github.com/rasterio/rasterio/blob/4e5bce88ea3c84b41a394244fe1cad6a5b8eb854/rasterio/_io.pyx#L544-L547
         data = src.read(
             1,
-            window=window,
-            out_shape=(height, width),
+            window=scaled_window,
+            out_shape=(int(window.height), int(window.width)),
             resampling=resampling_method,
         )
     return data
+
+
+def evenly_spaced_indexes(max_index: int, wanted_indexes: int) -> list[int]:
+    """Evenly select `max_index` indexes out of `wanted_indexes`.
+
+    Args:
+        max_index: The total number of available indexes.
+        wanted_indexes: The number of desired indexes.
+
+    Returns
+    -------
+        The list of indexes evenly spaced from 0 to `max_index`.
+    """
+    if wanted_indexes == 1:
+        return [0]
+
+    if wanted_indexes >= max_index:
+        return list(range(max_index))
+
+    step = (max_index - 1) / (wanted_indexes - 1)
+
+    return [round(i * step) for i in range(wanted_indexes)]
