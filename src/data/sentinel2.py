@@ -12,9 +12,10 @@ from rasterio.profiles import Profile
 from rasterio.windows import from_bounds
 
 from src.config import BBox, Sentinel2Config
+from src.logger import setup_logging
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("select_aoi")
+setup_logging()
+logger = logging.getLogger("sentinel2")
 
 
 @dataclass

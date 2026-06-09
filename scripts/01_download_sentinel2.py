@@ -15,11 +15,12 @@ from src.data.sentinel2 import (
     get_scene,
 )
 from src.io import RAW_DIR
+from src.logger import setup_logging
 
 # We access the Copernicus DB so we need the env variable for the S3-like access.
 load_dotenv()
 
-logging.basicConfig(level=logging.INFO)
+setup_logging()
 logger = logging.getLogger("download_sentinel2")
 
 COMPOSED_SCENE_SUFFIX = "_ALLBANDS.tif"

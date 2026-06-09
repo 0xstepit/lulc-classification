@@ -12,8 +12,9 @@ from pystac_client import Client
 
 from src.data.sentinel2 import SentinelClient
 from src.io import ANALYSIS_DIR
+from src.logger import setup_logging
 
-logging.basicConfig(level=logging.INFO)
+setup_logging()
 logger = logging.getLogger("select_aoi")
 
 from src.config import BBox, Sentinel2Config, load_sentinel2_config
