@@ -19,7 +19,7 @@ class GCS:
     latitude : float
         The values of the latitude in degrees.
     longitude : float
-        The values of the latitude in degrees.
+        The values of the longitude in degrees.
     """
 
     latitude: float
@@ -32,7 +32,7 @@ def deg_per_m(meters: float, center_lat: float) -> tuple[float, float]:
 
     Parameters
     ----------
-    size_m : float
+    meters : float
         The meters to convert
 
     center_lat : float
@@ -54,7 +54,7 @@ def deg_per_m(meters: float, center_lat: float) -> tuple[float, float]:
 def create_bbox(gcs: GCS, size_m: float) -> BoundingBox:
     """Create a bounding box around the provided center of the specified size.
     Due to distortions in the projections of Earth model,
-    the resulting bounding box size will be close to but not equal to the speicfied size.
+    the resulting bounding box size will be close to but not equal to the specified size.
 
     Parameters
     ----------
@@ -89,12 +89,12 @@ def create_window_from_bbox(bbox: BoundingBox, crs, transform) -> tuple[Window, 
 
     Parameters
     ----------
+    bbox : BoundingBox
+        Bounding box defining the window defined in the EPSG:4326.
     crs :
         Rasterio Profile CRS.
     transform :
         Rasterio Profile transformation matrix.
-    bbox : BoundingBox
-        Bounding box defining the window defined in the EPSG:4326.
 
 
     Returns
