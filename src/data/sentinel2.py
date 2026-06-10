@@ -1,7 +1,8 @@
 import logging
+from collections import Counter
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Counter
+from typing import Any
 
 import numpy as np
 import pystac
@@ -92,7 +93,7 @@ class ResamplingStrategy:
         The resampling factor is > 1 for upsampling and < 1 for downsampling.
     method : Resampling
         The resampling method. It should be bilinear for continuous variables and nearest
-        neighboor for continuous ones.
+        neighboor for categorical ones.
     """
 
     factor: float = 1
@@ -113,7 +114,7 @@ class SceneCounts:
     ----------
     total : int
         The overall number of scenes.
-    by_season : dic
+    by_season : dict[str, int]
         The number of available scenes per season.
     """
 
@@ -145,7 +146,8 @@ def count_scenes_by_seasons(items: list[pystac.Item]) -> SceneCounts:
     scene_counts = SceneCounts()
 
     for item in items:
-        # TODO: handle missing datetime
+        if item.datetime is None:
+            continue
         month = item.datetime.month
         for season, months in SEASON_MONTHS.items():
             # TODO: should not happen, but log not existing month.
@@ -274,10 +276,10 @@ def validate_scene_band(profile: Profile, data: np.ndarray) -> None:
     h, w = data.shape
 
     if w != profile["width"]:
-        raise ValueError(f"wrong width: expcted {profile['width']}, received {w}")
+        raise ValueError(f"wrong width: expected {profile['width']}, received {w}")
 
     if h != profile["height"]:
-        raise ValueError(f"wrong height: expcted {profile['height']}, received {h}")
+        raise ValueError(f"wrong height: expected {profile['height']}, received {h}")
 
 
 def get_resolution_from_band_name(band: str) -> float:
