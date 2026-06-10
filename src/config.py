@@ -1,14 +1,9 @@
 import tomllib
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TypeAlias
 
-from src.io import CONFIG_DIR
-
-# Helper alias for  w | s | e | n
-BBox: TypeAlias = tuple[float, float, float, float]
-
-SENTINEL_CONFIG = "sentinel2.toml"
+from src.geometry import BoundingBox
+from src.io import CONFIG_DIR, SENTINEL_CONFIG
 
 
 @dataclass
@@ -19,7 +14,8 @@ class AoIConfig:
     min_scenes: int
     min_scenes_per_season: int
     candidates: dict[str, list[float]]
-    bounding_box: BBox | None = None
+    bounding_box: BoundingBox | None = None
+    tile: str | None = None
     size: float = 50
 
     def __post_init__(self) -> None:

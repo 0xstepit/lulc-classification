@@ -27,3 +27,32 @@ layout cannot be enough to accommodate the new values, and for this reason, a
 new allocation is made. With the band approach, when we add a new band, we
 always touch the next memory available without having to keep dead space for the
 reallocation.
+
+Even if the bounding box does not change, we can get different tiles:
+
+```sh
+Item name: S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831
+Item name: S2A_MSIL2A_20221112T111321_N0510_R137_T29SQA_20240805T020831
+Item name: S2B_MSIL2A_20221107T111149_N0510_R137_T29SQB_20240805T175629
+Item name: S2A_MSIL2A_20221102T111221_N0510_R137_T29SQA_20240806T084534
+Item name: S2A_MSIL2A_20221013T111011_N0510_R137_T29SQB_20240801T195923
+Item name: S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100
+Item name: S2B_MSIL2A_20220928T110739_N0510_R137_T29SQA_20240726T063100
+Item name: S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329
+Item name: S2B_MSIL2A_20220908T110619_N0510_R137_T29SQA_20240705T075329
+Item name: S2A_MSIL2A_20220903T110631_N0510_R137_T29SQA_20240729T160319
+```
+
+We are computing the window for a tile, and then trying to apply it also to
+other, which origin is completely different:
+
+```sh
+ERROR 1: Stream too short
+
+ERROR 1: Stream too short
+
+ERROR 1: Stream too short
+
+ERROR 1: opj_get_decoded_tile() failed
+ERROR 1: opj_get_decoded_tile() failed
+```

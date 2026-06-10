@@ -11,3 +11,6 @@ ANALYSIS_DIR = DATA_DIR / "analysis"
 
 # Folder containing all the configuration files for the scripts.
 CONFIG_DIR = ROOT / "config"
+
+# Name of the Sentinel2 configuration file.
+SENTINEL_CONFIG = "sentinel2.toml"

@@ -1,5 +1,5 @@
 {
-    "candidate_analysis": {
+    "candidates_results": {
         "andalusia": {
             "bbox": [
                 -6.362565950090263,
@@ -7,13 +7,16 @@
                 -5.798434049909736,
                 37.45839293323928
             ],
-            "by_season": {
-                "DJF": 30,
-                "JJA": 45,
-                "MAM": 25,
-                "SON": 29
-            },
-            "total": 129
+            "grid_code": "MGRS-30STG",
+            "scene_counts": {
+                "by_season": {
+                    "DJF": 9,
+                    "JJA": 13,
+                    "MAM": 7,
+                    "SON": 6
+                },
+                "total": 35
+            }
         },
         "brandeburg": {
             "bbox": [
@@ -22,13 +25,16 @@
                 13.81135387673415,
                 52.99149293323928
             ],
-            "by_season": {
-                "DJF": 5,
-                "JJA": 14,
-                "MAM": 18,
-                "SON": 9
-            },
-            "total": 46
+            "grid_code": "MGRS-33UVU",
+            "scene_counts": {
+                "by_season": {
+                    "DJF": 3,
+                    "JJA": 6,
+                    "MAM": 6,
+                    "SON": 1
+                },
+                "total": 16
+            }
         },
         "lombardy": {
             "bbox": [
@@ -37,17 +43,19 @@
                 10.372128929873613,
                 45.86959293323928
             ],
-            "by_season": {
-                "DJF": 17,
-                "JJA": 28,
-                "MAM": 13,
-                "SON": 15
-            },
-            "total": 73
+            "grid_code": "MGRS-32TNR",
+            "scene_counts": {
+                "by_season": {
+                    "DJF": 9,
+                    "JJA": 16,
+                    "MAM": 7,
+                    "SON": 8
+                },
+                "total": 40
+            }
         }
     },
     "valid_candidates": [
-        "brandeburg",
         "lombardy",
         "andalusia"
     ]

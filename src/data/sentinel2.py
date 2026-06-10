@@ -1,29 +1,100 @@
 import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Any, Counter
 
 import numpy as np
 import pystac
 import rasterio
 from pystac_client import Client
-from rasterio import Affine, transform, warp
 from rasterio.enums import Resampling
+from rasterio.errors import RasterioIOError
 from rasterio.profiles import Profile
-from rasterio.windows import Window, from_bounds
-from rasterio.windows import transform as window_transform
+from rasterio.windows import Window
+from tenacity import (
+    retry,
+    retry_if_exception_type,
+    stop_after_attempt,
+    wait_exponential,
+)
 
-from src.config import BBox, Sentinel2Config
-from src.logger import setup_logging
+from src.config import BoundingBox, Sentinel2Config
+from src.constants import SEASON_MONTHS
 
-setup_logging()
 logger = logging.getLogger("sentinel2")
+
+
+class SentinelClient:
+    """The sentinel clinet for the CDSE database."""
+
+    def __init__(self, cfg: Sentinel2Config) -> None:
+        self._client = Client.open(cfg.stac.url)
+        self._cfg = cfg
+
+    def search_items(
+        self,
+        bbox: BoundingBox,
+        datetime: str | None = None,
+        grid_code: str | None = None,
+        single_tile: bool = False,
+    ) -> list[pystac.Item]:
+        """Search STAC items filtered by the inputs.
+
+        Parameters
+        ----------
+        bbox : BoundingBox
+            Bounding box that must be contained in the scene.
+        datetime : str | None
+            Date or range of dates used to filter the scenes. If not provided, it falls back
+            to the configuration year for the AOI.
+        grid_code : str | None
+            Grid code of the tile associated with the scene containin the bounding box.
+        single_tile: bool
+            If True, only the scenes associated with the most frequent tile are returned.
+
+        Returns
+        -------
+        list[pystac.Item]
+            A list of STAC Items.
+        """
+        query: dict[str, Any] = {
+            "eo:cloud_cover": {"lt": self._cfg.aoi.max_cloud_coverage}
+        }
+        if grid_code is not None:
+            query["grid:code"] = {"eq": grid_code}
+
+        if datetime is None:
+            year = self._cfg.aoi.year
+            datetime = f"{year}-01-01/{year}-12-31"
+
+        search = self._client.search(
+            collections=[self._cfg.stac.collection],
+            bbox=list(bbox),
+            datetime=datetime,
+            query=query,
+        )
+
+        items = list(search.items())
+
+        if single_tile and grid_code is None:
+            items = filter_most_frequent_tile(items)
+
+        return items
 
 
 @dataclass
 class ResamplingStrategy:
-    """Datawrapper to control rasterio resampling strategy"""
+    """Datawrapper to control rasterio resampling strategy.
 
-    # > 1 for upsampling, < 1 for downsampling.
+    Attributes
+    ----------
+    factor : float
+        The resampling factor is > 1 for upsampling and < 1 for downsampling.
+    method : Resampling
+        The resampling method. It should be bilinear for continuous variables and nearest
+        neighboor for continuous ones.
+    """
+
     factor: float = 1
     method: Resampling = Resampling.nearest
 
@@ -34,56 +105,121 @@ class ResamplingStrategy:
         return self.method
 
 
-class SentinelClient:
-    def __init__(self, cfg: Sentinel2Config) -> None:
-        self._client = Client.open(cfg.stac.url)
-        self._cfg = cfg
+@dataclass
+class SceneCounts:
+    """Contains information associated with the number of scenes found for each season.
 
-    def search_scenes(
-        self,
-        bbox: BBox,
-        datetime: str | None = None,
-    ) -> list[pystac.Item]:
-        """
-        Datatime can be the whole year if nothing is specified or the provided period.
-        """
-        if datetime is None:
-            year = self._cfg.aoi.year
-            datetime = f"{year}-01-01/{year}-12-31"
+    Attributes
+    ----------
+    total : int
+        The overall number of scenes.
+    by_season : dic
+        The number of available scenes per season.
+    """
 
-        search = self._client.search(
-            collections=[self._cfg.stac.collection],
-            bbox=list(bbox),
-            datetime=datetime,
-            query={"eo:cloud_cover": {"lt": self._cfg.aoi.max_cloud_coverage}},
-        )
+    total: int = 0
+    by_season: dict = field(
+        default_factory=lambda: {"DJF": 0, "MAM": 0, "JJA": 0, "SON": 0}
+    )
 
-        return list(search.items())
+    def increment_counter(self, season: str):
+        self.by_season[season] += 1
+        self.total += 1
 
 
+def count_scenes_by_seasons(items: list[pystac.Item]) -> SceneCounts:
+    """Counts the number of scene per each season.
+
+    Parameters
+    ----------
+    items : list[pystac.Item]
+        A list of STAC items.
+
+    Returns
+    -------
+    SceneCounts
+        The information abound the counting.
+    """
+    # It seems that mathced does not work here ???
+    # total = search.matched()
+    scene_counts = SceneCounts()
+
+    for item in items:
+        # TODO: handle missing datetime
+        month = item.datetime.month
+        for season, months in SEASON_MONTHS.items():
+            # TODO: should not happen, but log not existing month.
+            if month in months:
+                scene_counts.increment_counter(season)
+
+    return scene_counts
+
+
+def _log_retry(retry_state) -> None:
+    logger.warning(
+        f"retrying get_scene for {retry_state.args[0]} "
+        f"(attempt {retry_state.attempt_number}): {retry_state.outcome.exception()}"
+    )
+
+
+@retry(
+    retry=retry_if_exception_type((RasterioIOError, IOError)),
+    wait=wait_exponential(multiplier=1, min=2, max=60),
+    stop=stop_after_attempt(5),
+    before_sleep=_log_retry,
+)
 def get_data_profile(item_path: str) -> Profile:
-    """Return the rasterio Profile for the raster at the provided path."""
+    """Returns the rasterio Profile for the raster at the provided path.
+
+    Parameters
+    ----------
+    item_path : str
+        Path referencing the STAC Item.
+
+    Returns
+    -------
+    Profile
+        The Rasterio profile of the item.
+    """
     with rasterio.open(item_path) as src:
         profile = src.profile
 
     return profile
 
 
-def create_window_from_bbox(bbox: BBox, crs, transform) -> tuple[Window, Affine]:
-    # Transform from degree to meters.
-    left, bottom, right, top = warp.transform_bounds("EPSG:4326", crs, *bbox)
+@retry(
+    retry=retry_if_exception_type((RasterioIOError, IOError)),
+    wait=wait_exponential(multiplier=1, min=2, max=10),
+    stop=stop_after_attempt(5),
+    before_sleep=_log_retry,
+)
+def get_scene(
+    item_path: str,
+    window: Window,
+    resampling_strategy: ResamplingStrategy = ResamplingStrategy(),
+) -> np.ndarray:
+    """Get the data associated with a scene with support for windowing and resampling."""
+    resampling_factor = resampling_strategy.get_factor()
+    resampling_method = resampling_strategy.get_method()
 
-    window = from_bounds(
-        left=left,
-        bottom=bottom,
-        right=right,
-        top=top,
-        transform=transform,
-    )
-    window = window.round_offsets(op="floor").round_lengths(op="ceil")
-    cropped_transform = window_transform(window, transform)
+    with rasterio.open(item_path) as src:
+        scaled_window = Window(
+            window.col_off / resampling_factor,  # type: ignore[call-arg]
+            window.row_off / resampling_factor,
+            window.width / resampling_factor,
+            window.height / resampling_factor,
+        )
 
-    return window, cropped_transform
+        # An output shape is always created and used, so it should be ok to always set it here,
+        # even with the original size.
+        # https://github.com/rasterio/rasterio/blob/4e5bce88ea3c84b41a394244fe1cad6a5b8eb854/rasterio/_io.pyx#L544-L547
+        data = src.read(
+            1,
+            window=scaled_window,
+            out_shape=(int(window.height), int(window.width)),
+            resampling=resampling_method,
+        )
+    return data
 
 
 def download_all_bands_scene(
@@ -94,19 +230,6 @@ def download_all_bands_scene(
     assets: dict,
     bands: list[str],
 ) -> None:
-    """
-    Download a Setninel2 scene with composed bands.
-
-    Parameters
-    ----------
-    : BBox
-        Window to apply to the original raster to get a subset of the data.
-
-    Returns
-    -------
-    out: type
-        description
-    """
     with rasterio.open(out_file, "w", **profile) as dst:
         for idx, band in enumerate(bands):
             logger.info(f"starting download for band {band} and index {idx}")
@@ -173,52 +296,25 @@ def get_resolution_from_band_name(band: str) -> float:
         )
 
 
-def get_scene(
-    item_path: str,
-    window: Window,
-    resampling_strategy: ResamplingStrategy = ResamplingStrategy(),
-) -> np.ndarray:
-    """Get the data associated with a scene with support for windowing and resampling."""
-    resampling_factor = resampling_strategy.get_factor()
-    resampling_method = resampling_strategy.get_method()
+def get_tile_id(item: pystac.Item) -> str:
+    """Get the identifier of the tile associated with the provided STAC item. The function
+    is valid only for Sentinel2 data containedj in the CDSE database.
 
-    with rasterio.open(item_path) as src:
-        scaled_window = Window(
-            col_off=window.col_off / resampling_factor,
-            row_off=window.row_off / resampling_factor,
-            width=window.width / resampling_factor,
-            height=window.height / resampling_factor,
-        )
-
-        # An output shape is always created and used, so it should be ok to always set it here,
-        # even with the original size.
-        # https://github.com/rasterio/rasterio/blob/4e5bce88ea3c84b41a394244fe1cad6a5b8eb854/rasterio/_io.pyx#L544-L547
-        data = src.read(
-            1,
-            window=scaled_window,
-            out_shape=(int(window.height), int(window.width)),
-            resampling=resampling_method,
-        )
-    return data
-
-
-def evenly_spaced_indexes(max_index: int, wanted_indexes: int) -> list[int]:
-    """Evenly select `max_index` indexes out of `wanted_indexes`.
-
-    Args:
-        max_index: The total number of available indexes.
-        wanted_indexes: The number of desired indexes.
+    Parameters
+    ----------
+    item : pystac.Item
+        The items of which we want to know the tile ID.
 
     Returns
     -------
-        The list of indexes evenly spaced from 0 to `max_index`.
+    str
+        The tile ID.
     """
-    if wanted_indexes == 1:
-        return [0]
+    # An example of Sentinel2 tile name: S2A_MSIL2A_20220903T110631_N0510_R137_T29SQA_20240729T160319
+    return item.id.split("_")[5]
 
-    if wanted_indexes >= max_index:
-        return list(range(max_index))
 
-    step = (max_index - 1) / (wanted_indexes - 1)
-
-    return [round(i * step) for i in range(wanted_indexes)]
+def filter_most_frequent_tile(items: list[pystac.Item]) -> list[pystac.Item]:
+    tile_counts = Counter(get_tile_id(item) for item in items)
+    selected_tile = tile_counts.most_common(1)[0][0]
+    return [item for item in items if get_tile_id(item) == selected_tile]

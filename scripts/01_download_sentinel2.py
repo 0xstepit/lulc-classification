@@ -4,18 +4,16 @@ This script is used to download all the required images from the Sentinel2 missi
 
 import logging
 
-import rasterio
 from dotenv import load_dotenv
 
 from src.config import load_sentinel2_config
 from src.data.sentinel2 import (
     SentinelClient,
-    create_window_from_bbox,
     download_all_bands_scene,
-    evenly_spaced_indexes,
     get_data_profile,
-    get_scene,
 )
+from src.data.utils import evenly_spaced_indexes
+from src.geometry import create_window_from_bbox
 from src.io import RAW_DIR
 from src.logger import setup_logging
 
@@ -45,7 +43,7 @@ def main():
     # get the profile associated with an image of the desired resolution, correct it
     # to take into account the AoI, and then update it with the desired custom
     # profile properties.
-    items = client.search_scenes(bbox)
+    items = client.search_items(bbox, grid_code=cfg.aoi.tile)
 
     assets = items[0].assets
     # We use the first band of the desired resolution.
@@ -79,7 +77,7 @@ def main():
         SEASON_DIR.mkdir(parents=True, exist_ok=True)
 
         stac_datetime = f"{dates[0]}/{dates[1]}"
-        items = client.search_scenes(bbox, stac_datetime)
+        items = client.search_items(bbox, stac_datetime, cfg.aoi.tile)
 
         logger.info(f"retrieved {len(items)} items")
 
@@ -95,14 +93,21 @@ def main():
             if out_file.exists():
                 logger.info(f"output file {out_file} already exists, skipping")
             else:
-                download_all_bands_scene(
-                    out_file,
-                    profile,
-                    window,
-                    cfg.msi.target_resolution,
-                    item.assets,
-                    bands,
-                )
+                tmp_file = out_file.with_suffix(".tmp.tif")
+                try:
+                    download_all_bands_scene(
+                        tmp_file,
+                        profile,
+                        window,
+                        cfg.msi.target_resolution,
+                        item.assets,
+                        bands,
+                    )
+                    tmp_file.rename(out_file)
+                except Exception:
+                    if tmp_file.exists():
+                        tmp_file.unlink()
+                    raise
 
 
 if __name__ == "__main__":
