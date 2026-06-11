@@ -54,6 +54,7 @@ class MSIConfig:
 
     bands: dict
     target_resolution: int
+    scl_mask_classes: list[int]
 
     def __post_init__(self):
         self.num_bands = len([band for res in self.bands for band in self.bands[res]])
@@ -61,6 +62,19 @@ class MSIConfig:
 
     def get_bands(self):
         return sorted([band for res in self.bands for band in self.bands[res]])
+
+    def get_scl_band_index(self):
+        """Returns the SCL Sentinel2 band position in the scenes. This value is hardcoded
+        because it assumes that each scene has bands ordered like in the configuration
+        file.
+
+        Returns
+        -------
+        int
+            The SCL map index in a scene.
+
+        """
+        return 10
 
 
 @dataclass(frozen=True)
