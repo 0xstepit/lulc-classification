@@ -35,4 +35,7 @@ docstring-code-format = true
 docstring-code-line-length = 80
 
 [dependency-groups]
-dev = ["pre-commit>=4.6.0"]
+dev = [
+    "mdformat-myst>=0.3.0",
+    "pre-commit>=4.6.0",
+]
