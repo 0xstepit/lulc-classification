@@ -8,13 +8,10 @@ dependencies = [
   "dotenv>=0.9.9",
   "jupyterlab>=4.5.7",
   "matplotlib>=3.10.9",
-  "mdformat>=1.0.0",
   "numpy>=2.4.6",
-  "pre-commit>=4.6.0",
   "psutil>=7.2.2",
   "pystac>=1.14.3",
   "pystac-client>=0.9.0",
-  "pytest>=9.0.3",
   "rasterio>=1.5.0",
   "rich>=15.0.0",
   "ruff>=0.15.14",
@@ -36,6 +33,8 @@ docstring-code-line-length = 80
 
 [dependency-groups]
 dev = [
-    "mdformat-myst>=0.3.0",
-    "pre-commit>=4.6.0",
+  "mdformat>=1.0.0",
+  "mdformat-myst>=0.3.0",
+  "pre-commit>=4.6.0",
+  "pytest>=9.0.3",
 ]

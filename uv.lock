@@ -866,13 +866,10 @@ dependencies = [
     { name = "dotenv" },
     { name = "jupyterlab" },
     { name = "matplotlib" },
-    { name = "mdformat" },
     { name = "numpy" },
-    { name = "pre-commit" },
     { name = "psutil" },
     { name = "pystac" },
     { name = "pystac-client" },
-    { name = "pytest" },
     { name = "rasterio" },
     { name = "rich" },
     { name = "ruff" },
@@ -881,8 +878,10 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "mdformat" },
     { name = "mdformat-myst" },
     { name = "pre-commit" },
+    { name = "pytest" },
 ]
 
 [package.metadata]
@@ -890,13 +889,10 @@ requires-dist = [
     { name = "dotenv", specifier = ">=0.9.9" },
     { name = "jupyterlab", specifier = ">=4.5.7" },
     { name = "matplotlib", specifier = ">=3.10.9" },
-    { name = "mdformat", specifier = ">=1.0.0" },
     { name = "numpy", specifier = ">=2.4.6" },
-    { name = "pre-commit", specifier = ">=4.6.0" },
     { name = "psutil", specifier = ">=7.2.2" },
     { name = "pystac", specifier = ">=1.14.3" },
     { name = "pystac-client", specifier = ">=0.9.0" },
-    { name = "pytest", specifier = ">=9.0.3" },
     { name = "rasterio", specifier = ">=1.5.0" },
     { name = "rich", specifier = ">=15.0.0" },
     { name = "ruff", specifier = ">=0.15.14" },
@@ -905,8 +901,10 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "mdformat", specifier = ">=1.0.0" },
     { name = "mdformat-myst", specifier = ">=0.3.0" },
     { name = "pre-commit", specifier = ">=4.6.0" },
+    { name = "pytest", specifier = ">=9.0.3" },
 ]
 
 [[package]]
