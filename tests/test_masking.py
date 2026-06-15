@@ -53,3 +53,86 @@ class TestCreateSclMask:
         data = _scene(11, 3, 3, fill=3)
         mask = create_scl_mask(data, scl_band_index=0, mask_classes=[])
         assert not mask.all()
+
+
+class TestApplySclMask:
+    def test_scl_band_removed_from_output(self):
+        data = _scene(2, 3, 3, fill=3)
+        mask = np.zeros((3, 3), dtype=bool)
+
+        result = apply_scl_mask(data, scl_band_index=1, mask=mask)
+
+        assert result.shape[0] == 1
+
+    def test_scl_at_first_index_removed(self):
+        data = _scene(4, 3, 3, fill=1)
+        mask = np.zeros((3, 3), dtype=bool)
+
+        result = apply_scl_mask(data, scl_band_index=0, mask=mask)
+
+        assert result.shape == (3, 3, 3)
+
+    def test_scl_at_last_index_removed(self):
+        data = _scene(4, 3, 3, fill=1)
+        mask = np.zeros((3, 3), dtype=bool)
+
+        result = apply_scl_mask(data, scl_band_index=3, mask=mask)
+
+        assert result.shape == (3, 3, 3)
+
+    def test_masked_pixels_are_nan_in_all_bands(self):
+        data = _scene(4, 3, 3, fill=100)
+        mask = np.zeros((3, 3), dtype=bool)
+        mask[1, 1] = True
+
+        result = apply_scl_mask(data, scl_band_index=3, mask=mask)
+
+        assert np.all(np.isnan(result[:, 1, 1]))
+
+    def test_unmasked_pixels_preserve_values(self):
+        data = _scene(4, 3, 3, fill=500)
+        mask = np.zeros((3, 3), dtype=bool)
+        mask[1, 1] = True
+
+        result = apply_scl_mask(data, scl_band_index=3, mask=mask)
+
+        unmasked = result[:, mask == False]
+        assert np.all(unmasked == 500)
+
+    def test_output_dtype_is_float32(self):
+        data = _scene(4, 3, 3, fill=1)
+        mask = np.zeros((3, 3), dtype=bool)
+
+        result = apply_scl_mask(data, scl_band_index=3, mask=mask)
+
+        assert result.dtype == np.float32
+
+    def test_fully_masked_scene_all_nan(self):
+        data = _scene(4, 3, 3, fill=1)
+        mask = np.ones((3, 3), dtype=bool)
+
+        result = apply_scl_mask(data, scl_band_index=3, mask=mask)
+
+        assert np.all(np.isnan(result))
+
+    def test_empty_mask_no_nans(self):
+        data = _scene(4, 3, 3, fill=1)
+        mask = np.zeros((3, 3), dtype=bool)
+
+        result = apply_scl_mask(data, scl_band_index=3, mask=mask)
+
+        assert not np.any(np.isnan(result))
+
+    def test_raises_when_scl_index_out_of_bounds(self):
+        data = _scene(4, 3, 3)
+        mask = np.zeros((3, 3), dtype=bool)
+
+        with pytest.raises(ValueError):
+            apply_scl_mask(data, scl_band_index=4, mask=mask)
+
+    def test_raises_when_single_band_input(self):
+        data = _scene(1, 3, 3)
+        mask = np.zeros((3, 3), dtype=bool)
+
+        with pytest.raises(ValueError):
+            apply_scl_mask(data, scl_band_index=0, mask=mask)

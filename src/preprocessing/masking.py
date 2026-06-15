@@ -49,6 +49,12 @@ def apply_scl_mask(
         (C, H, W), the shape of the output is (C-1, H, W).
 
     """
+    if scl_band_index > data.shape[0] - 1:
+        raise ValueError(f"scl_band_index {scl_band_index} is out of bands")
+
+    if data.shape[0] == 1:
+        raise ValueError(f"provided array is must have >1 dimension")
+
     # Since NaN is a float, we have to cast the raster data.
     bands = np.concatenate(
         [data[:scl_band_index], data[scl_band_index + 1 :]], axis=0
