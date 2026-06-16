@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from src.geometry import BoundingBox
-from src.io import CONFIG_DIR, SENTINEL_CONFIG
+from src.io import CONFIG_DIR, CONFIG_FILE
 
 
 @dataclass
@@ -46,6 +46,18 @@ class StacConfig:
             raise ValueError("STAC collection cannot be empty")
 
 
+@dataclass(frozen=True)
+class IndicesConfig:
+    """
+    Configuration for the indices used in the analysis
+    """
+
+    bands_to_channels: dict[str, dict[str, int]]
+
+    def get_channel(self, index: str, band: str) -> int:
+        return self.bands_to_channels[index][band]
+
+
 @dataclass
 class MSIConfig:
     """
@@ -86,11 +98,13 @@ class Composites:
         max_scenes_per_season: Max number of scenes to use per season.
         seasons: Start and date of each season.
         statistic: Statistic to use within each seasons.
+        tiles_size: dimension for [H, W] of the window to tile each scene.
     """
 
     max_scenes_per_season: int
     seasons: dict[str, list[str]]
     statistic: str
+    tiles_size: int
 
     def __post_init__(self):
         for name, dates in self.seasons.items():
@@ -99,20 +113,19 @@ class Composites:
 
 
 @dataclass(frozen=True)
-class Sentinel2Config:
+class Config:
     aoi: AoIConfig
     stac: StacConfig
     msi: MSIConfig
     composites: Composites
+    indices: IndicesConfig
 
 
-def load_sentinel2_config(path: Path = CONFIG_DIR) -> Sentinel2Config:
-    file_path = CONFIG_DIR / SENTINEL_CONFIG
+def load_sentinel2_config(path: Path = CONFIG_DIR) -> Config:
+    file_path = CONFIG_DIR / CONFIG_FILE
 
     if not file_path.exists():
-        raise FileNotFoundError(
-            f"File named {SENTINEL_CONFIG} does not exists in {path}"
-        )
+        raise FileNotFoundError(f"File named {CONFIG_FILE} does not exists in {path}")
 
     with open(file_path, "rb") as f:
         _cfg = tomllib.load(f)
@@ -121,5 +134,6 @@ def load_sentinel2_config(path: Path = CONFIG_DIR) -> Sentinel2Config:
         stac = StacConfig(**_cfg.pop("stac"))
         msi = MSIConfig(**_cfg.pop("msi"))
         composites = Composites(**_cfg.pop("composites"))
+        indices = IndicesConfig(**_cfg.pop("indices"))
 
-    return Sentinel2Config(aoi, stac, msi, composites)
+    return Config(aoi, stac, msi, composites, indices)

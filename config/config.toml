@@ -67,4 +67,9 @@ seasons = { DJF = [
   "2022-11-30",
 ] }
 statistic = "median" # Per-season aggregation
+tiles_size = 1024 # dimension of the tile window to apply for the composite.
 # indices = ["NDVI", "NDBI", "NDWI"] # Computed per season
+
+[indices]
+# A map from the band name to the raster channel index for each index.
+bands_to_channels = { ndvi = { "nir" = 3, "red" = 2 }, ndbi = { "swir" = 9, "nir" = 3 }, ndwi = { "green" = 1, "nir" = 3 } }

@@ -19,8 +19,9 @@ from tenacity import (
     wait_exponential,
 )
 
-from src.config import BoundingBox, Sentinel2Config
+from src.config import Config
 from src.constants import SEASON_MONTHS
+from src.geometry import BoundingBox
 
 logger = logging.getLogger("sentinel2")
 
@@ -28,7 +29,7 @@ logger = logging.getLogger("sentinel2")
 class SentinelClient:
     """The sentinel clinet for the CDSE database."""
 
-    def __init__(self, cfg: Sentinel2Config) -> None:
+    def __init__(self, cfg: Config) -> None:
         self._client = Client.open(cfg.stac.url)
         self._cfg = cfg
 

@@ -1,0 +1,7 @@
+writer = "json"
+
+[dt]
+format = "%Y%m%d_%H%M%S"
+
+[json]
+indent = 4
