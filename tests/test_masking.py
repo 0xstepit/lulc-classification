@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from src.preprocessing.masking import apply_scl_mask, create_scl_mask
+from src.preprocessing.masking import create_scl_mask, get_masked_bands
 
 
 def _scene(n_bands: int, height: int, width: int, fill: int = 0) -> np.ndarray:
@@ -60,7 +60,7 @@ class TestApplySclMask:
         data = _scene(2, 3, 3, fill=3)
         mask = np.zeros((3, 3), dtype=bool)
 
-        result = apply_scl_mask(data, scl_band_index=1, mask=mask)
+        result = get_masked_bands(data, scl_band_index=1, mask=mask)
 
         assert result.shape[0] == 1
 
@@ -68,7 +68,7 @@ class TestApplySclMask:
         data = _scene(4, 3, 3, fill=1)
         mask = np.zeros((3, 3), dtype=bool)
 
-        result = apply_scl_mask(data, scl_band_index=0, mask=mask)
+        result = get_masked_bands(data, scl_band_index=0, mask=mask)
 
         assert result.shape == (3, 3, 3)
 
@@ -76,7 +76,7 @@ class TestApplySclMask:
         data = _scene(4, 3, 3, fill=1)
         mask = np.zeros((3, 3), dtype=bool)
 
-        result = apply_scl_mask(data, scl_band_index=3, mask=mask)
+        result = get_masked_bands(data, scl_band_index=3, mask=mask)
 
         assert result.shape == (3, 3, 3)
 
@@ -85,7 +85,7 @@ class TestApplySclMask:
         mask = np.zeros((3, 3), dtype=bool)
         mask[1, 1] = True
 
-        result = apply_scl_mask(data, scl_band_index=3, mask=mask)
+        result = get_masked_bands(data, scl_band_index=3, mask=mask)
 
         assert np.all(np.isnan(result[:, 1, 1]))
 
@@ -94,7 +94,7 @@ class TestApplySclMask:
         mask = np.zeros((3, 3), dtype=bool)
         mask[1, 1] = True
 
-        result = apply_scl_mask(data, scl_band_index=3, mask=mask)
+        result = get_masked_bands(data, scl_band_index=3, mask=mask)
 
         unmasked = result[:, mask == False]
         assert np.all(unmasked == 500)
@@ -103,7 +103,7 @@ class TestApplySclMask:
         data = _scene(4, 3, 3, fill=1)
         mask = np.zeros((3, 3), dtype=bool)
 
-        result = apply_scl_mask(data, scl_band_index=3, mask=mask)
+        result = get_masked_bands(data, scl_band_index=3, mask=mask)
 
         assert result.dtype == np.float32
 
@@ -111,7 +111,7 @@ class TestApplySclMask:
         data = _scene(4, 3, 3, fill=1)
         mask = np.ones((3, 3), dtype=bool)
 
-        result = apply_scl_mask(data, scl_band_index=3, mask=mask)
+        result = get_masked_bands(data, scl_band_index=3, mask=mask)
 
         assert np.all(np.isnan(result))
 
@@ -119,7 +119,7 @@ class TestApplySclMask:
         data = _scene(4, 3, 3, fill=1)
         mask = np.zeros((3, 3), dtype=bool)
 
-        result = apply_scl_mask(data, scl_band_index=3, mask=mask)
+        result = get_masked_bands(data, scl_band_index=3, mask=mask)
 
         assert not np.any(np.isnan(result))
 
@@ -128,11 +128,11 @@ class TestApplySclMask:
         mask = np.zeros((3, 3), dtype=bool)
 
         with pytest.raises(ValueError):
-            apply_scl_mask(data, scl_band_index=4, mask=mask)
+            get_masked_bands(data, scl_band_index=4, mask=mask)
 
     def test_raises_when_single_band_input(self):
         data = _scene(1, 3, 3)
         mask = np.zeros((3, 3), dtype=bool)
 
         with pytest.raises(ValueError):
-            apply_scl_mask(data, scl_band_index=0, mask=mask)
+            get_masked_bands(data, scl_band_index=0, mask=mask)

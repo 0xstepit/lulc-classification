@@ -2,7 +2,8 @@ import numpy as np
 
 
 def create_seasonal_composite(scenes: list[np.ndarray]) -> np.ndarray:
-    """Compute the pixel-wise NaN-aware median across scenes.
+    """Compute the pixel-wise NaN-aware median across scenes. Arrays provided in the list
+    should be associated with the same band.
 
     Parameters
     ----------
@@ -15,4 +16,5 @@ def create_seasonal_composite(scenes: list[np.ndarray]) -> np.ndarray:
         Median array of shape [H, W].
     """
     stack = np.stack(scenes, axis=0)
+
     return np.nanmedian(stack, axis=0)

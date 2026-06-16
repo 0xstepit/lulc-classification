@@ -1,5 +1,7 @@
 import numpy as np
 
+from src.config import IndicesConfig
+
 
 def compute_ndvi(nir: np.ndarray, red: np.ndarray) -> np.ndarray:
     """
@@ -84,3 +86,38 @@ def compute_ndwi(green: np.ndarray, nir: np.ndarray) -> np.ndarray:
     return np.divide(
         num, den, out=np.full_like(num, np.nan, dtype=np.float32), where=den != 0
     )
+
+
+def compute_indices(cfg: IndicesConfig, data: np.ndarray) -> np.ndarray:
+    """Computes a numpy array containing the NDVI, NDBI, and NDWI for the provided raster.
+
+    Parameters
+    ----------
+    cfg : Indices
+        A configuration class providing the position in a raster for each band used in the indices.
+    data : np.ndarray
+        The raster used for indices computation of size [H, W]
+
+    Returns
+    -------
+    np.ndarray
+        An array of size [NUM_INDICES, H, W] contianin the stacked indices.
+
+    """
+    # Compute NDVI index
+    # we add a channel axis needed for the concatenation later.
+    nir = data[cfg.get_channel("ndvi", "nir"), :, :]
+    red = data[cfg.get_channel("ndvi", "red"), :, :]
+    ndvi = compute_ndvi(nir, red)[np.newaxis]
+
+    # Compute NDBI index
+    swir = data[cfg.get_channel("ndbi", "swir"), :, :]
+    nir = data[cfg.get_channel("ndbi", "nir"), :, :]
+    ndbi = compute_ndbi(swir, nir)[np.newaxis]
+
+    # Compute NDWI index
+    green = data[cfg.get_channel("ndwi", "green"), :, :]
+    nir = data[cfg.get_channel("ndwi", "nir"), :, :]
+    ndwi = compute_ndwi(green, nir)[np.newaxis]
+
+    return np.concatenate([ndvi, ndbi, ndwi], axis=0)

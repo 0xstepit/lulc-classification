@@ -26,7 +26,7 @@ def create_scl_mask(
     return scl_mask
 
 
-def apply_scl_mask(
+def get_masked_bands(
     data: np.ndarray, scl_band_index: int, mask: np.ndarray
 ) -> np.ndarray:
     """Apply a mask to the multi-band raster. The function first remove the SCL map from the raster,
