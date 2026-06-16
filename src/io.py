@@ -11,6 +11,7 @@ ANALYSIS_DIR = DATA_DIR / "analysis"
 
 # Folder containing all the configuration files for the scripts.
 CONFIG_DIR = ROOT / "config"
+REPORTER_CONFIG = CONFIG_DIR / "reporter.toml"
 
 # Name of the configuration file.
 CONFIG_FILE = "config.toml"

@@ -18,7 +18,7 @@ class JSONWriter:
         self.dt_format = dt_config.format
 
     def write(
-        self, entries: list[ReportEntry], filename: str, timestamped: bool = True
+        self, entries: list[ReportEntry], filename: str, timestamped: bool = False
     ) -> Path:
         filename_path = Path(filename)
 
