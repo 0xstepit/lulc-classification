@@ -8,7 +8,7 @@ Interested (AoI) for the project.
 Three regions have been included as possible candidates in the analysis. The
 regions considered are identified by a point described by a latitude and
 longitude. The area of interested is the drawn around this point by using the
-size variable configurable in the `sentinel2.toml` configuration file.
+size variable configurable in the `config.toml` configuration file.
 
 The considered candidates are: Brandeburg (Germany), Andalusia (Spain), and
 Lombardy (Italy).
