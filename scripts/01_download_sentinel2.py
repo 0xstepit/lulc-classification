@@ -63,10 +63,12 @@ def main():
         compress="lzw",
         tiled=True,
         transform=cropped_transform,
-        #  We have to manually update profile geometric information.
+        # We have to manually update profile geometric information.
         width=int(window.width),
         height=int(window.height),
         interleave="band",
+        blockxsize=cfg.composites.tiles_size,
+        blockysize=cfg.composites.tiles_size,
     )
 
     for name, dates in cfg.composites.seasons.items():

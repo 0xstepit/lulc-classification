@@ -10,7 +10,7 @@ import logging
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from src.config import Sentinel2Config, load_sentinel2_config
+from src.config import Config, load_sentinel2_config
 from src.data.sentinel2 import (
     SceneCounts,
     SentinelClient,
@@ -67,7 +67,7 @@ class PreliminaryAnalysisResult:
 
 
 def evaluate_candidate_validity(
-    cfg: Sentinel2Config, candidate_analysis: CandidateResult
+    cfg: Config, candidate_analysis: CandidateResult
 ) -> bool:
     """Check if an AOI is a valid area based on the provided result.
     The validity is based on the number of scenes available.
