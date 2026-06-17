@@ -92,6 +92,14 @@ Unit tests can be executed with:
 make unit-tests
 ```
 
+### Env
+
+```sh
+mv .env.examples .env
+```
+
+Add your Copernicus Data Space Ecosystem (CDSE) credentials.
+
 ### Scripts
 
 Scripts are the main entrypoints for running the pipeline. They must be executed
