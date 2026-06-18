@@ -1,0 +1,20 @@
+[
+    {
+        "step": "aoi selection",
+        "timestamp": "2026-06-17T10:53:31.297164",
+        "data": "PreliminaryAnalysisResult(candidates_results={'brandeburg': CandidateResult(scene_counts=SceneCounts(total=16, by_season={'DJF': 3, 'MAM': 6, 'JJA': 6, 'SON': 1}), bbox=(13.069046123265851, 52.53930706676072, 13.81135387673415, 52.99149293323928), grid_code='MGRS-33UVU'), 'lombardy': CandidateResult(scene_counts=SceneCounts(total=40, by_season={'DJF': 9, 'MAM': 7, 'JJA': 16, 'SON': 8}), bbox=(9.729671070126388, 45.417407066760724, 10.372128929873613, 45.86959293323928), grid_code='MGRS-32TNR'), 'andalusia': CandidateResult(scene_counts=SceneCounts(total=35, by_season={'DJF': 9, 'MAM': 7, 'JJA': 13, 'SON': 6}), bbox=(-6.362565950090263, 37.00620706676072, -5.798434049909736, 37.45839293323928), grid_code='MGRS-30STG')}, valid_candidates=['lombardy', 'andalusia'])",
+        "metadata": {}
+    },
+    {
+        "step": "aoi selection",
+        "timestamp": "2026-06-17T10:53:34.879387",
+        "data": "PreliminaryAnalysisResult(candidates_results={'brandeburg': CandidateResult(scene_counts=SceneCounts(total=16, by_season={'DJF': 3, 'MAM': 6, 'JJA': 6, 'SON': 1}), bbox=(13.069046123265851, 52.53930706676072, 13.81135387673415, 52.99149293323928), grid_code='MGRS-33UVU'), 'lombardy': CandidateResult(scene_counts=SceneCounts(total=40, by_season={'DJF': 9, 'MAM': 7, 'JJA': 16, 'SON': 8}), bbox=(9.729671070126388, 45.417407066760724, 10.372128929873613, 45.86959293323928), grid_code='MGRS-32TNR'), 'andalusia': CandidateResult(scene_counts=SceneCounts(total=35, by_season={'DJF': 9, 'MAM': 7, 'JJA': 13, 'SON': 6}), bbox=(-6.362565950090263, 37.00620706676072, -5.798434049909736, 37.45839293323928), grid_code='MGRS-30STG')}, valid_candidates=['lombardy', 'andalusia'])",
+        "metadata": {}
+    },
+    {
+        "step": "aoi selection",
+        "timestamp": "2026-06-17T10:53:40.552799",
+        "data": "PreliminaryAnalysisResult(candidates_results={'brandeburg': CandidateResult(scene_counts=SceneCounts(total=16, by_season={'DJF': 3, 'MAM': 6, 'JJA': 6, 'SON': 1}), bbox=(13.069046123265851, 52.53930706676072, 13.81135387673415, 52.99149293323928), grid_code='MGRS-33UVU'), 'lombardy': CandidateResult(scene_counts=SceneCounts(total=40, by_season={'DJF': 9, 'MAM': 7, 'JJA': 16, 'SON': 8}), bbox=(9.729671070126388, 45.417407066760724, 10.372128929873613, 45.86959293323928), grid_code='MGRS-32TNR'), 'andalusia': CandidateResult(scene_counts=SceneCounts(total=35, by_season={'DJF': 9, 'MAM': 7, 'JJA': 13, 'SON': 6}), bbox=(-6.362565950090263, 37.00620706676072, -5.798434049909736, 37.45839293323928), grid_code='MGRS-30STG')}, valid_candidates=['lombardy', 'andalusia'])",
+        "metadata": {}
+    }
+]

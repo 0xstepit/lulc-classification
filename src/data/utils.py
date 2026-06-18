@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def evenly_spaced_indexes(max_index: int, wanted_indexes: int) -> list[int]:
     """Evenly select `wanted_indexes` indexes out of a total of possible `max_index`.
     This function can be used to evenly select a fixed number of STAC scene ordered by date.
@@ -23,3 +26,10 @@ def evenly_spaced_indexes(max_index: int, wanted_indexes: int) -> list[int]:
     step = (max_index - 1) / (wanted_indexes - 1)
 
     return [round(i * step) for i in range(wanted_indexes)]
+
+
+def compute_nan_pct(scene: np.ndarray) -> np.float16:
+    return round(
+        np.count_nonzero(np.isnan(scene)) / scene.size * 100,
+        2,
+    ).astype(np.float16)

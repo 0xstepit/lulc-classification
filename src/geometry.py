@@ -53,23 +53,20 @@ def deg_per_m(meters: float, center_lat: float) -> tuple[float, float]:
 
 def create_bbox(gcs: GCS, size_m: float) -> BoundingBox:
     """Create a bounding box around the provided center of the specified size.
-    Due to distortions in the projections of Earth model,
-    the resulting bounding box size will be close to but not equal to the specified size.
+    Due to distortions in the projections of Earth model, the resulting bounding box size
+    will be close to but not equal to the specified size.
 
     Parameters
     ----------
     gcs : GCS
         Geograhic coordinates of the center of the box.
-
     size_m : float
         Size of each bounding box side.
-
 
     Returns
     -------
     BoundingBox
         The bounding box around the provided center.
-
     """
     half_size = size_m / 2
 
@@ -84,7 +81,7 @@ def create_bbox(gcs: GCS, size_m: float) -> BoundingBox:
 
 
 def create_window_from_bbox(bbox: BoundingBox, crs, transform) -> tuple[Window, Affine]:
-    """Create a Rasterio window from a bounding box and geometric information of the Items
+    """Create a rasterio window from a bounding box and geometric information of the Items
     that will be windowed with it. Windows computed values are rounded.
 
     Parameters

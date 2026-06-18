@@ -31,6 +31,8 @@ class SentinelClient:
 
     def __init__(self, cfg: Config) -> None:
         self._client = Client.open(cfg.stac.url)
+        # TODO: separate the config into smaller chunks and inject only what is relevant
+        # for the client.
         self._cfg = cfg
 
     def search_items(
@@ -321,3 +323,30 @@ def filter_most_frequent_tile(items: list[pystac.Item]) -> list[pystac.Item]:
     tile_counts = Counter(get_tile_id(item) for item in items)
     selected_tile = tile_counts.most_common(1)[0][0]
     return [item for item in items if get_tile_id(item) == selected_tile]
+
+
+def evaluate_candidate_validity(cfg: Config, scene_counts: SceneCounts) -> bool:
+    """Check if an AOI is a valid area based on the provided result.
+    The validity is based on the number of scenes available.
+
+    Parameters
+    ----------
+    cfg : Sentinel2Config
+        Sentinel2 analysis configuration.
+    candidate_analysis : CandidateResult
+        Result of the candidate analysis used to evaluate its validity.
+
+    Returns
+    -------
+    bool
+        True if the AOI is a valid candidate, False otherwise.
+    """
+    # Evaluate minimum overall scenes.
+    if scene_counts.total < cfg.aoi.min_scenes:
+        return False
+    # Evaluate minimum scenes per season.
+    for _, count in scene_counts.by_season.items():
+        if count < cfg.aoi.min_scenes_per_season:
+            return False
+
+    return True

@@ -3,11 +3,25 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from src.geometry import BoundingBox
-from src.io import CONFIG_DIR, CONFIG_FILE
 
 
 @dataclass
-class AoIConfig:
+class AOIConfig:
+    """Area Of Interest configuration class.
+
+    Attributes
+    ----------
+    name : name of the AOI.
+    year : year of evaluation of the AOI in the preliminary analysis.
+    max_cloud_coverage : cloud coverage percentage after which scenes are filtered out.
+    min_scenes : minimum of scenes to consider an AOI valid.
+    min_scenes_per_season : minimum of scenes for each season to consider an AOI valid.
+    candidates : center point in (lon, lat) for candidates AOI.
+    bounding_box : bounding box of the AOI.
+    tile : Sentinel-2 CDSE tile containing the AOI.
+    size : lenght of each side of the AOI.
+    """
+
     name: str
     year: int
     max_cloud_coverage: float
@@ -30,9 +44,13 @@ class AoIConfig:
 
 
 @dataclass(frozen=True)
-class StacConfig:
-    """
-    Configuration class for the STAC client.
+class STACConfig:
+    """Configuration class for the STAC client.
+
+    Attributes
+    ----------
+    url : url of the server.
+    collection : STAC collection to use.
     """
 
     url: str
@@ -48,8 +66,12 @@ class StacConfig:
 
 @dataclass(frozen=True)
 class IndicesConfig:
-    """
-    Configuration for the indices used in the analysis
+    """Configuration for the indices used in the analysis.
+
+    Attributes
+    ----------
+    bands_to_channels : dictionary mapping the band name to the position in the scene channel
+                        dimension for each indices considered.
     """
 
     bands_to_channels: dict[str, dict[str, int]]
@@ -60,19 +82,39 @@ class IndicesConfig:
 
 @dataclass
 class MSIConfig:
-    """
-    Configuraion class for the MultiSpectral images of the Sentinel2 mission.
+    """Configuraion class for the MultiSpectral images of the Sentinel2 mission.
+
+    Attributes
+    ----------
+    bands :
+    target_resolution :
+    scl_mask_classes :
+    num_bands :
+    bands :
     """
 
-    bands: dict
     target_resolution: int
     scl_mask_classes: list[int]
+    bands: dict
 
     def __post_init__(self):
         self.num_bands = len([band for res in self.bands for band in self.bands[res]])
         self.bands = {int(k): v for k, v in self.bands.items()}
 
-    def get_bands(self):
+        if self.target_resolution not in list(self.bands.keys()):
+            raise ValueError(
+                f"target resolution {self.target_resolution} is not in the analysed bands"
+            )
+
+    def get_bands_list(self) -> list[str]:
+        """Returns the sorted list of Sentinel-2 bands used in the analysis.
+
+        Returns
+        -------
+        list[str]
+            The sorted list of band names.
+
+        """
         return sorted([band for res in self.bands for band in self.bands[res]])
 
     def get_scl_band_index(self):
@@ -84,26 +126,24 @@ class MSIConfig:
         -------
         int
             The SCL map index in a scene.
-
         """
         return 10
 
 
 @dataclass(frozen=True)
-class Composites:
+class CompositesConfig:
     """Seasonal composite raster configuration.
 
     Attributes
     ----------
-        max_scenes_per_season: Max number of scenes to use per season.
-        seasons: Start and date of each season.
-        statistic: Statistic to use within each seasons.
-        tiles_size: dimension for [H, W] of the window to tile each scene.
+    max_scenes_per_season: Max number of scenes to use per season.
+    seasons: Start and date of each season.
+    statistic: Statistic to use within each seasons.
+    tiles_size: dimension for [H, W] of the window to tile each scene.
     """
 
     max_scenes_per_season: int
     seasons: dict[str, list[str]]
-    statistic: str
     tiles_size: int
 
     def __post_init__(self):
@@ -114,26 +154,36 @@ class Composites:
 
 @dataclass(frozen=True)
 class Config:
-    aoi: AoIConfig
-    stac: StacConfig
+    aoi: AOIConfig
+    stac: STACConfig
     msi: MSIConfig
-    composites: Composites
+    composites: CompositesConfig
     indices: IndicesConfig
 
 
-def load_sentinel2_config(path: Path = CONFIG_DIR) -> Config:
-    file_path = CONFIG_DIR / CONFIG_FILE
+def load_config(file_path: Path) -> Config:
+    """Load project configuration from disk.
 
+    Parameters
+    ----------
+    file_path : Path
+        The path pointing to the configuration file in `.toml` format.
+
+    Returns
+    -------
+    Config
+        The project configuration file.
+    """
     if not file_path.exists():
-        raise FileNotFoundError(f"File named {CONFIG_FILE} does not exists in {path}")
+        raise FileNotFoundError(f"file {file_path} does not exists")
 
     with open(file_path, "rb") as f:
         _cfg = tomllib.load(f)
 
-        aoi = AoIConfig(**_cfg.pop("aoi"))
-        stac = StacConfig(**_cfg.pop("stac"))
+        aoi = AOIConfig(**_cfg.pop("aoi"))
+        stac = STACConfig(**_cfg.pop("stac"))
         msi = MSIConfig(**_cfg.pop("msi"))
-        composites = Composites(**_cfg.pop("composites"))
+        composites = CompositesConfig(**_cfg.pop("composites"))
         indices = IndicesConfig(**_cfg.pop("indices"))
 
     return Config(aoi, stac, msi, composites, indices)

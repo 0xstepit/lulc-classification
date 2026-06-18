@@ -32,7 +32,6 @@ def load_reporter_config(file_path: Path) -> ReporterConfig:
     -------
     ReporterConfig
         The configuration file for the reporter.
-
     """
     if not file_path.exists():
         raise FileNotFoundError(f"file config {file_path} does not exists")

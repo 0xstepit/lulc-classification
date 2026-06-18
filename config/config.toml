@@ -12,7 +12,7 @@ size = 50_000 # [m]
 year = 2022
 max_cloud_coverage = 10.0
 min_scenes = 30
-min_scenes_per_season = 5 # this actually is visually selected from the https://viewer.esa-worldcover.org/worldcover/
+min_scenes_per_season = 5
 # longitude/latitude (x, y) points of the candidate regions.
 candidates = { brandeburg = [
   13.4402,
@@ -66,7 +66,6 @@ seasons = { DJF = [
   "2022-09-01",
   "2022-11-30",
 ] }
-statistic = "median" # Per-season aggregation
 tiles_size = 1024 # dimension of the tile window to apply for the composite.
 # indices = ["NDVI", "NDBI", "NDWI"] # Computed per season
 

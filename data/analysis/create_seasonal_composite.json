@@ -1,1 +1,6002 @@
-[]
+[
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:05:54.703510",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "8.81"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                0,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:05:58.638248",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                0,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:00.283697",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                0,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:03.703739",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                0,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:05.320803",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "0.59"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                0,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:08.785116",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                0,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:10.425049",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "14.07"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                0,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:13.942301",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                0,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:15.586910",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "51.94"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                0,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:18.944079",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                0,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:20.602944",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                1,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:23.990583",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                1,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:25.595240",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "0.41"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                1,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:28.991632",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                1,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:30.648210",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "3.5"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:34.176446",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:35.849551",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "3.67"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                1,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:39.384229",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                1,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:41.026585",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "20.7"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.52"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                1,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:44.448978",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                1,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:46.104071",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                2,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:49.509622",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                2,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:51.145220",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "3.23"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                2,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:54.522500",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                2,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:56.149547",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.15"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                2,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:06:59.485628",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                2,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:01.224375",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "1.31"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:04.742217",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:06.423493",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "6.45"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.2"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                2,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:09.759305",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                2,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:11.313722",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "1.25"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.23"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "1.71"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.63"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.42"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.29"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                3,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:14.563890",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                3,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:16.221532",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "1.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.33"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.63"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "0.92"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.34"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "1.12"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.45"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.58"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.25"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                3,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:19.708461",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                3,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:21.339192",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "2.4"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.43"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.17"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "0.94"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.45"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "5.85"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "1.13"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.49"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.34"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                3,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:24.601388",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                3,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:26.193302",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.41"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "5.12"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "5.94"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.47"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.25"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                3,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:29.471024",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                3,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:31.119288",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "7.74"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "2.23"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                3,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:34.529252",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                3,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:36.054834",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.47"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.44"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.2"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "2.53"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.28"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.24"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.45"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                4,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:39.475576",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                4,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:41.042802",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "2.57"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "1.48"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.5"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.98"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "1.76"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.66"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.53"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "1.14"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.99"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.89"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                4,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:44.308355",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                4,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:46.054054",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "1.07"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "1.12"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.17"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.4"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "0.44"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.44"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "0.93"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.93"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.51"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.46"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                4,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:49.327312",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                4,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:50.989540",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.52"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.33"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "5.7"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.39"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "15.88"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.14"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                4,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:54.207721",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                4,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:55.838054",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220131T111209_N0510_R137_T30STG_20240509T043132_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20211207T111441_N0500_R137_T30STG_20221228T085814_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220215T111141_N0510_R137_T30STG_20240515T060333_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220106T111441_N0510_R137_T30STG_20240424T232816_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220101T111349_N0510_R137_T30STG_20240419T020830_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20211212T111349_N0500_R137_T30STG_20221223T013901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif",
+                "nan_pct": "28.19"
+            },
+            {
+                "file": "S2A_MSIL2A_20211217T111451_N0500_R137_T30STG_20221225T134748_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220121T111249_N0510_R137_T30STG_20240503T213153_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220210T111109_N0510_R137_T30STG_20240513T074211_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                4,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:07:59.089873",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "DJF",
+            "block": [
+                4,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:00.858440",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "1.54"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "95.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                0,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:04.150791",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                0,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:05.797059",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "0.74"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "25.34"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.15"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.15"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                0,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:09.229991",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                0,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:10.872252",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                0,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:14.339392",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                0,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:16.001719",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "5.16"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                0,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:19.709773",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                0,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:21.335496",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.28"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "0.16"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.23"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.19"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.27"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.25"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.26"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                0,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:24.810696",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                0,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:26.434419",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "3.96"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "34.56"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.12"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                1,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:30.095321",
+        "data": {
+            "nan_pct": "0.01"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                1,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:31.690068",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "3.4"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "5.33"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                1,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:35.183912",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                1,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:36.821300",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "0.6"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "2.54"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:40.564918",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:42.201095",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.12"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "3.9"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                1,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:45.776792",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                1,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:47.407436",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                1,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:50.902306",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                1,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:52.528630",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "7.11"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "1.29"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                2,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:56.065711",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                2,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:08:57.655609",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.67"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.68"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "13.83"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "1.11"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "1.37"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "1.16"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                2,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:01.166509",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                2,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:02.797592",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "4.12"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "3.17"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "9.4"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.91"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "3.2"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.14"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.14"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "1.25"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.66"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "2.08"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                2,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:06.286199",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                2,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:07.896916",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "1.84"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.12"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "1.53"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:11.458723",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:13.096505",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                2,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:16.668109",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                2,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:18.290692",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "1.11"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "1.45"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "24.52"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "1.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "3.42"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.46"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.53"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "2.47"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "1.09"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                3,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:21.688250",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                3,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:23.285556",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "4.95"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "3.64"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "32.62"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.93"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "4.04"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.52"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.75"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.12"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "1.56"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                3,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:26.643350",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                3,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:28.232356",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "2.82"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "1.71"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "27.23"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.42"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "1.26"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.18"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.4"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "3.29"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.58"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                3,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:31.583419",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                3,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:33.207146",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.14"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "8.25"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.83"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "1.74"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.26"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                3,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:36.592907",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                3,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:38.216949",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "0.74"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.12"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.12"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.15"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                3,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:41.799053",
+        "data": {
+            "nan_pct": "0.02"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                3,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:43.306073",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.78"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "21.56"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.41"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.27"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "0.84"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "1.79"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.69"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                4,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:46.685322",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                4,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:48.283329",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "1.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "1.86"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "35.9"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.53"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "1.38"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.48"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "1.92"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "2.18"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.71"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.92"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                4,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:51.668032",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                4,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:53.272873",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "2.4"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.49"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "26.62"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.48"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "1.31"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.66"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "4.44"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "5.88"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.17"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.59"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                4,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:56.709482",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                4,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:09:58.348338",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.26"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.18"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "9.68"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.23"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "1.65"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.29"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                4,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:01.844011",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                4,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:03.479508",
+        "data": [
+            {
+                "file": "S2B_MSIL2A_20220710T110629_N0510_R137_T30STG_20240724T063356_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220705T110631_N0510_R137_T30STG_20240630T210600_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220804T110631_N0510_R137_T30STG_20240711T010354_ALLBANDS.tif",
+                "nan_pct": "2.4"
+            },
+            {
+                "file": "S2B_MSIL2A_20220720T110629_N0510_R137_T30STG_20240715T015612_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220630T110629_N0510_R137_T30STG_20240629T122536_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20220819T110619_N0510_R137_T30STG_20240704T000208_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220725T110631_N0510_R137_T30STG_20240715T062901_ALLBANDS.tif",
+                "nan_pct": "2.34"
+            },
+            {
+                "file": "S2A_MSIL2A_20220824T110631_N0510_R137_T30STG_20240704T201559_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            },
+            {
+                "file": "S2B_MSIL2A_20220610T110619_N0510_R137_T30STG_20240619T213737_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220605T110631_N0510_R137_T30STG_20240715T145227_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            }
+        ],
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                4,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:06.785700",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "JJA",
+            "block": [
+                4,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:08.136292",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "26.1"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "6.25"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                0,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:10.334688",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                0,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:11.606008",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.25"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.32"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.16"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                0,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:13.908197",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                0,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:15.197761",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                0,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:17.549436",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                0,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:18.867508",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.14"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.82"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                0,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:21.244469",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                0,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:22.521348",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.26"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.28"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.56"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.78"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.26"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.25"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                0,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:24.826093",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                0,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:26.103444",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.15"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.17"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "8.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.16"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.16"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                1,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:28.446004",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                1,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:29.725317",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                1,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:32.043745",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                1,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:33.315170",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:35.644882",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:36.977028",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.66"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                1,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:39.344669",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                1,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:40.655321",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "1.04"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.12"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                1,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:42.992317",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                1,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:44.311920",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                2,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:46.623235",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                2,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:47.897399",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "1.24"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "1.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.33"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "1.76"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "1.06"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                2,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:50.263312",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                2,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:51.539463",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "1.56"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "8.4"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.37"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                2,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:53.830838",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                2,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:55.131603",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "3.74"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:57.455828",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:10:58.743662",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.12"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                2,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:01.045026",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                2,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:02.298834",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "1.39"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "1.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "1.69"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.31"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.9"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "1.11"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.44"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                3,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:04.552757",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                3,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:05.809969",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.24"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "1.21"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.58"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "6.21"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.27"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                3,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:08.139208",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                3,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:09.388380",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "1.46"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.18"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.3"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "2.98"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.3"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.12"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                3,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:11.641745",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                3,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:12.911016",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "1.51"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.21"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "1.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "1.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                3,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:15.189555",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                3,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:16.504456",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.18"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "1.15"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.12"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.15"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                3,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:18.790097",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                3,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:20.031065",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "1.85"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                4,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:22.239362",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                4,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:23.475487",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.63"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.67"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.85"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.31"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "10.44"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.63"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.84"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                4,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:25.717836",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                4,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:26.987874",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.14"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.67"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.28"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.27"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.39"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.16"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                4,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:29.342142",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                4,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:30.635821",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.82"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.21"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.25"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                4,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:32.890834",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                4,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:34.173898",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220516T110631_N0510_R137_T30STG_20240617T123024_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2B_MSIL2A_20220531T110619_N0510_R137_T30STG_20240611T141435_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2A_MSIL2A_20220416T110621_N0510_R137_T30STG_20240526T010916_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            },
+            {
+                "file": "S2B_MSIL2A_20220302T110859_N0510_R137_T30STG_20240524T003324_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220421T110619_N0510_R137_T30STG_20240609T214840_ALLBANDS.tif",
+                "nan_pct": "0.63"
+            },
+            {
+                "file": "S2A_MSIL2A_20220526T110631_N0510_R137_T30STG_20240615T080108_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2A_MSIL2A_20220506T110621_N0510_R137_T30STG_20240615T162704_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            }
+        ],
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                4,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:36.421140",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "MAM",
+            "block": [
+                4,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:37.618724",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                0,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:39.563681",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                0,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:40.722749",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                0,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:42.716001",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                0,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:43.895491",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                0,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:45.888374",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                0,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:47.082012",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.06"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                0,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:49.172805",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                0,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:50.362748",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                0,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:52.354639",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                0,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:53.532816",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                1,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:55.515913",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                1,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:56.682546",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                1,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:58.700292",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                1,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:11:59.890540",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:01.927014",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                1,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:03.134442",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                1,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:05.176024",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                1,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:06.408527",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                1,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:08.447025",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                1,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:09.669108",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                2,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:11.729980",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                2,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:12.944631",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.12"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                2,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:14.952395",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                2,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:16.154107",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.29"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.14"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.22"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.14"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                2,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:18.123355",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                2,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:19.323518",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:21.328282",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                2,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:22.501139",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.04"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                2,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:24.490572",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                2,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:25.700010",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.25"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.51"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.22"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.21"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                3,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:27.656216",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                3,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:28.898219",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.27"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.57"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.56"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.18"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.3"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                3,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:30.895342",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                3,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:32.085328",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.34"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "1.07"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.24"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.24"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.23"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.24"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                3,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:34.067815",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                3,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:35.269659",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.1"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.33"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.16"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.11"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.23"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                3,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:37.222941",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                3,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:38.507353",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.08"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.07"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                3,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:40.495574",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                3,
+                4
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:41.646330",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.23"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.46"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.16"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.03"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                4,
+                0
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:43.579292",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                4,
+                0
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:44.737152",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.88"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "1.69"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.56"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.34"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.54"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.53"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                4,
+                1
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:46.707953",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                4,
+                1
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:47.905265",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.26"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.93"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.3"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.21"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.31"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                4,
+                2
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:49.951294",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                4,
+                2
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:51.165029",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.09"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.13"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.05"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                4,
+                3
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:53.112473",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                4,
+                3
+            ]
+        }
+    },
+    {
+        "step": "scene_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:54.308627",
+        "data": [
+            {
+                "file": "S2A_MSIL2A_20220903T110631_N0510_R137_T30STG_20240729T160319_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2A_MSIL2A_20221112T111321_N0510_R137_T30STG_20240805T020831_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2A_MSIL2A_20221013T111011_N0510_R137_T30STG_20240801T195923_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            },
+            {
+                "file": "S2B_MSIL2A_20220908T110619_N0510_R137_T30STG_20240705T075329_ALLBANDS.tif",
+                "nan_pct": "0.01"
+            },
+            {
+                "file": "S2B_MSIL2A_20220928T110739_N0510_R137_T30STG_20240726T063100_ALLBANDS.tif",
+                "nan_pct": "0.02"
+            },
+            {
+                "file": "S2B_MSIL2A_20221107T111149_N0510_R137_T30STG_20240805T175629_ALLBANDS.tif",
+                "nan_pct": "0.0"
+            }
+        ],
+        "metadata": {
+            "season": "SON",
+            "block": [
+                4,
+                4
+            ]
+        }
+    },
+    {
+        "step": "seasonal_composite_block_nan_pct",
+        "timestamp": "2026-06-18T09:12:56.267267",
+        "data": {
+            "nan_pct": "0.0"
+        },
+        "metadata": {
+            "season": "SON",
+            "block": [
+                4,
+                4
+            ]
+        }
+    }
+]
