@@ -157,6 +157,12 @@ The development of the framework has been focused around:
 It is not part of the scope to create a general purpose LULC classifier but only
 a model capable of predicting pixel classes for held-out tiles in the AOI.
 
+## Future Works
+
+- Create the AOI with size multiple of the tiled reading blocks.
+- Improve management of the band references.
+- Parallelize raster tile reading and writing with positional queue.
+
 ## References
 
 1. [Land cover - Wikipedia](https://en.wikipedia.org/wiki/Land_cover)
