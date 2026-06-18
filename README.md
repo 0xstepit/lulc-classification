@@ -34,11 +34,12 @@ of carbon dioxide emissions.
 
 The project is divided in three steps:
 
-- AOI selection and generation of a seasonal image based on optical data
-  obtained from Sentinel-2 satellites.
+- AOI selection and generation of a all seasons image based on optical data
+  obtained from Sentinel-2 satellites. (DONE)
 - Creation of the dataset based on the seasonal image created on the previous
   step and the WorldCover dataset provided by the European Space Agency (ESA).
-- Training and evaluation of a random forest and a U-Net models.
+  (TODO)
+- Training and evaluation of a random forest and a U-Net models. (TODO)
 
 Each step is then divided into finer tasks that are described in detail in the
 [docs](./docs/).
