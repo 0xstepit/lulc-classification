@@ -14,6 +14,7 @@ wheels/
 # Project
 **/raw/**
 **/processed/**
+**/labels/**
 
 # MacOS
 .DS_Store

@@ -1,3 +1,52 @@
+import logging
+
+import geopandas as gpd
+
+from src.config import load_config
+from src.data.sentinel2 import get_data_profile
+from src.data.worldcover import download_tile, get_worldcover_tiles
+from src.io import (
+    GLOBAL_CONFIG,
+    LABELS_DIR,
+    MULTISEASONAL_SCENE_DIR,
+    WORLDCOVER_LABELS,
+    WORLDCOVER_RAW_DIR,
+)
+from src.logger import setup_logging
+
+setup_logging()
+logger = logging.getLogger("download_world_cover")
+
+
+def main():
+    cfg = load_config(GLOBAL_CONFIG)
+
+    LABELS_DIR.mkdir(parents=True, exist_ok=True)
+    WORLDCOVER_RAW_DIR.mkdir(parents=True, exist_ok=True)
+
+    # If the file is already present, short circuit termination.
+    if WORLDCOVER_LABELS.exists():
+        logger.info(f"{WORLDCOVER_LABELS} file already exists, skipping.")
+        return
+
+    # TODO: file name should be a constant, not hardcoded...
+    ref_profile = get_data_profile(str(MULTISEASONAL_SCENE_DIR / "composite.tif"))
+
+    grid = gpd.read_file(cfg.worldcover.grid_url)
+    tiles = get_worldcover_tiles(grid, cfg.aoi.bounding_box)
+
+    logger.info(f"AOI intersects with WorldCover tiles: {tiles}")
+
+    for tile in tiles:
+        download_tile(cfg.worldcover, tile, WORLDCOVER_RAW_DIR)
+
+    downloaded_files = WORLDCOVER_RAW_DIR.glob("*.tif")
+    for downloaded_file in downloaded_files:
+
+
+
+if __name__ == "__main__":
+    main()
 # def _compute_global_band_medians(files: list[Path], tiles_size: int) -> np.ndarray:
 #     block_medians: list[np.ndarray] = []
 #
