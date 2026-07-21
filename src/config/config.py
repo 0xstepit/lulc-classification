@@ -153,12 +153,22 @@ class CompositesConfig:
 
 
 @dataclass(frozen=True)
+class WorldCoverConfig:
+    url: str
+    grid_url: str
+    version: str
+    year: str
+    class_to_color: dict[str, list[int]]
+
+
+@dataclass(frozen=True)
 class Config:
     aoi: AOIConfig
     stac: STACConfig
     msi: MSIConfig
     composites: CompositesConfig
     indices: IndicesConfig
+    worldcover: WorldCoverConfig
 
 
 def load_config(file_path: Path) -> Config:
@@ -185,5 +195,6 @@ def load_config(file_path: Path) -> Config:
         msi = MSIConfig(**_cfg.pop("msi"))
         composites = CompositesConfig(**_cfg.pop("composites"))
         indices = IndicesConfig(**_cfg.pop("indices"))
+        worldcover = WorldCoverConfig(**_cfg.pop("worldcover"))
 
-    return Config(aoi, stac, msi, composites, indices)
+    return Config(aoi, stac, msi, composites, indices, worldcover)

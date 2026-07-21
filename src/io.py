@@ -29,3 +29,8 @@ ANALYSIS_DIR = DATA_DIR / "analysis"
 # with other strings.
 SEASONAL_SCENE_SUFFIX = "_SEASONAL.tif"
 ALL_BANDS_SCENE_SUFFIX = "_ALLBANDS.tif"
+
+# Directories and files for the data ground truth labels.
+LABELS_DIR = DATA_DIR / "labels"
+WORLDCOVER_RAW_DIR = LABELS_DIR / "worldcover_raw"
+WORLDCOVER_LABELS = LABELS_DIR / "worldcover_classes.tif"

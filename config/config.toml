@@ -1,6 +1,5 @@
 [aoi]
-name = "andalusia"
-# Bounding box expressed in the EPSG: 4326.
+name = "andalusia" # Bounding box expressed in the EPSG: 4326.
 bounding_box = [
   -6.362565950090263,
   37.00620706676072,
@@ -72,3 +71,59 @@ tiles_size = 1024 # dimension of the tile window to apply for the composite.
 [indices]
 # A map from the band name to the raster channel index for each index.
 bands_to_channels = { ndvi = { "nir" = 3, "red" = 2 }, ndbi = { "swir" = 9, "nir" = 3 }, ndwi = { "green" = 1, "nir" = 3 } }
+
+[worldcover]
+url = "https://esa-worldcover.s3.eu-central-1.amazonaws.com"
+grid_url = "https://esa-worldcover.s3.eu-central-1.amazonaws.com/esa_worldcover_grid.geojson"
+version = "v200"
+year = 2021
+class_to_color = { "10" = [
+  0,
+  100,
+  0,
+], "20" = [
+  255,
+  187,
+  34,
+], "30" = [
+  255,
+  255,
+  76,
+], "40" = [
+  240,
+  150,
+  255,
+], "50" = [
+  250,
+  0,
+  0,
+], "60" = [
+  180,
+  180,
+  180,
+], "70" = [
+  240,
+  240,
+  240,
+], "80" = [
+  0,
+  100,
+  200,
+], "90" = [
+  0,
+  150,
+  160,
+], "95" = [
+  0,
+  207,
+  117,
+], "100" = [
+  250,
+  230,
+  160,
+] }
+# WorldCover code -> merged class id. FINALIZE this after inspecting the
+# distribution logged by scripts/03. Codes absent here become `nodata`.
+mapping = { "10" = 1, "20" = 2, "30" = 3, "40" = 4, "50" = 4, "60" = 6, "70" = 7, "80" = 8, "90" = 9, "95" = 10, "100" = 10 }
+# merged id -> human name (for figures / README later)
+class_names = { "0" = "Tree Cover", "1" = "Shrubland", "2" = "Grassland", "3" = "Cropland", "4" = "Built-up", "5" = "Bare/Sparse", "6" = "Water" }

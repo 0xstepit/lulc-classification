@@ -5,6 +5,7 @@ description = "Land use and land cover classification with Sentinel-2 imagery, R
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+  "dask[complete]>=2026.7.1",
   "dotenv>=0.9.9",
   "folium>=0.20.0",
   "geopandas>=1.1.3",
