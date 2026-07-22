@@ -180,18 +180,19 @@ def _log_retry(retry_state) -> None:
     stop=stop_after_attempt(5),
     before_sleep=_log_retry,
 )
-def get_data_profile(item_path: str) -> Profile:
+def get_data_profile(item_path: str | Path) -> Profile:
     """Returns the rasterio Profile for the raster at the provided path.
 
     Parameters
     ----------
-    item_path : str
-        Path referencing the STAC Item.
+    item_path : str | Path
+        Path referencing the STAC Item location locally or on the web.
 
     Returns
     -------
     Profile
         The Rasterio profile of the item.
+
     """
     with rasterio.open(item_path) as src:
         profile = src.profile

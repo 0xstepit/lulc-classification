@@ -125,6 +125,6 @@ class_to_color = { "10" = [
 ] }
 # WorldCover code -> merged class id. FINALIZE this after inspecting the
 # distribution logged by scripts/03. Codes absent here become `nodata`.
-#mapping = { "10" = 1, "20" = 2, "30" = 3, "40" = 4, "50" = 4, "60" = 6, "70" = 7, "80" = 8, "90" = 9, "95" = 10, "100" = 10 }
+class_mapping = { 0 = 0, 10 = 1, 20 = 2, 30 = 3, 40 = 4, 50 = 5, 60 = 6, 70 = 7, 80 = 8, 90 = 9, 95 = 10, 100 = 11 }
 # merged id -> human name (for figures / README later)
 #class_names = { "0" = "Tree Cover", "1" = "Shrubland", "2" = "Grassland", "3" = "Cropland", "4" = "Built-up", "5" = "Bare/Sparse", "6" = "Water" }

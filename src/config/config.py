@@ -162,6 +162,7 @@ class WorldCoverConfig:
     version: str
     year: str
     class_to_color: dict[str, list[int]]
+    class_mapping: dict[int, int]
 
 
 @dataclass(frozen=True)
