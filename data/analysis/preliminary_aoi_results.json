@@ -7,7 +7,9 @@
                 -5.798434049909736,
                 37.45839293323928
             ],
-            "grid_code": "MGRS-30STG",
+            "grid_code": [
+                "MGRS-30STG"
+            ],
             "scene_counts": {
                 "by_season": {
                     "DJF": 9,
@@ -25,7 +27,9 @@
                 13.81135387673415,
                 52.99149293323928
             ],
-            "grid_code": "MGRS-33UVU",
+            "grid_code": [
+                "MGRS-33UVU"
+            ],
             "scene_counts": {
                 "by_season": {
                     "DJF": 3,
@@ -43,7 +47,9 @@
                 10.372128929873613,
                 45.86959293323928
             ],
-            "grid_code": "MGRS-32TNR",
+            "grid_code": [
+                "MGRS-32TNR"
+            ],
             "scene_counts": {
                 "by_season": {
                     "DJF": 9,

@@ -12,7 +12,7 @@ BoundingBox: TypeAlias = tuple[float, float, float, float]
 
 @dataclass(frozen=True)
 class GCS:
-    """Geographic Coordinate System.
+    """Geographic Coordinate System class.
 
     Attributes
     ----------
@@ -26,34 +26,31 @@ class GCS:
     longitude: float
 
 
-def deg_per_m(meters: float, center_lat: float) -> tuple[float, float]:
+def deg_per_m(meters: float, center_lat: float) -> GCS:
     """Convert with approximation latitude and longitude from meters into degrees.
     Ref: https://stackoverflow.com/questions/1253499/simple-calculations-for-working-with-lat-lon-and-km-distance
 
     Parameters
     ----------
     meters : float
-        The meters to convert
-
+        The meters to convert.
     center_lat : float
         The latitude to use for the correction of the longitudinal degrees.
 
-
     Returns
     -------
-    tuple[float, float]
-        The longitude and latitude in degrees associated with the meters.
+    GCS
 
     """
     lat_deg = meters / 110_574
     lon_deg = meters / (111_320 * cos(radians(center_lat)))
 
-    return lon_deg, lat_deg
+    return GCS(lat_deg, lon_deg)
 
 
 def create_bbox(gcs: GCS, size_m: float) -> BoundingBox:
     """Create a bounding box around the provided center of the specified size.
-    Due to distortions in the projections of Earth model, the resulting bounding box size
+    Due to distortions in the projections of the Earth model, the resulting bounding box size
     will be close to but not equal to the specified size.
 
     Parameters
@@ -61,22 +58,23 @@ def create_bbox(gcs: GCS, size_m: float) -> BoundingBox:
     gcs : GCS
         Geograhic coordinates of the center of the box.
     size_m : float
-        Size of each bounding box side.
+        Size of each bounding box side in meters.
 
     Returns
     -------
     BoundingBox
         The bounding box around the provided center.
+
     """
     half_size = size_m / 2
 
-    lon_deg, lat_deg = deg_per_m(half_size, gcs.latitude)
+    side_deg = deg_per_m(half_size, gcs.latitude)
 
     return (
-        gcs.longitude - lon_deg,
-        gcs.latitude - lat_deg,
-        gcs.longitude + lon_deg,
-        gcs.latitude + lat_deg,
+        gcs.longitude - side_deg.longitude,
+        gcs.latitude - side_deg.latitude,
+        gcs.longitude + side_deg.longitude,
+        gcs.latitude + side_deg.latitude,
     )
 
 
@@ -92,7 +90,6 @@ def create_window_from_bbox(bbox: BoundingBox, crs, transform) -> tuple[Window, 
         Rasterio Profile CRS.
     transform :
         Rasterio Profile transformation matrix.
-
 
     Returns
     -------

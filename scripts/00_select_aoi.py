@@ -11,6 +11,7 @@ from pathlib import Path
 
 from src.config import load_config
 from src.data.sentinel2 import (
+    MGRS_PREFIX,
     SentinelClient,
     count_scenes_by_seasons,
     evaluate_candidate_validity,
@@ -22,12 +23,10 @@ from src.logger import setup_logging
 from src.reporter.models import CandidateResult, PreliminaryAnalysisResult
 
 setup_logging()
-logger = logging.getLogger("select_aoi")
+logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
 
 
-RESULTS_FILE = "preliminary_aoi_results.json"
-# Specifies if we want only the scenes for the most frequent tile.
-IS_SINGLE_TILE = True
+REPORT_FILEPATH = ANALYSIS_DIR / "preliminary_aoi_results.json"
 
 
 def save_results(path: Path, data: PreliminaryAnalysisResult):
@@ -54,31 +53,35 @@ def main():
 
     preliminary_analysis_result = PreliminaryAnalysisResult()
 
+    # Iterate through all the area of interests in the configuration.
     for name, point in cfg.aoi.candidates.items():
-        logger.info(f"starting STAC requests for candidate {name}")
+        logger.info(f"starting STAC requests for candidate [{name}]")
 
         bbox = create_bbox(GCS(point[1], point[0]), cfg.aoi.size)
 
-        # Get the scenes of the most frequent tile associated with the bounding box.
-        scenes = client.search_items(bbox, single_tile=IS_SINGLE_TILE)
-        logger.info(f"completed STAC requests")
+        scenes = client.search_items(bbox, single_tile=cfg.aoi.single_tile)
+        logger.info(f"completed STAC request and collected scenes")
 
         logger.info(f"starting scenes analysis")
         scene_counts = count_scenes_by_seasons(scenes)
 
-        # In the ID we have something like T<CODE>. The STAC filter requires only the <CODE> and
-        # the prefix `MGRS-` which stands for Militaty Grid Reference System.
-        mgrs = "MGRS-" + get_tile_id(scenes[0])[1:] if IS_SINGLE_TILE else "multiple"
+        mgrs = set(
+            [MGRS_PREFIX + tid for s in scenes if (tid := get_tile_id(s)) is not None]
+        )
 
-        candidate_result = CandidateResult(scene_counts, bbox, mgrs)
+        candidate_result = CandidateResult(list(mgrs), bbox, scene_counts)
         preliminary_analysis_result.candidates_results[name] = candidate_result
+
         if evaluate_candidate_validity(cfg, candidate_result.scene_counts):
             preliminary_analysis_result.valid_candidates.append(name)
 
-        logger.info(f"completed scenes analysis")
+        logger.info(f"completed scenes analysis for [{name}]")
 
     # TODO: use the new reporter class.
     save_results(ANALYSIS_DIR / RESULTS_FILE, preliminary_analysis_result)
+    logger.info(f"report saved at [{REPORT_FILEPATH}]")
+
+    logger.info(f"completed preliminary analysis of area of interests")
 
 
 if __name__ == "__main__":

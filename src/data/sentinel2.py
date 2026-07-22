@@ -25,6 +25,9 @@ from src.geometry import BoundingBox
 
 logger = logging.getLogger("sentinel2")
 
+# Militaty Grid Reference System prefix used in the Setninel-2 data.
+MGRS_PREFIX = "MGRS-"
+
 
 class SentinelClient:
     """The sentinel clinet for the CDSE database."""
@@ -123,10 +126,17 @@ class SceneCounts:
 
     total: int = 0
     by_season: dict = field(
-        default_factory=lambda: {"DJF": 0, "MAM": 0, "JJA": 0, "SON": 0}
+        default_factory=lambda: dict.fromkeys(
+            SEASON_MONTHS.keys(), 0
+        )  # {"DJF": 0, "MAM": 0, "JJA": 0, "SON": 0}
     )
 
     def increment_counter(self, season: str):
+        """Increment the number of total scenes and scenes for the provided season."""
+        if season not in self.by_season.keys():
+            raise KeyError(
+                f"season {season} is not valid; valid seasons are {self.by_season.keys()}"
+            )
         self.by_season[season] += 1
         self.total += 1
 
@@ -142,10 +152,8 @@ def count_scenes_by_seasons(items: list[pystac.Item]) -> SceneCounts:
     Returns
     -------
     SceneCounts
-        The information abound the counting.
+        The information abound the counting for each provided scene.
     """
-    # It seems that mathced does not work here ???
-    # total = search.matched()
     scene_counts = SceneCounts()
 
     for item in items:
@@ -153,7 +161,6 @@ def count_scenes_by_seasons(items: list[pystac.Item]) -> SceneCounts:
             continue
         month = item.datetime.month
         for season, months in SEASON_MONTHS.items():
-            # TODO: should not happen, but log not existing month.
             if month in months:
                 scene_counts.increment_counter(season)
 
@@ -301,9 +308,10 @@ def get_resolution_from_band_name(band: str) -> float:
         )
 
 
-def get_tile_id(item: pystac.Item) -> str:
+def get_tile_id(item: pystac.Item) -> str | None:
     """Get the identifier of the tile associated with the provided STAC item. The function
-    is valid only for Sentinel2 data containedj in the CDSE database.
+    is valid only for Sentinel-2 data. The function assumes that the ID is contained in the
+    STAC properties at the key `grid:code`.
 
     Parameters
     ----------
@@ -313,10 +321,15 @@ def get_tile_id(item: pystac.Item) -> str:
     Returns
     -------
     str
-        The tile ID.
+        The tile ID without the MGRS prefix.
     """
-    # An example of Sentinel2 tile name: S2A_MSIL2A_20220903T110631_N0510_R137_T29SQA_20240729T160319
-    return item.id.split("_")[5]
+    value = item.properties.get("grid:code")
+    if isinstance(value, str) and value:
+        return value.removeprefix(MGRS_PREFIX).strip().upper()
+
+    # # An example of Sentinel2 tile name: S2A_MSIL2A_20220903T110631_N0510_R137_T29SQA_20240729T160319
+    # return item.id.split("_")[5]
+    return None
 
 
 def filter_most_frequent_tile(items: list[pystac.Item]) -> list[pystac.Item]:

@@ -1,17 +1,17 @@
 from .config import (
-    AOIConfig,
+    AoiConfig,
     CompositesConfig,
     Config,
     IndicesConfig,
     MSIConfig,
-    STACConfig,
+    StacConfig,
     WorldCoverConfig,
     load_config,
 )
 from .reporter import DatetimeConfig, JSONConfig, ReporterConfig, load_reporter_config
 
 __all__ = [
-    "AOIConfig",
+    "AoiConfig",
     "CompositesConfig",
     "Config",
     "DatetimeConfig",
@@ -20,7 +20,7 @@ __all__ = [
     "MSIConfig",
     "ReporterConfig",
     "WorldCoverConfig",
-    "STACConfig",
+    "StacConfig",
     "load_reporter_config",
     "load_config",
 ]

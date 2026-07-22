@@ -6,7 +6,7 @@ from src.geometry import BoundingBox
 
 
 @dataclass
-class AOIConfig:
+class AoiConfig:
     """Area Of Interest configuration class.
 
     Attributes
@@ -20,6 +20,8 @@ class AOIConfig:
     bounding_box : bounding box of the AOI.
     tile : Sentinel-2 CDSE tile containing the AOI.
     size : lenght of each side of the AOI.
+    single_tile : specifies if the analysis should only consider the tile with the highest
+                  number of scenes.
     """
 
     name: str
@@ -31,6 +33,7 @@ class AOIConfig:
     bounding_box: BoundingBox | None = None
     tile: str | None = None
     size: float = 50
+    single_tile: bool = True
 
     def __post_init__(self) -> None:
         if len(self.candidates) == 0:
@@ -44,7 +47,7 @@ class AOIConfig:
 
 
 @dataclass(frozen=True)
-class STACConfig:
+class StacConfig:
     """Configuration class for the STAC client.
 
     Attributes
@@ -163,8 +166,8 @@ class WorldCoverConfig:
 
 @dataclass(frozen=True)
 class Config:
-    aoi: AOIConfig
-    stac: STACConfig
+    aoi: AoiConfig
+    stac: StacConfig
     msi: MSIConfig
     composites: CompositesConfig
     indices: IndicesConfig
@@ -190,8 +193,8 @@ def load_config(file_path: Path) -> Config:
     with open(file_path, "rb") as f:
         _cfg = tomllib.load(f)
 
-        aoi = AOIConfig(**_cfg.pop("aoi"))
-        stac = STACConfig(**_cfg.pop("stac"))
+        aoi = AoiConfig(**_cfg.pop("aoi"))
+        stac = StacConfig(**_cfg.pop("stac"))
         msi = MSIConfig(**_cfg.pop("msi"))
         composites = CompositesConfig(**_cfg.pop("composites"))
         indices = IndicesConfig(**_cfg.pop("indices"))

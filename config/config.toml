@@ -23,6 +23,7 @@ candidates = { brandeburg = [
   -6.0805,
   37.2323,
 ] }
+single_tile = true
 
 [stac]
 url = "https://stac.dataspace.copernicus.eu/v1"
@@ -124,6 +125,6 @@ class_to_color = { "10" = [
 ] }
 # WorldCover code -> merged class id. FINALIZE this after inspecting the
 # distribution logged by scripts/03. Codes absent here become `nodata`.
-mapping = { "10" = 1, "20" = 2, "30" = 3, "40" = 4, "50" = 4, "60" = 6, "70" = 7, "80" = 8, "90" = 9, "95" = 10, "100" = 10 }
+#mapping = { "10" = 1, "20" = 2, "30" = 3, "40" = 4, "50" = 4, "60" = 6, "70" = 7, "80" = 8, "90" = 9, "95" = 10, "100" = 10 }
 # merged id -> human name (for figures / README later)
-class_names = { "0" = "Tree Cover", "1" = "Shrubland", "2" = "Grassland", "3" = "Cropland", "4" = "Built-up", "5" = "Bare/Sparse", "6" = "Water" }
+#class_names = { "0" = "Tree Cover", "1" = "Shrubland", "2" = "Grassland", "3" = "Cropland", "4" = "Built-up", "5" = "Bare/Sparse", "6" = "Water" }
