@@ -1,5 +1,6 @@
 [aoi]
-name = "andalusia" # Bounding box expressed in the EPSG: 4326.
+name = "andalusia"
+# Bounding box expressed in the EPSG:4326.
 bounding_box = [
   -6.362565950090263,
   37.00620706676072,
@@ -23,6 +24,11 @@ andalusia = [-6.0805, 37.2323]
 [stac]
 url = "https://stac.dataspace.copernicus.eu/v1"
 collection = "sentinel-2-l2a"
+page_size = 20
+timeout = 90.0                                  # [s]
+max_retries = 6
+backoff_factor = 1.5                            # [s] exponential backoff base between retries.
+retry_statuses = [429, 500, 502, 503, 504]
 
 [msi]
 target_resolution = 10

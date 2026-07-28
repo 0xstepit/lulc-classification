@@ -1,5 +1,5 @@
 import tomllib
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from src.geometry import BoundingBox
@@ -58,6 +58,13 @@ class StacConfig:
 
     url: str
     collection: str
+    page_size: int = 20
+    timeout: float = 90.0
+    max_retries: int = 6
+    backoff_factor: float = 1.5
+    retry_statuses: list[int] = field(
+        default_factory=lambda: [429, 500, 502, 503, 504]
+    )  # needed because frozen class
 
     def __post_init__(self) -> None:
         if self.url == "":
@@ -161,9 +168,27 @@ class WorldCoverConfig:
     grid_url: str
     version: str
     year: str
-    class_to_color: dict[str, list[int]]
+    class_to_color: dict[int, list[int]]
     class_mapping: dict[int, int]
     class_names: dict[int, str]
+
+    def __post_init__(self):
+        # We need to bypass the frozen class because TOML keys are always string:
+        object.__setattr__(
+            self,
+            "class_names",
+            {int(key): value for key, value in self.class_names.items()},
+        )
+        object.__setattr__(
+            self,
+            "class_mapping",
+            {int(key): value for key, value in self.class_mapping.items()},
+        )
+        object.__setattr__(
+            self,
+            "class_to_color",
+            {int(key): value for key, value in self.class_to_color.items()},
+        )
 
 
 @dataclass(frozen=True)

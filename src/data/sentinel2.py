@@ -8,6 +8,7 @@ import numpy as np
 import pystac
 import rasterio
 from pystac_client import Client
+from pystac_client.stac_api_io import StacApiIO
 from rasterio.enums import Resampling
 from rasterio.errors import RasterioIOError
 from rasterio.profiles import Profile
@@ -18,6 +19,7 @@ from tenacity import (
     stop_after_attempt,
     wait_exponential,
 )
+from urllib3.util.retry import Retry
 
 from src.config import Config
 from src.constants import SEASON_MONTHS
@@ -33,7 +35,20 @@ class SentinelClient:
     """The sentinel clinet for the CDSE database."""
 
     def __init__(self, cfg: Config) -> None:
-        self._client = Client.open(cfg.stac.url)
+        # By configuring the Retry on the STAC client we can re-execute
+        # the single HTTP request that failed resuming the pagination.
+        retry = Retry(
+            total=cfg.stac.max_retries,
+            backoff_factor=cfg.stac.backoff_factor,
+            status_forcelist=cfg.stac.retry_statuses,
+            allowed_methods=frozenset(
+                {"GET", "POST"}
+            ),  # required because STAC uses POST and urllib3 does not retry them by default
+            backoff_jitter=1.0,
+            respect_retry_after_header=True,
+        )
+        stac_io = StacApiIO(timeout=cfg.stac.timeout, max_retries=retry)
+        self._client = Client.open(cfg.stac.url, stac_io=stac_io)
         # TODO: separate the config into smaller chunks and inject only what is relevant
         # for the client.
         self._cfg = cfg
@@ -79,6 +94,7 @@ class SentinelClient:
             bbox=list(bbox),
             datetime=datetime,
             query=query,
+            limit=self._cfg.stac.page_size,
         )
 
         items = list(search.items())
