@@ -7,6 +7,26 @@ from src.reporter.models import ReportEntry
 
 SUFFIX = ".json"
 
+import dataclasses
+from datetime import date, datetime
+from pathlib import Path
+
+import numpy as np
+
+
+def _json(obj):
+    # Since is_dataclass is True for both the class and the instance, and a class is also type, we
+    # remove the class with the second condition. This way, we check only instances.
+    if dataclasses.is_dataclass(obj) and not isinstance(obj, type):
+        return dataclasses.asdict(obj)
+    if isinstance(obj, Path):
+        return str(obj)
+    if isinstance(obj, (datetime, date)):
+        return obj.isoformat()
+    if isinstance(obj, (np.integer, np.floating)):
+        return obj.tolist()
+    raise TypeError(f"cannot serialize type {type(obj).__name__} to JSON")
+
 
 class JSONWriter:
     def __init__(
@@ -34,13 +54,13 @@ class JSONWriter:
         payload = [
             {
                 "step": e.step,
-                "timestamp": e.timestamp.isoformat(),
+                "timestamp": e.timestamp,
                 "data": e.data,
                 "metadata": e.metadata,
             }
             for e in entries
         ]
 
-        path.write_text(json.dumps(payload, indent=self.indent, default=str))
+        path.write_text(json.dumps(payload, indent=self.indent, default=_json))
 
         return path

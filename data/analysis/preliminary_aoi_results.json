@@ -1,68 +1,78 @@
-{
-    "candidates_results": {
-        "andalusia": {
-            "bbox": [
-                -6.362565950090263,
-                37.00620706676072,
-                -5.798434049909736,
-                37.45839293323928
-            ],
-            "grid_code": [
-                "MGRS-30STG"
-            ],
-            "scene_counts": {
-                "by_season": {
-                    "DJF": 9,
-                    "JJA": 13,
-                    "MAM": 7,
-                    "SON": 6
-                },
-                "total": 35
+[
+    {
+        "step": "candidates_analysis",
+        "timestamp": "2026-07-28T11:25:28.274912+00:00",
+        "data": {
+            "brandeburg": {
+                "grid_code": [
+                    "MGRS-33UVU"
+                ],
+                "bbox": [
+                    13.069046123265851,
+                    52.53930706676072,
+                    13.81135387673415,
+                    52.99149293323928
+                ],
+                "scene_counts": {
+                    "total": 16,
+                    "by_season": {
+                        "DJF": 3,
+                        "MAM": 6,
+                        "JJA": 6,
+                        "SON": 1
+                    }
+                }
+            },
+            "lombardy": {
+                "grid_code": [
+                    "MGRS-32TNR"
+                ],
+                "bbox": [
+                    9.729671070126388,
+                    45.417407066760724,
+                    10.372128929873613,
+                    45.86959293323928
+                ],
+                "scene_counts": {
+                    "total": 40,
+                    "by_season": {
+                        "DJF": 9,
+                        "MAM": 7,
+                        "JJA": 16,
+                        "SON": 8
+                    }
+                }
+            },
+            "andalusia": {
+                "grid_code": [
+                    "MGRS-30STG"
+                ],
+                "bbox": [
+                    -6.362565950090263,
+                    37.00620706676072,
+                    -5.798434049909736,
+                    37.45839293323928
+                ],
+                "scene_counts": {
+                    "total": 35,
+                    "by_season": {
+                        "DJF": 9,
+                        "MAM": 7,
+                        "JJA": 13,
+                        "SON": 6
+                    }
+                }
             }
         },
-        "brandeburg": {
-            "bbox": [
-                13.069046123265851,
-                52.53930706676072,
-                13.81135387673415,
-                52.99149293323928
-            ],
-            "grid_code": [
-                "MGRS-33UVU"
-            ],
-            "scene_counts": {
-                "by_season": {
-                    "DJF": 3,
-                    "JJA": 6,
-                    "MAM": 6,
-                    "SON": 1
-                },
-                "total": 16
-            }
-        },
-        "lombardy": {
-            "bbox": [
-                9.729671070126388,
-                45.417407066760724,
-                10.372128929873613,
-                45.86959293323928
-            ],
-            "grid_code": [
-                "MGRS-32TNR"
-            ],
-            "scene_counts": {
-                "by_season": {
-                    "DJF": 9,
-                    "JJA": 16,
-                    "MAM": 7,
-                    "SON": 8
-                },
-                "total": 40
-            }
-        }
+        "metadata": {}
     },
-    "valid_candidates": [
-        "lombardy",
-        "andalusia"
-    ]
-}
+    {
+        "step": "valid_candidates",
+        "timestamp": "2026-07-28T11:25:28.274912+00:00",
+        "data": [
+            "lombardy",
+            "andalusia"
+        ],
+        "metadata": {}
+    }
+]

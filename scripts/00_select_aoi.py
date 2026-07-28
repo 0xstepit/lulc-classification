@@ -4,12 +4,10 @@ The result of this script is a `.json` file containing relevant information to s
 use in the project.
 """
 
-import dataclasses
-import json
 import logging
 from pathlib import Path
 
-from src.config import load_config
+from src.config import load_config, load_reporter_config
 from src.data.sentinel2 import (
     MGRS_PREFIX,
     SentinelClient,
@@ -18,29 +16,15 @@ from src.data.sentinel2 import (
     get_tile_id,
 )
 from src.geometry import GCS, create_bbox
-from src.io import ANALYSIS_DIR, GLOBAL_CONFIG
+from src.io import ANALYSIS_DIR, GLOBAL_CONFIG, REPORTER_CONFIG
 from src.logger import setup_logging
 from src.reporter.models import CandidateResult, PreliminaryAnalysisResult
+from src.reporter.reporter import Reporter
 
 setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
 
-
-REPORT_FILEPATH = ANALYSIS_DIR / "preliminary_aoi_results.json"
-
-
-def save_results(path: Path, data: PreliminaryAnalysisResult):
-    """Save the data as a JSON formatted string.
-
-    Parameters
-    ----------
-    path : Path
-        The path of the file where the data has to be stored.
-    data : PreliminaryAnalysisResult
-    """
-    logger.info("saving results to file")
-    with open(path, "w") as file:
-        json.dump(dataclasses.asdict(data), file, indent=4, sort_keys=True)
+REPORT_NAME = "preliminary_aoi_results.json"
 
 
 def main():
@@ -50,6 +34,10 @@ def main():
     # Load config and create the Sentinel client for CDSE.
     cfg = load_config(GLOBAL_CONFIG)
     client = SentinelClient(cfg)
+
+    # Load and instantiate analysis reporter.
+    cfg_reporter = load_reporter_config(REPORTER_CONFIG)
+    reporter = Reporter(ANALYSIS_DIR, cfg_reporter)
 
     preliminary_analysis_result = PreliminaryAnalysisResult()
 
@@ -77,9 +65,11 @@ def main():
 
         logger.info(f"completed scenes analysis for [{name}]")
 
-    # TODO: use the new reporter class.
-    save_results(ANALYSIS_DIR / RESULTS_FILE, preliminary_analysis_result)
-    logger.info(f"report saved at [{REPORT_FILEPATH}]")
+    reporter.add("candidates_analysis", preliminary_analysis_result.candidates_results)
+    reporter.add("valid_candidates", preliminary_analysis_result.valid_candidates)
+    reporter.save(REPORT_NAME)
+
+    logger.info(f"report saved in [{REPORT_NAME}]")
 
     logger.info(f"completed preliminary analysis of area of interests")
 
