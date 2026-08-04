@@ -27,7 +27,7 @@ endif
 	@echo "Completed script execution"
 	@echo "==================================================================="
 
-create-notebook-kernel:
+kernel:
 	@echo "==================================================================="
 	@echo 'Creating notebook kernel named $(kernel_name)...'
 	@uv run ipython kernel install --user --env VIRTUAL_ENV $(venv) --name=$(kernel_name)
