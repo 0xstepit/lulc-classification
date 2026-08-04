@@ -23,14 +23,18 @@
 # %autoreload 2
 
 # %%
-import sys
 import os
-sys.path.append(os.path.abspath('..'))
+import sys
 
-from src.io import RAW_DIR
+sys.path.append(os.path.abspath(".."))
+
+from src.io import RAW_DATA_DIR
 
 # %%
-file_name = RAW_DIR / "DJF/S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif"
+file_name = (
+    RAW_DATA_DIR
+    / "DJF/S2B_MSIL2A_20220220T110959_N0510_R137_T30STG_20240516T171047_ALLBANDS.tif"
+)
 
 # %%
 file_name
@@ -39,9 +43,9 @@ file_name
 # !gdalinfo -stats {file_name}
 
 # %%
-import rasterio
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+import rasterio
 
 # %%
 with rasterio.open(file_name, "r") as src:
@@ -65,7 +69,6 @@ def robust_plot(data, bounds: list | None = None) -> None:
     Plot the provided data with the Viridis cmap and cmap max and min given
     by the 2nd and 98th percentiles of the data.
     """
-
     extent = []
     if bounds is not None:
         left, bottom, right, top = bounds
@@ -83,9 +86,9 @@ def robust_plot(data, bounds: list | None = None) -> None:
 robust_plot(data[9], bounds)
 
 # %%
-from src.config import load_sentinel2_config
+from src.config import load_config
 
-cfg = load_sentinel2_config()
+cfg = load_config()
 
 # %%
 band_names = [band.split("_")[0] for band in cfg.msi.get_bands()]
@@ -112,7 +115,12 @@ def plot_bands(data, bands, bounds=None):
             continue
         band = data[i].astype(float)
         lo, hi = np.percentile(band[band > 0], [2, 98])
-        ax.imshow(np.clip((band - lo) / (hi - lo), 0, 1), extent=extent, origin="upper", cmap="gray")
+        ax.imshow(
+            np.clip((band - lo) / (hi - lo), 0, 1),
+            extent=extent,
+            origin="upper",
+            cmap="gray",
+        )
         ax.set_title(f"Band {bands[i]}", fontsize=9)
 
     plt.tight_layout()

@@ -40,7 +40,7 @@ from rasterio.windows import from_bounds
 # As a reference tile, we are going to use a region of Andalusia (Spain). We can specify the bounding box we are interested in inspecting, but very hardly will this perfectly match with a tile generated from satellite imagery. We will directly use the s3-like link to our scene without using the STAC client for the search since I've already did it before:
 
 # %%
-href_andalusia = 's3://eodata/Sentinel-2/MSI/L2A_N0500/2022/12/27/S2B_MSIL2A_20221227T111359_N0510_R137_T30STG_20240807T153102.SAFE/GRANULE/L2A_T30STG_A030336_20221227T111439/IMG_DATA/R10m/T30STG_20221227T111359_B02_10m.jp2'
+href_andalusia = "s3://eodata/Sentinel-2/MSI/L2A_N0500/2022/12/27/S2B_MSIL2A_20221227T111359_N0510_R137_T30STG_20240807T153102.SAFE/GRANULE/L2A_T30STG_A030336_20221227T111439/IMG_DATA/R10m/T30STG_20221227T111359_B02_10m.jp2"
 
 # %%
 with rasterio.open(href_andalusia) as src:
@@ -57,10 +57,10 @@ print(bounds_tile)
 
 # %%
 bounds_aoi = [
-  -6.362565950090263,
-  37.00620706676072,
-  -5.798434049909736,
-  37.45839293323928,
+    -6.362565950090263,
+    37.00620706676072,
+    -5.798434049909736,
+    37.45839293323928,
 ]
 
 # %% [markdown]
@@ -81,6 +81,7 @@ bounds_tile_deg
 # %% [markdown]
 # Let's first visualize the original tile:
 
+
 # %%
 def robust_plot(data, bounds) -> None:
     """
@@ -99,12 +100,18 @@ def robust_plot(data, bounds) -> None:
 
 
 # %%
-bounds_tile_list = [bounds_tile.left, bounds_tile.bottom, bounds_tile.right, bounds_tile.top]
+bounds_tile_list = [
+    bounds_tile.left,
+    bounds_tile.bottom,
+    bounds_tile.right,
+    bounds_tile.top,
+]
 robust_plot(data_tile, bounds_tile_list)
 
 
 # %% [markdown]
 # Now we want to only download the cropped AoI from the STAC database:
+
 
 # %%
 @dataclass
@@ -121,7 +128,7 @@ class ResamplingStrategy:
 
 def get_scene(
     item_path: str,
-    window_bbox: BBox | None = None, # EPSG: 4326
+    window_bbox: BBox | None = None,  # EPSG: 4326
     resampling_strategy: ResamplingStrategy = ResamplingStrategy(),
 ) -> np.ndarray:
 
@@ -133,7 +140,9 @@ def get_scene(
     with rasterio.open(item_path) as src:
         if window_bbox is not None:
             # Transform from degree to meters.
-            left, bottom, right, top = warp.transform_bounds("EPSG:4326", src.crs, *window_bbox)
+            left, bottom, right, top = warp.transform_bounds(
+                "EPSG:4326", src.crs, *window_bbox
+            )
 
             window = from_bounds(
                 left=left,
@@ -184,7 +193,7 @@ scene_oversampled.shape
 robust_plot(scene_oversampled, bounds_aoi_m)
 
 # %%
-resampling = ResamplingStrategy(1/32, Resampling.bilinear)
+resampling = ResamplingStrategy(1 / 32, Resampling.bilinear)
 scene_undersampled = get_scene(href_andalusia, bounds_aoi, resampling)
 
 # %%
