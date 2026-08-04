@@ -2,6 +2,7 @@ import tomllib
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from src.config.dataset import PatchesConfig
 from src.geometry import BoundingBox
 
 
@@ -199,6 +200,7 @@ class Config:
     composites: CompositesConfig
     indices: IndicesConfig
     worldcover: WorldCoverConfig
+    patches: PatchesConfig
 
 
 def load_config(file_path: Path) -> Config:
@@ -226,5 +228,6 @@ def load_config(file_path: Path) -> Config:
         composites = CompositesConfig(**_cfg.pop("composites"))
         indices = IndicesConfig(**_cfg.pop("indices"))
         worldcover = WorldCoverConfig(**_cfg.pop("worldcover"))
+        patches = PatchesConfig(**_cfg.pop("patches"))
 
-    return Config(aoi, stac, msi, composites, indices, worldcover)
+    return Config(aoi, stac, msi, composites, indices, worldcover, patches)

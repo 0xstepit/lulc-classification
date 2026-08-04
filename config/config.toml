@@ -74,17 +74,18 @@ version = "v200"
 year = 2021
 
 [worldcover.class_to_color]
-"10" = [0, 100, 0]
-"20" = [255, 187, 34]
-"30" = [255, 255, 76]
-"40" = [240, 150, 255]
-"50" = [250, 0, 0]
-"60" = [180, 180, 180]
-"70" = [240, 240, 240]
-"80" = [0, 100, 200]
-"90" = [0, 150, 160]
-"95" = [0, 207, 117]
-"100" = [250, 230, 160]
+0 = [255, 255, 255]
+1 = [0, 100, 0]
+2 = [255, 187, 34]
+3 = [255, 255, 76]
+4 = [240, 150, 255]
+5 = [250, 0, 0]
+6 = [180, 180, 180]
+7 = [240, 240, 240]
+8 = [0, 100, 200]
+9 = [0, 150, 160]
+10 = [0, 207, 117]
+11 = [250, 230, 160]
 
 [worldcover.class_mapping]
 0 = 0
@@ -101,10 +102,26 @@ year = 2021
 100 = 11
 
 [worldcover.class_names]
-0 = "Tree Cover"
-1 = "Shrubland"
-2 = "Grassland"
-3 = "Cropland"
-4 = "Built-up"
-5 = "Bare/Sparse"
-6 = "Water"
+0 = "No Data"
+1 = "Tree Cover"
+2 = "Shrubland"
+3 = "Grassland"
+4 = "Cropland"
+5 = "Built-up"
+6 = "Bare/Sparse vegetation"
+7 = "Snow and ice"
+8 = "Permanent water bodies"
+9 = "Herbaceous wetland"
+10 = "Mangroves"
+11 = "Moss and lichen"
+
+[patches]
+seed = 3
+size = 256        # [pixel]
+block_size = 1024
+buffer = 1000     # [m]
+
+[patches.split]
+train = 0.7
+test = 0.15
+val = 0.15
