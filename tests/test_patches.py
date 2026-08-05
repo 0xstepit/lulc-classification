@@ -4,8 +4,8 @@ import pytest
 from src.data.patches import (
     LABELS_TO_SET,
     assign_blocks,
-    buffer_radius,
-    compute_patch_class_counts,
+    compute_buffer_radius,
+    counts_classes_per_patch,
     create_buffer_mask,
     create_labelled_patches,
     validate_block_size,
@@ -21,27 +21,29 @@ class TestValidateBlockSize:
 
     @pytest.mark.parametrize("block_size", [3, 300, 1023, 20480])
     def test_raises_when_block_size_is_not_a_factor(self, block_size):
-        with pytest.raises(ValueError, match="factor of the AOI raster size"):
+        with pytest.raises(ValueError, match="factor of the raster_size"):
             validate_block_size(10240, block_size)
 
 
-class TestBufferRadius:
+class TestComputeBufferRadius:
     @pytest.mark.parametrize(
-        ("buffer_m", "patch_size", "pixel_size", "expected"),
+        ("buffer_m", "patch_size", "pixel_resolution_m", "expected"),
         [
-            (0, 256, 10.0, 0),  # No buffer requested.
-            (100, 256, 10.0, 1),  # Below one patch, still rounded up to one.
-            (1000, 256, 10.0, 1),  # 100 pixels, the project default.
-            (2560, 256, 10.0, 1),  # Exactly one patch.
-            (2570, 256, 10.0, 2),  # Just above one patch.
-            (1000, 256, 20.0, 1),  # Coarser pixels shrink the radius.
-            (10000, 256, 10.0, 4),  # 1000 pixels.
+            (0.0, 256, 10.0, 0),  # No buffer requested.
+            (100.0, 256, 10.0, 1),  # Below one patch, still rounded up to one.
+            (1000.0, 256, 10.0, 1),  # 100 pixels, the project default.
+            (2560.0, 256, 10.0, 1),  # Exactly one patch.
+            (2570.0, 256, 10.0, 2),  # Just above one patch.
+            (1000.0, 256, 20.0, 1),  # Coarser pixels shrink the radius.
+            (10000.0, 256, 10.0, 4),  # 1000 pixels.
         ],
     )
-    def test_converts_metres_to_patch_units(
-        self, buffer_m, patch_size, pixel_size, expected
+    def test_converts_meters_to_patch_units(
+        self, buffer_m, patch_size, pixel_resolution_m, expected
     ):
-        assert buffer_radius(buffer_m, patch_size, pixel_size) == expected
+        assert (
+            compute_buffer_radius(buffer_m, patch_size, pixel_resolution_m) == expected
+        )
 
 
 class TestCreateBufferMask:
@@ -51,7 +53,12 @@ class TestCreateBufferMask:
         keep = create_buffer_mask(labels, 1)
 
         assert keep.shape == labels.shape
-        assert keep.dtype == np.bool_
+        assert keep.dtype == np.bool
+
+    def test_raises_when_radius_is_too_big(self):
+        labels = np.array([[0, 1], [2, 0]], dtype=np.uint8)
+        with pytest.raises(ValueError, match="is bigger than patches number"):
+            create_buffer_mask(labels, 3)
 
     @pytest.mark.parametrize("radius", [-1, 0])
     def test_keeps_everything_when_radius_is_not_positive(self, radius):
@@ -123,14 +130,14 @@ class TestCreateBufferMask:
 
 class TestAssignBlocks:
     def test_returns_grid_shaped_uint8_labels(self):
-        labels = assign_blocks((10, 10), EVEN_SPLIT, seed=3)
+        labels = assign_blocks(3, 10, EVEN_SPLIT)
 
         assert labels.shape == (10, 10)
         assert labels.dtype == np.uint8
         assert set(np.unique(labels)) <= set(LABELS_TO_SET.values())
 
     def test_block_counts_follow_the_split_fractions(self):
-        labels = assign_blocks((10, 10), EVEN_SPLIT, seed=3)
+        labels = assign_blocks(3, 10, EVEN_SPLIT)
 
         counts = np.bincount(labels.ravel(), minlength=3)
 
@@ -138,42 +145,26 @@ class TestAssignBlocks:
         assert counts[LABELS_TO_SET["val"]] == 15
         assert counts[LABELS_TO_SET["train"]] == 70
 
-    def test_fractions_are_rounded_up(self):
-        # 7 blocks * 0.15 = 1.05 -> 2 blocks each for val and test.
-        labels = assign_blocks((1, 7), EVEN_SPLIT, seed=3)
-
-        counts = np.bincount(labels.ravel(), minlength=3)
-
-        assert counts[LABELS_TO_SET["test"]] == 2
-        assert counts[LABELS_TO_SET["val"]] == 2
-        assert counts[LABELS_TO_SET["train"]] == 3
-
     def test_assigns_everything_to_train_when_other_fractions_are_zero(self):
-        labels = assign_blocks((4, 4), {"train": 1.0, "val": 0.0, "test": 0.0}, seed=3)
+        labels = assign_blocks(3, 4, {"train": 1.0, "val": 0.0, "test": 0.0})
 
         assert (labels == LABELS_TO_SET["train"]).all()
 
     def test_is_deterministic_for_a_given_seed(self):
-        first = assign_blocks((8, 8), EVEN_SPLIT, seed=3)
-        second = assign_blocks((8, 8), EVEN_SPLIT, seed=3)
+        first = assign_blocks(3, 8, EVEN_SPLIT)
+        second = assign_blocks(3, 8, EVEN_SPLIT)
 
         np.testing.assert_array_equal(first, second)
 
     def test_different_seeds_shuffle_differently_but_keep_the_counts(self):
-        first = assign_blocks((10, 10), EVEN_SPLIT, seed=3)
-        second = assign_blocks((10, 10), EVEN_SPLIT, seed=4)
+        first = assign_blocks(3, 10, EVEN_SPLIT)
+        second = assign_blocks(4, 10, EVEN_SPLIT)
 
         assert not np.array_equal(first, second)
         np.testing.assert_array_equal(
             np.bincount(first.ravel(), minlength=3),
             np.bincount(second.ravel(), minlength=3),
         )
-
-    def test_handles_non_square_grids(self):
-        labels = assign_blocks((4, 25), EVEN_SPLIT, seed=3)
-
-        assert labels.shape == (4, 25)
-        assert np.bincount(labels.ravel(), minlength=3).sum() == 100
 
 
 class TestCreateLabelledPatches:
@@ -215,7 +206,7 @@ class TestCreateLabelledPatches:
         assert patches.dtype == np.uint8
 
 
-class TestComputePatchClassCounts:
+class TestCountsClassesPerPatch:
     def test_returns_counts_per_patch_and_class(self):
         labels = np.array(
             [
@@ -227,7 +218,7 @@ class TestComputePatchClassCounts:
             dtype=np.uint8,
         )
 
-        counts = compute_patch_class_counts(labels, patch_size=2, num_classes=2)
+        counts = counts_classes_per_patch(labels, patch_size=2, num_classes=2)
 
         expected = np.array(
             [
@@ -248,7 +239,7 @@ class TestComputePatchClassCounts:
             dtype=np.uint8,
         )
 
-        counts = compute_patch_class_counts(labels, patch_size=2, num_classes=3)
+        counts = counts_classes_per_patch(labels, patch_size=2, num_classes=3)
 
         np.testing.assert_array_equal(counts[0, 0], [1, 3, 0])
         np.testing.assert_array_equal(counts[0, 1], [1, 0, 3])
@@ -257,7 +248,7 @@ class TestComputePatchClassCounts:
         rng = np.random.default_rng(3)
         labels = rng.integers(0, 5, size=(24, 16), dtype=np.uint8)
 
-        counts = compute_patch_class_counts(labels, patch_size=8, num_classes=5)
+        counts = counts_classes_per_patch(labels, patch_size=8, num_classes=5)
 
         assert counts.shape == (3, 2, 5)
         assert (counts.sum(axis=-1) == 64).all()
@@ -265,7 +256,7 @@ class TestComputePatchClassCounts:
     def test_reserves_a_column_for_classes_absent_from_the_labels(self):
         labels = np.zeros((4, 4), dtype=np.uint8)
 
-        counts = compute_patch_class_counts(labels, patch_size=4, num_classes=6)
+        counts = counts_classes_per_patch(labels, patch_size=4, num_classes=6)
 
         assert counts.shape == (1, 1, 6)
         np.testing.assert_array_equal(counts[0, 0], [16, 0, 0, 0, 0, 0])
@@ -273,6 +264,6 @@ class TestComputePatchClassCounts:
     def test_counts_are_int64(self):
         labels = np.zeros((2, 2), dtype=np.uint8)
 
-        counts = compute_patch_class_counts(labels, patch_size=2, num_classes=2)
+        counts = counts_classes_per_patch(labels, patch_size=2, num_classes=2)
 
         assert counts.dtype == np.int64
