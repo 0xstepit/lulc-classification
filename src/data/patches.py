@@ -159,9 +159,11 @@ def assign_blocks(
     return block_labels.reshape(grid_size, grid_size)
 
 
-def create_labelled_patches(labels: np.ndarray, patches_per_block: int) -> np.ndarray:
+def create_labelled_patches(
+    block_labels: np.ndarray, patches_per_block: int
+) -> np.ndarray:
     return np.repeat(
-        np.repeat(labels, patches_per_block, axis=0), patches_per_block, axis=1
+        np.repeat(block_labels, patches_per_block, axis=0), patches_per_block, axis=1
     )
 
 
@@ -181,8 +183,7 @@ def counts_classes_per_patch(
 
     Returns
     -------
-    np.ndarray
-        A 3D array with shape R1xR2x(num_classes). The size of the first
+    np.ndarray A 3D array with shape R1xR2x(num_classes). The size of the first
         two dimensions equal to the number of patches along x and y
         in the raster, and the third dimension contains the counting
         for each class in the patch.
@@ -215,10 +216,63 @@ def counts_classes_per_patch(
     return counts.reshape((rows, cols, num_classes))
 
 
-# def select_seed(
-#     grid_shape: np.ndarray, num_candidates: int, set_fractions: dict[str, float]
-# ):
-#
-#     ranked = []
-#     for seed in range(num_candidates):
-#         raster_blocks = assign_blocks(seed, grid_shape, set_fractions)
+def select_seed(
+    patch_class_count: np.ndarray,
+    grid_size: int,
+    buffer_radius: int,
+    patches_per_block: int,
+    num_candidates: int,
+    set_fractions: dict[str, float],
+):
+    # Create a boolean vector indicating whether a class is present in the
+    # labelled raster or not.
+    present = patch_class_count.sum(axis=(0, 1)) > 0
+
+    # We rank the seeds based on the total number of patches retained in all the
+    # training set.
+    ranked = []
+    for seed in range(num_candidates):
+        block_labels = assign_blocks(seed, grid_size, set_fractions)
+        patch_labels = create_labelled_patches(
+            block_labels,
+            patches_per_block,
+        )
+        keep_mask = create_buffer_mask(patch_labels, buffer_radius)
+
+        # Compute the number of patches associated with each set.
+        set_patch_counts = {
+            name: int((keep_mask & (patches_per_block == label)).sum())
+            for name, label in LABELS_TO_SET.items()
+        }
+        ranked.append(
+            (
+                min(
+                    set_patch_counts["val"],
+                    set_patch_counts["test"],
+                    set_patch_counts["train"],
+                ),
+                seed,
+                patch_labels,
+                keep_mask,
+            )
+        )
+    # Rank from the seed associated with the biggest smaller set.
+    ranked.sort(key=lambda item: item[0], reverse=True)
+
+    for _, seed, patch_labels, keep_mask in ranked:
+        covered = True
+        for label in LABELS_TO_SET.items():
+            # Select the patches that are both kept and in the currently selected set.
+            selected = keep_mask & (patch_labels == label)
+            counts = patch_class_count[selected].sum(axis=0)
+            # If one of the set does not have all the labels, the seed is skipped.
+            if not np.all(counts[present] > 0):
+                covered = False
+                break
+
+        if covered:
+            return seed, patch_labels, keep_mask
+
+    raise ValueError(
+        f"no seed in the range [0, {num_candidates}] produce a split with every class in every set"
+    )
