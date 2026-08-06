@@ -15,6 +15,7 @@ wheels/
 **/raw/**
 **/processed/**
 **/labels/**
+**/patches/**
 
 # MacOS
 .DS_Store

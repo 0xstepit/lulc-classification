@@ -1,6 +1,8 @@
+from dataclasses import dataclass
 from math import ceil
 
 import numpy as np
+from rasterio.windows import Window
 
 from src.config.dataset import SET_NAMES
 
@@ -241,7 +243,7 @@ def select_seed(
 
         # Compute the number of patches associated with each set.
         set_patch_counts = {
-            name: int((keep_mask & (patches_per_block == label)).sum())
+            name: int((keep_mask & (patch_labels == label)).sum())
             for name, label in LABELS_TO_SET.items()
         }
         ranked.append(
@@ -261,7 +263,7 @@ def select_seed(
 
     for _, seed, patch_labels, keep_mask in ranked:
         covered = True
-        for label in LABELS_TO_SET.items():
+        for label in LABELS_TO_SET.values():
             # Select the patches that are both kept and in the currently selected set.
             selected = keep_mask & (patch_labels == label)
             counts = patch_class_count[selected].sum(axis=0)
@@ -276,3 +278,32 @@ def select_seed(
     raise ValueError(
         f"no seed in the range [0, {num_candidates}] produce a split with every class in every set"
     )
+
+
+@dataclass(frozen=True)
+class PatchSpec:
+    row: int
+    col: int
+    set_name: str
+
+    def window(self, patch_size: int) -> Window:
+        """Rasterio window covering the patch."""
+        return Window(
+            self.col * patch_size, self.row * patch_size, patch_size, patch_size
+        )
+
+
+def build_patch_specs(
+    patch_labels: np.ndarray, keep_mask: np.ndarray
+) -> list[PatchSpec]:
+    rows, cols = patch_labels.shape
+
+    patch_specs = []
+    for row in range(rows):
+        for col in range(cols):
+            if keep_mask[row, col]:
+                patch_specs.append(
+                    PatchSpec(row, col, SETS_TO_LABEL[patch_labels[row, col]])
+                )
+
+    return patch_specs

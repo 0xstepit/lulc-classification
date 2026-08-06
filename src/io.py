@@ -35,3 +35,5 @@ ALL_BANDS_SCENE_SUFFIX = "_ALLBANDS.tif"
 LABELS_DIR = DATA_DIR / "labels"
 WORLDCOVER_RAW_DIR = LABELS_DIR / "worldcover_raw"
 WORLDCOVER_LABELS = LABELS_DIR / "worldcover_classes.tif"
+
+PATCHES_DIR = DATA_DIR / "patches"

@@ -1,5 +1,5 @@
 [project]
-name = "lu-lc-classification-with-unet"
+name = "lulc-classification"
 version = "0.1.0"
 description = "Land use and land cover classification with Sentinel-2 imagery, Random Forests, and U-Net"
 readme = "README.md"

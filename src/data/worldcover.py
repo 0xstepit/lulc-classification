@@ -17,7 +17,7 @@ from src.geometry import BoundingBox
 logger = logging.getLogger("worldcover")
 
 
-def get_worldcover_tile_ids(grid: gpd.GeoDataFrame, bbox: BoundingBox) -> list[str]:
+def get_worldcover_tile_ids(grid: gpd.GeoDataFrame, bbox: BoundingBox) -> list:
     """Returns the WorldCover tile IDs from the provided grid that intersect with the
     bounding box.
 
@@ -61,12 +61,57 @@ def create_worldcover_tile(
     worldcover_raster.rio.to_raster(out_file)
 
 
+def compute_class_stats(file_path: Path, class_names: dict[int, str]) -> dict:
+    nodata = 0
+
+    composite = rxr.open_rasterio(file_path)
+    if not isinstance(composite, xr.DataArray):  # to make basedpyright happy...
+        raise TypeError(f"expected [{file_path}] to open as a DataArray")
+
+    ids, counts = np.unique(composite, return_counts=True)
+    count_by_id = dict(zip(ids, counts))
+
+    total_pixels = int(composite.size)
+    total_nodata = count_by_id.get(nodata, 0)
+    total_valid = total_pixels - total_nodata
+    per_class = []
+    for cid, count in count_by_id.items():
+        # Skip the nodata label
+        if cid == nodata:
+            continue
+        per_class.append(
+            {
+                "id": int(cid),
+                "name": class_names.get(int(cid), "unknown"),
+                "pixels": int(count),
+                "pct_total": round(100 * count / total_pixels, 3),
+                "pct_valid": round(100 * count / total_valid, 3),
+                "is_rare": 100 * count / total_valid < 0.5,
+            }
+        )
+    present = {int(c) for c in count_by_id if c != nodata}
+    valid_classes = set(class_names) - {nodata}
+    present_counts = [c["pixels"] for c in per_class]
+
+    summary = {
+        "total_pixels": total_pixels,
+        "total_valid": total_valid,
+        "total_nodata": total_nodata,
+        "nodata_pct": round(100 * total_nodata / total_pixels, 3),
+        "n_classes_present": len(per_class),
+        "missing_classes": sorted(valid_classes - present),
+        "imbalance_ratio": round(max(present_counts) / min(present_counts), 2),
+    }
+
+    return {"per_class": per_class, "summary": summary}
+
+
 def _reclass_raster(
     raster: xr.DataArray, class_mapping: dict[int, int]
 ) -> xr.DataArray:
     lut = np.zeros(256, dtype=np.uint8)
-    for new_class, wc_class in class_mapping.items():
-        lut[wc_class] = new_class
+    for wc_class, new_class in class_mapping.items():
+        lut[int(wc_class)] = int(new_class)
     reclassed = lut[raster.values.astype(np.uint8)]
 
     return raster.copy(data=reclassed)
