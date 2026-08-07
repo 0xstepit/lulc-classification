@@ -1,0 +1,66 @@
+[
+    {
+        "step": "patch_split",
+        "timestamp": "2026-08-06T16:26:11.359108+00:00",
+        "data": {
+            "seed": 55,
+            "patches_per_split": {
+                "train": 201,
+                "val": 36,
+                "test": 35
+            }
+        },
+        "metadata": {}
+    },
+    {
+        "step": "patches_class_distribution",
+        "timestamp": "2026-08-06T16:26:11.359108+00:00",
+        "data": [
+            2256891,
+            450365,
+            3077377,
+            5309246,
+            804574,
+            415842,
+            205203,
+            653238
+        ],
+        "metadata": {
+            "split": "train"
+        }
+    },
+    {
+        "step": "patches_class_distribution",
+        "timestamp": "2026-08-06T16:26:11.359108+00:00",
+        "data": [
+            234317,
+            51007,
+            595578,
+            1196736,
+            22833,
+            51413,
+            14265,
+            193147
+        ],
+        "metadata": {
+            "split": "val"
+        }
+    },
+    {
+        "step": "patches_class_distribution",
+        "timestamp": "2026-08-06T16:26:11.359108+00:00",
+        "data": [
+            284507,
+            32902,
+            295406,
+            881745,
+            219236,
+            114234,
+            126699,
+            339031
+        ],
+        "metadata": {
+            "split": "test"
+        }
+    }
+]

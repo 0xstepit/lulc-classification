@@ -10,7 +10,7 @@ min_scenes            = 30     # minimum number of scenes for valid candidates
 min_scenes_per_season = 5      # minimum number of scenes per each season for valid candidates
 single_tile           = true   # only the one tile is used for the AOI
 size                  = 50_000 # size in meters for the AOI around candidates centers in [m]
-year                  = 2022
+year                  = 2021
 
 [aoi.selected]
 bounding_box = [ # Bounding box expressed in the EPSG:4326.

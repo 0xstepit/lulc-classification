@@ -1,11 +1,31 @@
 [
     {
         "step": "candidates_analysis",
-        "timestamp": "2026-07-28T11:25:28.274912+00:00",
+        "timestamp": "2026-08-07T09:05:57.012816+00:00",
         "data": {
+            "andalusia": {
+                "grid_code": [
+                    "MGRS-30STG"
+                ],
+                "bbox": [
+                    -6.362565950090263,
+                    37.00620706676072,
+                    -5.798434049909736,
+                    37.45839293323928
+                ],
+                "scene_counts": {
+                    "total": 37,
+                    "by_season": {
+                        "DJF": 7,
+                        "MAM": 6,
+                        "JJA": 14,
+                        "SON": 10
+                    }
+                }
+            },
             "brandeburg": {
                 "grid_code": [
-                    "MGRS-33UVU"
+                    "MGRS-33UUU"
                 ],
                 "bbox": [
                     13.069046123265851,
@@ -14,12 +34,12 @@
                     52.99149293323928
                 ],
                 "scene_counts": {
-                    "total": 16,
+                    "total": 15,
                     "by_season": {
                         "DJF": 3,
-                        "MAM": 6,
-                        "JJA": 6,
-                        "SON": 1
+                        "MAM": 3,
+                        "JJA": 3,
+                        "SON": 6
                     }
                 }
             },
@@ -34,32 +54,12 @@
                     45.86959293323928
                 ],
                 "scene_counts": {
-                    "total": 40,
+                    "total": 31,
                     "by_season": {
                         "DJF": 9,
-                        "MAM": 7,
-                        "JJA": 16,
-                        "SON": 8
-                    }
-                }
-            },
-            "andalusia": {
-                "grid_code": [
-                    "MGRS-30STG"
-                ],
-                "bbox": [
-                    -6.362565950090263,
-                    37.00620706676072,
-                    -5.798434049909736,
-                    37.45839293323928
-                ],
-                "scene_counts": {
-                    "total": 35,
-                    "by_season": {
-                        "DJF": 9,
-                        "MAM": 7,
-                        "JJA": 13,
-                        "SON": 6
+                        "MAM": 4,
+                        "JJA": 9,
+                        "SON": 9
                     }
                 }
             }
@@ -68,9 +68,8 @@
     },
     {
         "step": "valid_candidates",
-        "timestamp": "2026-07-28T11:25:28.274912+00:00",
+        "timestamp": "2026-08-07T09:05:57.012816+00:00",
         "data": [
-            "lombardy",
             "andalusia"
         ],
         "metadata": {}

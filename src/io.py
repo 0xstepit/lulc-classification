@@ -6,7 +6,7 @@ ROOT = Path(__file__).parent.parent
 CONFIG_DIR = ROOT / "config"
 
 REPORTER_CONFIG = CONFIG_DIR / "reporter.toml"
-GLOBAL_CONFIG = CONFIG_DIR / "config.toml"
+GLOBAL_CONFIG = CONFIG_DIR / "analysis.toml"
 
 # Folder containing all the data used in the project.
 DATA_DIR = ROOT / "data"
@@ -22,9 +22,8 @@ SEASONAL_SCENE_DIR = PROCESSED_DATA_DIR / "seasonal"
 MULTISEASONAL_SCENE_DIR = PROCESSED_DATA_DIR / "multiseasonal"
 MULTISEASONAL_SCENE = MULTISEASONAL_SCENE_DIR / "composite.tif"
 
-# Analysis directories
-# Folder containing automatic analysis results.
-ANALYSIS_DIR = DATA_DIR / "analysis"
+# Folder containing automatic reports results.
+REPORTS_DIR = DATA_DIR / "reports"
 
 # Suffixes are used when the name of final scene is composed
 # with other strings.
@@ -37,3 +36,5 @@ WORLDCOVER_RAW_DIR = LABELS_DIR / "worldcover_raw"
 WORLDCOVER_LABELS = LABELS_DIR / "worldcover_classes.tif"
 
 PATCHES_DIR = DATA_DIR / "patches"
+NORMALIZATION_PARAMS = PATCHES_DIR / "normalization_params.json"
+PATCHES_METADATA = PATCHES_DIR / "patches_metadata.json"

@@ -1,7 +1,7 @@
 """
-This script is used to run a preliminary investigation of the candidate Area Of Interests (AOI)s.
+Run a preliminary investigation of the candidate Area Of Interests (AOI)s.
 The result of this script is a `.json` file containing relevant information to select which AOI
-use in the project.
+use in the project analysis.
 """
 
 import logging
@@ -16,7 +16,7 @@ from src.data.sentinel2 import (
     get_tile_id,
 )
 from src.geometry import GCS, create_bbox
-from src.io import ANALYSIS_DIR, GLOBAL_CONFIG, REPORTER_CONFIG
+from src.io import GLOBAL_CONFIG, REPORTER_CONFIG, REPORTS_DIR
 from src.logger import setup_logging
 from src.reporter.models import CandidateResult, PreliminaryAnalysisResult
 from src.reporter.reporter import Reporter
@@ -28,16 +28,12 @@ REPORT_NAME = "preliminary_aoi_results.json"
 
 
 def main():
-    # Create folder to store preliminary analysis if it does not exist yet.
-    ANALYSIS_DIR.mkdir(parents=True, exist_ok=True)
-
     # Load config and create the Sentinel client for CDSE.
     cfg = load_config(GLOBAL_CONFIG)
     client = SentinelClient(cfg)
 
     # Load and instantiate analysis reporter.
-    cfg_reporter = load_reporter_config(REPORTER_CONFIG)
-    reporter = Reporter(ANALYSIS_DIR, cfg_reporter)
+    reporter = Reporter(REPORTS_DIR, load_reporter_config(REPORTER_CONFIG))
 
     preliminary_analysis_result = PreliminaryAnalysisResult()
 
