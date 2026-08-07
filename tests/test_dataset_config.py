@@ -16,6 +16,7 @@ def _patches_config(**overrides) -> PatchesConfig:
         "buffer": 1000,
         "max_nan_fraction": 0.5,
         "normalization_percentiles": [1, 99],
+        "stats_retention_fraction": 0.25,
         "split": dict(VALID_SPLIT),
     }
     kwargs.update(overrides)
@@ -33,6 +34,7 @@ class TestPatchesConfig:
         assert cfg.buffer == 1000
         assert cfg.max_nan_fraction == 0.5
         assert cfg.normalization_percentiles == [1, 99]
+        assert cfg.stats_retention_fraction == 0.25
         assert cfg.split == VALID_SPLIT
 
     def test_is_frozen(self):
@@ -131,3 +133,14 @@ class TestPatchesConfig:
     def test_raises_when_max_nan_fraction_is_out_of_bounds(self, fraction):
         with pytest.raises(ValueError, match="max_nan_fraction"):
             _patches_config(max_nan_fraction=fraction)
+
+    @pytest.mark.parametrize("fraction", [0.0, 0.25, 1.0])
+    def test_accepts_stats_retention_fraction_within_bounds(self, fraction):
+        cfg = _patches_config(stats_retention_fraction=fraction)
+
+        assert cfg.stats_retention_fraction == fraction
+
+    @pytest.mark.parametrize("fraction", [-0.1, 1.1])
+    def test_raises_when_stats_retention_fraction_is_out_of_bounds(self, fraction):
+        with pytest.raises(ValueError, match="stats_retention_fraction"):
+            _patches_config(stats_retention_fraction=fraction)
