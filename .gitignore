@@ -16,6 +16,7 @@ wheels/
 **/processed/**
 **/labels/**
 **/patches/**
+**/images/**
 
 # MacOS
 .DS_Store
