@@ -1,3 +1,5 @@
+# Configuration file for the scripts analysis reporter.
+
 writer = "json"
 
 [dt]

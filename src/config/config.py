@@ -1,9 +1,26 @@
 import tomllib
 from dataclasses import dataclass, field
 from pathlib import Path
+from typing import Self
 
 from src.config.dataset import PatchesConfig
 from src.geometry import BoundingBox
+
+
+@dataclass(frozen=True)
+class SelectedCandidate:
+    """The selected candidate for the analysis.
+
+    Attributes
+    ----------
+    name : name of the AOI.
+    bounding_box : bounding box of the AOI.
+    tile : Sentinel-2 CDSE tile containing the AOI.
+    """
+
+    name: str
+    bounding_box: BoundingBox | None = None
+    tile: str | None = None
 
 
 @dataclass
@@ -12,27 +29,23 @@ class AoiConfig:
 
     Attributes
     ----------
-    name : name of the AOI.
+    selected: the configuration of the selected candidate.
     year : year of evaluation of the AOI in the preliminary analysis.
     max_cloud_coverage : cloud coverage percentage after which scenes are filtered out.
     min_scenes : minimum of scenes to consider an AOI valid.
     min_scenes_per_season : minimum of scenes for each season to consider an AOI valid.
     candidates : center point in (lon, lat) for candidates AOI.
-    bounding_box : bounding box of the AOI.
-    tile : Sentinel-2 CDSE tile containing the AOI.
     size : lenght of each side of the AOI.
     single_tile : specifies if the analysis should only consider the tile with the highest
                   number of scenes.
     """
 
-    name: str
+    selected: SelectedCandidate
     year: int
     max_cloud_coverage: float
     min_scenes: int
     min_scenes_per_season: int
     candidates: dict[str, list[float]]
-    bounding_box: BoundingBox | None = None
-    tile: str | None = None
     size: float = 50
     single_tile: bool = True
 
@@ -45,6 +58,20 @@ class AoiConfig:
                 raise ValueError(
                     f"An area of interested is defined by lat/lon, received {len(v)} values for {k}"
                 )
+
+    @classmethod
+    def from_dict(cls, aoi_data: dict) -> Self:
+
+        return cls(
+            max_cloud_coverage=aoi_data["max_cloud_coverage"],
+            min_scenes=aoi_data["min_scenes"],
+            min_scenes_per_season=aoi_data["min_scenes_per_season"],
+            single_tile=aoi_data["single_tile"],
+            candidates=aoi_data["candidates"],
+            size=aoi_data["size"],
+            year=aoi_data["year"],
+            selected=SelectedCandidate(**aoi_data["selected"]),
+        )
 
 
 @dataclass(frozen=True)
@@ -169,6 +196,7 @@ class WorldCoverConfig:
     grid_url: str
     version: str
     year: str
+    nodata_value: int
     class_to_color: dict[int, list[int]]
     class_mapping: dict[int, int]
     class_names: dict[int, str]
@@ -222,7 +250,7 @@ def load_config(file_path: Path) -> Config:
     with open(file_path, "rb") as f:
         _cfg = tomllib.load(f)
 
-        aoi = AoiConfig(**_cfg.pop("aoi"))
+        aoi = AoiConfig.from_dict(_cfg.pop("aoi"))
         stac = StacConfig(**_cfg.pop("stac"))
         msi = MSIConfig(**_cfg.pop("msi"))
         composites = CompositesConfig(**_cfg.pop("composites"))

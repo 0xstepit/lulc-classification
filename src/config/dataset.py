@@ -13,6 +13,7 @@ class PatchesConfig:
     buffer: int
     max_nan_fraction: float
     normalization_percentiles: list[float]
+    stats_retention_fraction: float
     split: dict[str, float]
 
     def __post_init__(self) -> None:
@@ -42,6 +43,9 @@ class PatchesConfig:
 
         if not 0.0 <= self.max_nan_fraction <= 1.0:
             raise ValueError("max_nan_fraction must be in [0, 1]")
+
+        if not 0.0 <= self.stats_retention_fraction <= 1.0:
+            raise ValueError("stats_retention_fraction must be in [0, 1]")
 
     @property
     def patches_per_block(self) -> int:

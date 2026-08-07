@@ -1,0 +1,183 @@
+# Analysis configuration file.
+
+# =================================================================================================
+# Area of Interes
+# =================================================================================================
+
+[aoi]
+max_cloud_coverage    = 10.0   # maximum cloud used in scene filter
+min_scenes            = 30     # minimum number of scenes for valid candidates
+min_scenes_per_season = 5      # minimum number of scenes per each season for valid candidates
+single_tile           = true   # only the one tile is used for the AOI
+size                  = 50_000 # size in meters for the AOI around candidates centers in [m]
+year                  = 2022
+
+[aoi.selected]
+bounding_box = [ # Bounding box expressed in the EPSG:4326.
+    -6.362565950090263,
+    37.00620706676072,
+    -5.798434049909736,
+    37.45839293323928,
+]
+name = "andalusia" # Selected candidate name.
+tile = "MGRS-30STG" # Tile to use for the bounding box.
+
+[aoi.candidates] # longitude/latitude (x, y) points of the candidate regions [deg]
+andalusia  = [-6.0805, 37.2323]
+brandeburg = [13.4402, 52.7654]
+lombardy   = [10.0509, 45.6435]
+
+# =================================================================================================
+# STAC
+# =================================================================================================
+
+[stac]
+backoff_factor = 1.5 # exponential backoff base between retries in [s]
+collection = "sentinel-2-l2a"
+max_retries = 6 # maximum number of retries for the items query.
+page_size = 20
+retry_statuses = [
+    429,
+    500,
+    502,
+    503,
+    504,
+] # list of statuses for which the retry must be executed.
+timeout = 90.0 # [s]
+# Notice that by updating this URL, also the associated bands in [msi] must be updated accordingly.
+url = "https://stac.dataspace.copernicus.eu/v1" # STAC catalog location.
+
+# =================================================================================================
+# MSI
+# =================================================================================================
+
+[msi] # Configuration for the MultiSpectral Instrument of Sentinel-2 satellites.
+scl_mask_classes = [
+    0,
+    1,
+    3,
+    7,
+    8,
+    9,
+    10,
+    11,
+] # classes used to filter rasters with the SCL mask.
+target_resolution = 10 # target resolution for the composite in [m]
+
+[msi.bands]
+# 10: blue, green, red, NIR.
+# 20: red edge 1, red edge 2, red edge 3, narrow NIR, SWIR 1, SWIR 2, SCL.
+10 = ["B02_10m", "B03_10m", "B04_10m", "B08_10m"]
+20 = [
+    "B05_20m",
+    "B06_20m",
+    "B07_20m",
+    "B8A_20m",
+    "B11_20m",
+    "B12_20m",
+    "SCL_20m",
+]
+
+# =================================================================================================
+# Composites
+# =================================================================================================
+
+[composites] # Configuration for the scene composite generation
+max_scenes_per_season = 10   # maximum number of scenes to use in each season.
+tiles_size            = 1024 # size of the tiles when the raster is stored on disk.
+
+[composites.seasons]
+DJF = [
+    "2021-12-01",
+    "2022-02-28",
+] # alway use sequential seasons (december is from the previous year)
+JJA = ["2022-06-01", "2022-08-31"]
+MAM = ["2022-03-01", "2022-05-31"]
+SON = ["2022-09-01", "2022-11-30"]
+# indices = ["NDVI", "NDBI", "NDWI"] # Computed per season
+
+# =================================================================================================
+# Spectral indices
+# =================================================================================================
+
+[indices.bands_to_channels] # A map from the band name to the raster channel for each spectral index
+ndbi = { "swir" = 9, "nir" = 3 }
+ndvi = { "nir" = 3, "red" = 2 }
+ndwi = { "green" = 1, "nir" = 3 }
+
+# =================================================================================================
+# WorldCover
+# =================================================================================================
+
+[worldcover]
+
+grid_url     = "https://esa-worldcover.s3.eu-central-1.amazonaws.com/esa_worldcover_grid.geojson" # URL for the file containin the vector data for the WorldCover grid.
+nodata_value = 0                                                                                  # value to consider no data in the raster.
+url          = "https://esa-worldcover.s3.eu-central-1.amazonaws.com"
+version      = "v200"
+year         = 2021                                                                               # this year should match the Sentinel-2 scene year.
+
+[worldcover.class_to_color] # map between each WorldCover class and its color used in the doc.
+0  = [255, 255, 255]
+1  = [0, 100, 0]
+2  = [255, 187, 34]
+3  = [255, 255, 76]
+4  = [240, 150, 255]
+5  = [250, 0, 0]
+6  = [180, 180, 180]
+7  = [240, 240, 240]
+8  = [0, 100, 200]
+9  = [0, 150, 160]
+10 = [0, 207, 117]
+11 = [250, 230, 160]
+
+# TODO: is this correct? we then used sequential indexing in patch generation.
+[worldcover.class_mapping] # mapping between WorldCover class labels and our labes
+0   = 0
+10  = 1
+20  = 2
+30  = 3
+40  = 4
+50  = 5
+60  = 6
+70  = 7
+80  = 8
+90  = 9
+95  = 10
+100 = 11
+
+[worldcover.class_names] # class names for our labeling system.
+0  = "No Data"
+1  = "Tree Cover"
+2  = "Shrubland"
+3  = "Grassland"
+4  = "Cropland"
+5  = "Built-up"
+6  = "Bare/Sparse vegetation"
+7  = "Snow and ice"
+8  = "Permanent water bodies"
+9  = "Herbaceous wetland"
+10 = "Mangroves"
+11 = "Moss and lichen"
+
+# =================================================================================================
+# Dataset patches
+# =================================================================================================
+
+[patches]
+block_size = 1024 # dimension of each block of patches for a dataset subset [pixels]
+buffer = 1000 # buffer to apply between adjacent dataset subset [m]
+max_nan_fraction = 0.5 # maximum number of nan percentage supported in a patch. [%]
+normalization_percentiles = [
+    1,
+    99,
+] # percentiles to use in the normalization of the data.
+seed = 3
+seed_candidates = 200 # number of seeds to evaluate for the dataset split operation.
+size = 256 # patch size [pixel]
+stats_retention_fraction = 0.25 # percentage of pixels to accumulate for the statistic computation [%]
+
+[patches.split] # dataset split fractions [%]
+test  = 0.15
+train = 0.7
+val   = 0.15

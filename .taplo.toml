@@ -1,0 +1,6 @@
+# reorder_keys is false because taplo use alphabetical order, which breaks
+# array with numerical keys.
+[formatting]
+align_entries = true
+indent_string = "    "
+reorder_keys  = false
