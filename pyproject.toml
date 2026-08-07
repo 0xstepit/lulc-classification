@@ -50,4 +50,6 @@ dev = [
     "folium>=0.20.0",
     "ruff>=0.15.14",
     "taplo>=0.9.3",
+    "geodataset>=0.3.2",
+    "geodatasets>=2026.5.1",
 ]
