@@ -1,6 +1,7 @@
-# Land Usage/Land Coverage Classification with U-Net
+[![Unit Tests](https://img.shields.io/github/actions/workflow/status/0xstepit/lulc-classification/tests.yml?style=flat&logo=githubactions&logoColor=white&label=tests&labelColor=grey)](https://github.com/0xstepit/lu-lc-classification-with-unet/actions/workflows/tests.yml)
+[![Python](https://img.shields.io/badge/python-3.14%2B-blue.svg)](https://www.python.org/downloads/)
 
-[![Unit Tests](https://img.shields.io/github/actions/workflow/status/0xstepit/lu-lc-classification-with-unet/tests.yml?style=flat&logo=githubactions&logoColor=white&label=tests&labelColor=black)](https://github.com/0xstepit/lu-lc-classification-with-unet/actions/workflows/tests.yml)
+# LULC Classification
 
 ## Description
 
@@ -84,6 +85,22 @@ uv sync
 ```
 
 A Makefile is provided to simplify the usage of the source code.
+
+### Configure
+
+To configure the behavior of the scripts, you can modify the associated
+configuration files in the `/config/` folder. There are two files you can
+customize:
+
+- `analysis.toml`: this is the main configuration file that is used to define
+  the parameters of the pipeline like the area of interest, the desired bands,
+  the patch size in the created dataset, and many others
+- `reporter.toml`: this file is used to configure how the scripts report should
+  be created and formatted. Only JSON formatted texts are supported at the
+  moment.
+
+For more details about each parameter you can configure, please head over the
+associated file and read the description of the variables you want to customize.
 
 ### Tests
 
