@@ -1,4 +1,4 @@
-.PHONY: help unit-tests check format list-scripts run-script
+.PHONY: help install unit-tests check format list-scripts run-script
 .PHONY: kernel start-notebook
 
 venv = $(CURDIR)/.venv
@@ -8,6 +8,13 @@ SCRIPTS := $(notdir $(wildcard $(SCRIPTS_DIR)/*))
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+install: ## Install dependencies
+	@echo "==================================================================="
+	@echo 'Installing deps in a virtual environment...'
+	@uv sync
+	@echo "Completed installation"
+	@echo "==================================================================="
 
 format: ## Format codebase
 	@echo "==================================================================="
