@@ -23,7 +23,6 @@ from src.data.sentinel2 import (
 from src.data.utils import compute_nan_pct
 from src.io import (
     GLOBAL_CONFIG,
-    MULTISEASONAL_SCENE_DIR,
     RAW_DATA_DIR,
     REPORTER_CONFIG,
     REPORTS_DIR,
@@ -48,8 +47,6 @@ def main():
 
     # Here we store all the composite scenes for each season.
     SEASONAL_SCENE_DIR.mkdir(parents=True, exist_ok=True)
-    # Here we store the all seasons composite image.
-    MULTISEASONAL_SCENE_DIR.mkdir(parents=True, exist_ok=True)
 
     season_ids = cfg.composites.seasons.keys()
 

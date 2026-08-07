@@ -1,4 +1,6 @@
+import contextlib
 import logging
+from pathlib import Path
 
 import numpy as np
 import rasterio
@@ -99,3 +101,77 @@ def create_masked_bands_and_indices_tile(
     indices = compute_indices(cfg.indices, rescaled_bands)
 
     return np.concatenate([rescaled_bands, indices], axis=0)
+
+
+class SeasonalStack:
+    def __init__(self, files: list[Path]) -> None:
+        if not files:
+            raise ValueError("no seasonal files provided")
+
+        self._files = files
+        self._exit_stack = contextlib.ExitStack()
+        self._sources: list[rasterio.DatasetReader] = []
+
+    def __enter__(self) -> "SeasonalStack":
+        self._sources = [
+            self._exit_stack.enter_context(rasterio.open(f)) for f in self._files
+        ]
+        self._validate_alignment()
+        return self
+
+    def __exit__(self, *exec_info) -> None:
+        self._exit_stack.close()
+
+    def _validate_alignment(self) -> None:
+        reference = self._sources[0]
+
+        for source in self._sources[1:]:
+            if (source.width, source.height) != (reference.width, reference.height):
+                raise ValueError(
+                    f"seasonal scene ({source.name}) has shape "
+                    f"({source.width}, {source.height}), expected "
+                    f"({reference.width}, {reference.height})."
+                )
+
+            if source.crs != reference.crs:
+                raise ValueError(
+                    f"seasonal scene ({source.name}) has CRS {source.crs}, "
+                    f"expected ({reference.crs})."
+                )
+
+            if not source.transform.almost_equals(reference.transform):
+                raise ValueError(
+                    f"seasonal scene ({source.name}) is not aligned with scene({reference.name})"
+                )
+
+    @property
+    def width(self) -> int:
+        return self._sources[0].width
+
+    @property
+    def height(self) -> int:
+        return self._sources[0].height
+
+    @property
+    def shape(self) -> tuple[int, int]:
+        return self._sources[0].shape
+
+    @property
+    def crs(self):
+        return self._sources[0].crs
+
+    @property
+    def transform(self):
+        return self._sources[0].transform
+
+    @property
+    def count(self):
+        return sum(source.count for source in self._sources)
+
+    def block_window(self, band_index: int):
+        return self._sources[0].block_windows(band_index)
+
+    def read(self, window: Window | None = None) -> np.ndarray:
+        return np.concatenate(
+            [source.read(window=window) for source in self._sources], axis=0
+        )

@@ -1,5 +1,5 @@
 # Defines the correct order of the season IDs.
-SEASON_ORDER = ["DJF", "MAM", "JJA", "SON"]
+SEASONS_ORDER = ["DJF", "MAM", "JJA", "SON"]
 
 # Season acronym to associated month numbers.
 SEASON_MONTHS = {

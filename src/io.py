@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from src.constants import SEASONS_ORDER
+
 ROOT = Path(__file__).parent.parent
 
 # Configuration directories.
@@ -17,11 +19,6 @@ DATA_DIR = ROOT / "data"
 RAW_DATA_DIR = DATA_DIR / "raw"
 PROCESSED_DATA_DIR = DATA_DIR / "processed"
 
-# Seasonal scenes folder.
-SEASONAL_SCENE_DIR = PROCESSED_DATA_DIR / "seasonal"
-MULTISEASONAL_SCENE_DIR = PROCESSED_DATA_DIR
-MULTISEASONAL_SCENE = MULTISEASONAL_SCENE_DIR / "composite.tif"
-
 # Folder containing automatic reports results.
 REPORTS_DIR = DATA_DIR / "reports"
 
@@ -38,3 +35,11 @@ WORLDCOVER_LABELS = LABELS_DIR / "worldcover_classes.tif"
 PATCHES_DIR = DATA_DIR / "patches"
 NORMALIZATION_PARAMS = PATCHES_DIR / "normalization_params.json"
 PATCHES_METADATA = PATCHES_DIR / "patches_metadata.json"
+
+# Seasonal scenes folder.
+SEASONAL_SCENE_DIR = PROCESSED_DATA_DIR / "seasonal"
+SEASONAL_SCENES = [
+    SEASONAL_SCENE_DIR / f"{season}{SEASONAL_SCENE_SUFFIX}" for season in SEASONS_ORDER
+]
+
+IMGS_DIR = ROOT / "assets" / "images"
