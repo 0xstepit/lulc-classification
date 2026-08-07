@@ -1,4 +1,8 @@
-""" """
+"""
+Create a seasonal composite raster by combining each season images into a median aggregate, and then
+by stacking together all the bands for each seasons and spectral indexes into a single raster.
+"""
+# TODO: rescale properly reflectances
 
 import contextlib
 import logging
@@ -9,7 +13,6 @@ import rasterio
 from dotenv import load_dotenv
 
 from src.config import load_config, load_reporter_config
-from src.constants import SEASON_ORDER
 from src.data.rasterio import (
     create_masked_bands_and_indices_tile,
     create_seasonal_profile,
@@ -19,11 +22,11 @@ from src.data.sentinel2 import (
 )
 from src.data.utils import compute_nan_pct
 from src.io import (
-    ANALYSIS_DIR,
     GLOBAL_CONFIG,
     MULTISEASONAL_SCENE_DIR,
     RAW_DATA_DIR,
     REPORTER_CONFIG,
+    REPORTS_DIR,
     SEASONAL_SCENE_DIR,
     SEASONAL_SCENE_SUFFIX,
 )
@@ -35,17 +38,13 @@ from src.reporter.reporter import Reporter
 load_dotenv()
 
 setup_logging()
-logger = logging.getLogger("create_seasonal_composite")
-
-SKIP_PARTIAL_BLOCKS = True
+logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
 
 
 def main():
     cfg = load_config(GLOBAL_CONFIG)
 
-    # Load and instantiate analysis reporter.
-    cfg_reporter = load_reporter_config(REPORTER_CONFIG)
-    reporter = Reporter(ANALYSIS_DIR, cfg_reporter)
+    reporter = Reporter(REPORTS_DIR, load_reporter_config(REPORTER_CONFIG))
 
     # Here we store all the composite scenes for each season.
     SEASONAL_SCENE_DIR.mkdir(parents=True, exist_ok=True)
@@ -54,8 +53,8 @@ def main():
 
     season_ids = cfg.composites.seasons.keys()
 
-    # Keep track of the single season file so we can quickly access them for the composite.
-    seasonal_files = {}
+    # We remove the SCL band from the channels when we create the composite.
+    num_channels = cfg.msi.num_bands - 1 + len(cfg.indices.bands_to_channels.keys())
 
     # Iterate over each season folder to preprocess season's scenes.
     for season_dir in sorted(RAW_DATA_DIR.iterdir()):
@@ -63,30 +62,28 @@ def main():
         if not season_dir.is_dir() or season_dir.name not in list(season_ids):
             continue
 
-        logger.info(f"processing files for season {season_dir.name}")
+        logger.info(f"processing scenes for season ({season_dir.name})")
 
         out_file = SEASONAL_SCENE_DIR / f"{season_dir.name}{SEASONAL_SCENE_SUFFIX}"
 
-        seasonal_files[season_dir.name] = out_file
-
         if out_file.exists():
-            logger.info(f"output file {out_file} already exists, skipping")
+            logger.info(f"skip: output file ({out_file}) already exists")
             continue
 
-        # Create an array containing all the scene for the considered season.
+        # Create an array containing all the scene paths for the considered season.
         files = [f for f in season_dir.glob("*.tif")]
 
         # No need here to update the affine transform since in case of scene cutting,
         # only the pixels far from the origin are removed.
         profile = create_seasonal_profile(
             get_data_profile(str(files[0])),
-            13,
+            num_channels,
             cfg.composites.tiles_size,
-            SKIP_PARTIAL_BLOCKS,
+            cfg.composites.skip_partial_blocks,
         )
 
         # Create a nested context containing all rasterio data reader needed. Since each season
-        # can have a different number of scene, we use ExitStack to properly close their context.
+        # can have a different number of scenes, we use ExitStack to properly close their context.
         with contextlib.ExitStack() as stack:
             # Accumulate nested contexts.
             sources = [stack.enter_context(rasterio.open(f)) for f in files]
@@ -98,12 +95,16 @@ def main():
                     logger.info(f"processing block {block_idx}")
 
                     # Skip not full blocks if configured.
-                    if SKIP_PARTIAL_BLOCKS and (window.width, window.height) != (
-                        cfg.composites.tiles_size,
-                        cfg.composites.tiles_size,
+                    if cfg.composites.skip_partial_blocks and (
+                        (window.width, window.height)
+                        != (
+                            cfg.composites.tiles_size,
+                            cfg.composites.tiles_size,
+                        )
                     ):
                         logger.warning(
-                            f"skipping block {block_idx} with shape {window.height}x{window.width}"
+                            f"skipping block ({block_idx}) with shape "
+                            f"({window.height}x{window.width}) because not full"
                         )
                         continue
 
@@ -149,32 +150,6 @@ def main():
                     dst.write(season_composite_block, window=window)
 
     reporter.save("create_seasonal_composite.json")
-
-    # Create the all seasons composite
-
-    profile = get_data_profile(seasonal_files[SEASON_ORDER[0]])
-    profile.update(count=profile["count"] * len(SEASON_ORDER))
-
-    ordered_files = [seasonal_files[season] for season in SEASON_ORDER]
-
-    MULTISEASONAL_SCENE_DIR.mkdir(parents=True, exist_ok=True)
-    out_file = MULTISEASONAL_SCENE_DIR / "composite.tif"
-
-    if out_file.exists():
-        logger.info(f"output file {out_file} already exists, skipping")
-        return
-
-    logger.info("starting all seasonal composite generation")
-    with rasterio.open(out_file, "w", **profile) as dst:
-        with contextlib.ExitStack() as stack:
-            sources = [stack.enter_context(rasterio.open(f)) for f in ordered_files]
-
-            for block_idx, window in sources[0].block_windows(1):
-                block_scenes = [source.read(window=window) for source in sources]
-
-                stack_seasons = np.concatenate(block_scenes, axis=0)
-
-                dst.write(stack_seasons, window=window)
 
 
 if __name__ == "__main__":

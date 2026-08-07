@@ -85,6 +85,7 @@ target_resolution = 10 # target resolution for the composite in [m]
 [composites] # Configuration for the scene composite generation
 max_scenes_per_season = 10   # maximum number of scenes to use in each season.
 tiles_size            = 1024 # size of the tiles when the raster is stored on disk.
+skip_partial_blocks   = true
 
 [composites.seasons]
 DJF = [
@@ -100,10 +101,12 @@ SON = ["2022-09-01", "2022-11-30"]
 # Spectral indices
 # =================================================================================================
 
-[indices.bands_to_channels] # A map from the band name to the raster channel for each spectral index
-ndbi = { "swir" = 9, "nir" = 3 }
-ndvi = { "nir" = 3, "red" = 2 }
-ndwi = { "green" = 1, "nir" = 3 }
+# A map from the band name to the raster channel for each spectral index
+# The bands are sorted alphabetically in the script, this is why we have this mapping
+[indices.bands_to_channels]
+ndbi = { "swir" = 7, "nir" = 6 }  # B08 and B04
+ndvi = { "nir" = 6, "red" = 2 }   # B11 and B08
+ndwi = { "green" = 1, "nir" = 6 } #B03 and B08
 
 # =================================================================================================
 # WorldCover

@@ -6,6 +6,7 @@ from rasterio.profiles import Profile
 from rasterio.windows import Window
 
 from src.config import Config
+from src.data.sentinel2 import rescale_reflectances
 from src.preprocessing.indices import compute_indices
 from src.preprocessing.masking import (
     create_scl_mask,
@@ -25,6 +26,8 @@ def create_seasonal_profile(
     ----------
     profile : Profile
         Reference profile to update.
+    num_channels: int
+        Number of channels in the final raster.
     tiles_size : int
         Size of the tile block used to read the image raster.
     discard_partial: bool
@@ -35,6 +38,8 @@ def create_seasonal_profile(
     Profile
         The updated profile to use for each season median scene.
     """
+    # We take into account that the windowed read of the raster can have window that are not
+    # full size.
     if discard_partial:
         new_width = profile["width"] - profile["width"] % tiles_size
         new_height = profile["height"] - profile["height"] % tiles_size
@@ -44,11 +49,9 @@ def create_seasonal_profile(
 
     if new_width != profile["width"] or new_height != profile["height"]:
         logger.warning(
-            "AOI extent is not a multiple of tiles_size=%d, dropping the trailing "
-            "%dx%d px (right/bottom edge) from the seasonal composite",
-            tiles_size,
-            profile["width"] - new_width,
-            profile["height"] - new_height,
+            f"AOI extent is not a multiple of tiles_size ({tiles_size}), "
+            f"dropping the trailing {profile['width'] - new_width}x{profile['height'] - new_height} px "
+            "(right/bottom edge) from the seasonal composite",
         )
 
     # The transform's origin (upper-left corner of pixel (0, 0)) is unaffected:
@@ -87,11 +90,12 @@ def create_masked_bands_and_indices_tile(
     data = src.read(window=window)
 
     mask = create_scl_mask(data, cfg.msi.get_scl_band_index(), cfg.msi.scl_mask_classes)
-
     masked_bands = get_masked_bands(data, cfg.msi.get_scl_band_index(), mask)
+
+    rescaled_bands = rescale_reflectances(masked_bands)
 
     # NOTE: we know that SCL was at the end of the data so indices positions are still valid
     # but it should be improved.
-    indices = compute_indices(cfg.indices, masked_bands)
+    indices = compute_indices(cfg.indices, rescaled_bands)
 
-    return np.concatenate([masked_bands, indices], axis=0)
+    return np.concatenate([rescaled_bands, indices], axis=0)

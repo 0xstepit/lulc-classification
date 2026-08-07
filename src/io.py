@@ -19,7 +19,7 @@ PROCESSED_DATA_DIR = DATA_DIR / "processed"
 
 # Seasonal scenes folder.
 SEASONAL_SCENE_DIR = PROCESSED_DATA_DIR / "seasonal"
-MULTISEASONAL_SCENE_DIR = PROCESSED_DATA_DIR / "multiseasonal"
+MULTISEASONAL_SCENE_DIR = PROCESSED_DATA_DIR
 MULTISEASONAL_SCENE = MULTISEASONAL_SCENE_DIR / "composite.tif"
 
 # Folder containing automatic reports results.

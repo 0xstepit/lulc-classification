@@ -398,3 +398,10 @@ def evaluate_candidate_validity(cfg: Config, scene_counts: SceneCounts) -> bool:
             return False
 
     return True
+
+
+def rescale_reflectances(raster: np.ndarray):
+    rescaled = raster.astype(np.float32)
+    rescaled = np.where(rescaled == 0, np.nan, rescaled)
+    # Clip negative reflectances.
+    return np.maximum(rescaled * 0.0001 - 0.1, 0.0)

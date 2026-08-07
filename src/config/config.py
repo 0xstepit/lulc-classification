@@ -178,11 +178,15 @@ class CompositesConfig:
     seasons: Start and date of each season.
     statistic: Statistic to use within each seasons.
     tiles_size: dimension for [H, W] of the window to tile each scene.
+    skip_partial_scenes: skip or not partial blocks in the final composite. We can
+        have partial blocks if the block size used in the image stored on disk is not
+        a factor of raster width and height.
     """
 
     max_scenes_per_season: int
     seasons: dict[str, list[str]]
     tiles_size: int
+    skip_partial_blocks: bool
 
     def __post_init__(self):
         for name, dates in self.seasons.items():
