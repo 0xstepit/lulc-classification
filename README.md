@@ -8,8 +8,6 @@
 
 # LULC Classification
 
-## Description
-
 This project explores Machine Learning (ML) assisted Land Use and Land Cover
 (LULC) classification for a selected Area Of Interest (AOI). The classification
 process evaluates and compares the results obtained from a classic ML approach
@@ -19,6 +17,10 @@ U-Net architecture.
 The goal of the project is the definition of a clear and statically sound
 approach for the generation of a geospatial dataset, and to assess how
 data-driven techniques can be used in the analysis of spatio-temporal patterns.
+
+<div align="center">
+  <img src="assets/seasonal_median_composites_andalusia.png" alt="Seasonal median compsites Andalusia" />
+</div>
 
 ## What is Land Use and Land Cover?
 
