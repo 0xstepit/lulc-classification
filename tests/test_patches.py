@@ -8,6 +8,7 @@ from src.data.patches import (
     counts_classes_per_patch,
     create_buffer_mask,
     create_labelled_patches,
+    select_seed,
     validate_block_size,
 )
 
@@ -267,3 +268,152 @@ class TestCountsClassesPerPatch:
         counts = counts_classes_per_patch(labels, patch_size=2, num_classes=2)
 
         assert counts.dtype == np.int64
+
+
+def _split_for_seed(seed, grid_size, patches_per_block, buffer_radius, set_fractions):
+    """Rebuild the patch labels and buffer mask a given seed produces."""
+    patch_labels = create_labelled_patches(
+        assign_blocks(seed, grid_size, set_fractions), patches_per_block
+    )
+    return patch_labels, create_buffer_mask(patch_labels, buffer_radius)
+
+
+def _smallest_set_size(patch_labels, keep_mask):
+    """The quantity select_seed maximises: kept patches in the thinnest set."""
+    return min(
+        int((keep_mask & (patch_labels == label)).sum())
+        for label in LABELS_TO_SET.values()
+    )
+
+
+class TestSelectSeed:
+    GRID_SIZE = 4
+    PATCHES_PER_BLOCK = 2
+    NUM_PATCHES = GRID_SIZE * PATCHES_PER_BLOCK  # 8 patches per side.
+
+    def _counts(self, num_classes=3, fill=1):
+        return np.full(
+            (self.NUM_PATCHES, self.NUM_PATCHES, num_classes), fill, dtype=np.int64
+        )
+
+    def _select(self, patch_class_count, buffer_radius=0, num_candidates=20):
+        return select_seed(
+            patch_class_count,
+            self.GRID_SIZE,
+            buffer_radius,
+            self.PATCHES_PER_BLOCK,
+            num_candidates,
+            EVEN_SPLIT,
+        )
+
+    def test_returns_seed_labels_and_mask(self):
+        seed, patch_labels, keep_mask, _ = self._select(self._counts())
+
+        assert 0 <= seed < 20
+        assert patch_labels.shape == (self.NUM_PATCHES, self.NUM_PATCHES)
+        assert keep_mask.shape == (self.NUM_PATCHES, self.NUM_PATCHES)
+        assert keep_mask.dtype == np.bool_
+
+    def test_returned_arrays_match_the_returned_seed(self):
+        seed, patch_labels, keep_mask, _ = self._select(self._counts(), buffer_radius=1)
+
+        expected_labels, expected_mask = _split_for_seed(
+            seed, self.GRID_SIZE, self.PATCHES_PER_BLOCK, 1, EVEN_SPLIT
+        )
+        np.testing.assert_array_equal(patch_labels, expected_labels)
+        np.testing.assert_array_equal(keep_mask, expected_mask)
+
+    def test_returned_block_labels_belong_to_the_returned_seed(self):
+        # Regression: block_labels used to leak out of the ranking loop, so it
+        # described the last candidate seed instead of the selected one.
+        seed, patch_labels, _, block_labels = self._select(
+            self._counts(), buffer_radius=1
+        )
+
+        np.testing.assert_array_equal(
+            block_labels, assign_blocks(seed, self.GRID_SIZE, EVEN_SPLIT)
+        )
+        np.testing.assert_array_equal(
+            create_labelled_patches(block_labels, self.PATCHES_PER_BLOCK), patch_labels
+        )
+
+    def test_is_deterministic(self):
+        first_seed, first_labels, first_mask, _ = self._select(self._counts())
+        second_seed, second_labels, second_mask, _ = self._select(self._counts())
+
+        assert first_seed == second_seed
+        np.testing.assert_array_equal(first_labels, second_labels)
+        np.testing.assert_array_equal(first_mask, second_mask)
+
+    def test_every_set_contains_every_present_class(self):
+        rng = np.random.default_rng(3)
+        counts = rng.integers(
+            0, 5, size=(self.NUM_PATCHES, self.NUM_PATCHES, 3), dtype=np.int64
+        )
+
+        _, patch_labels, keep_mask, _ = self._select(counts)
+
+        present = counts.sum(axis=(0, 1)) > 0
+        for label in LABELS_TO_SET.values():
+            selected = keep_mask & (patch_labels == label)
+            assert (counts[selected].sum(axis=0)[present] > 0).all()
+
+    def test_ignores_classes_absent_from_the_whole_raster(self):
+        # Class 2 has no pixel anywhere, so it must not block the selection.
+        counts = self._counts(num_classes=3)
+        counts[:, :, 2] = 0
+
+        seed, patch_labels, keep_mask, _ = self._select(counts)
+
+        assert 0 <= seed < 20
+        assert patch_labels.shape == keep_mask.shape
+        totals = counts[keep_mask].sum(axis=0)
+        assert totals[0] > 0
+        assert totals[2] == 0
+
+    def test_prefers_the_covering_seed_with_the_largest_smallest_set(self):
+        counts = self._counts()
+
+        seed, _, _, _ = self._select(counts, buffer_radius=1)
+
+        # Every seed covers the classes here, so the choice is purely the rank.
+        sizes = {
+            candidate: _smallest_set_size(
+                *_split_for_seed(
+                    candidate,
+                    self.GRID_SIZE,
+                    self.PATCHES_PER_BLOCK,
+                    1,
+                    EVEN_SPLIT,
+                )
+            )
+            for candidate in range(20)
+        }
+        best = max(sizes.values())
+        assert sizes[seed] == best
+        # Ties are broken by the lowest seed.
+        assert seed == min(c for c, size in sizes.items() if size == best)
+
+    def test_skips_seeds_that_leave_a_class_out_of_a_set(self):
+        # Class 1 lives in a single patch, so at most one set can ever hold it.
+        counts = self._counts(num_classes=2)
+        counts[:, :, 1] = 0
+        counts[0, 0, 1] = 5
+
+        with pytest.raises(ValueError, match="no seed in the range"):
+            self._select(counts)
+
+    def test_raises_when_there_are_no_candidates(self):
+        with pytest.raises(ValueError, match="no seed in the range"):
+            self._select(self._counts(), num_candidates=0)
+
+    def test_zero_buffer_keeps_every_patch(self):
+        _, _, keep_mask, _ = self._select(self._counts(), buffer_radius=0)
+
+        assert keep_mask.all()
+
+    def test_buffer_removes_patches_along_set_boundaries(self):
+        _, _, keep_mask, _ = self._select(self._counts(), buffer_radius=1)
+
+        assert not keep_mask.all()
+        assert keep_mask.any()

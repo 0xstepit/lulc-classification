@@ -51,6 +51,7 @@ target_resolution = 10
 [composites]
 max_scenes_per_season = 10
 tiles_size            = 1024
+skip_partial_blocks   = true
 
 [composites.seasons]
 DJF = ["2021-12-01", "2022-02-28"]
@@ -338,6 +339,7 @@ class TestCompositesConfig:
             max_scenes_per_season=10,
             seasons={"DJF": ["2021-12-01", "2022-02-28"]},
             tiles_size=1024,
+            skip_partial_blocks=True,
         )
 
         assert cfg.seasons["DJF"] == ["2021-12-01", "2022-02-28"]
@@ -348,11 +350,19 @@ class TestCompositesConfig:
     def test_raises_when_a_season_is_not_a_date_pair(self, dates):
         with pytest.raises(ValueError, match="season JJA"):
             CompositesConfig(
-                max_scenes_per_season=10, seasons={"JJA": dates}, tiles_size=1024
+                max_scenes_per_season=10,
+                seasons={"JJA": dates},
+                tiles_size=1024,
+                skip_partial_blocks=True,
             )
 
     def test_is_frozen(self):
-        cfg = CompositesConfig(max_scenes_per_season=10, seasons={}, tiles_size=1024)
+        cfg = CompositesConfig(
+            max_scenes_per_season=10,
+            seasons={},
+            tiles_size=1024,
+            skip_partial_blocks=True,
+        )
 
         with pytest.raises(dataclasses.FrozenInstanceError):
             cfg.tiles_size = 512  # type: ignore[misc]
