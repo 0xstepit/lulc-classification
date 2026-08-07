@@ -2,6 +2,10 @@
 [![Python](https://img.shields.io/badge/python-3.14%2B-blue.svg)](https://www.python.org/downloads/)
 ![Static Badge](https://img.shields.io/badge/project_status-WIP-yellow)
 
+<div align="center">
+  <img src="assets/logo.png" alt="LULC classification logo" width="250" height="auto" />
+</div>
+
 # LULC Classification
 
 ## Description
@@ -50,18 +54,20 @@ the [docs](./docs/).
 
 The project is structured in the following main folders:
 
-- `src/`: contains the source code for the analysis pipeline, including
-  configuration loader, data models, and core functions.
-- `scripts/`: contains Python scripts that are used for the workflow execution.
-  The order of the scripts is defined by the number prefixing the filename.
-- `config/`: contains configuration files in [TOML](https://toml.io/en/) format
-  that define the main variables of the analysis, such as the AOI, the optical
-  bands used, and other parameters.
-- `tests/`: contains unit tests for the core functions.
-- `data/`: stores raw and processed data (not tracked by git).
+- [`src/`](./src/): contains the source code for the analysis pipeline,
+  including configuration loader, data models, and core functions.
+- [`scripts/`](./scripts/): contains Python scripts that are used for the
+  workflow execution. The order of the scripts is defined by the number
+  prefixing the filename.
+- [`config/`](./config): contains configuration files in
+  [TOML](https://toml.io/en/) format that define the main variables of the
+  analysis, such as the AOI, the optical bands used, and other parameters.
+- [`tests/`](./tests/): contains unit tests for the core functions.
+- [`data/`](./data/): stores raw and processed data (not tracked by git).
 
-Other relevant folders are `notebooks/`, containing exploration files for visual
-inspection, and `docs/`, containing detailed documentation for each phase.
+Other relevant folders are [`notebooks/`](./notebooks/), containing exploration
+files for visual inspection, and [`docs/`](./docs/), containing detailed
+documentation for each phase.
 
 ## Usage
 
@@ -87,13 +93,13 @@ Scripts are the main entry-point for running the pipeline. They must be executed
 in order, as each step depends on the outputs of the previous one. Before
 running scripts, please review the [configuration section](#configure)
 
-| Script                         | Description                                                                     |
-| ------------------------------ | ------------------------------------------------------------------------------- |
-| `00_select_aoi`                | Query Sentinel-2 scene counts for candidate AOIs and creates a report           |
-| `01_download_sentinel2`        | Download all Sentinel-2 L2A scenes for the selected AOI                         |
-| `02_create_seasonal_composite` | Apply cloud masking, compute spectral indices, and build the seasonal composite |
-| `03_download_world_cover`      | Download ESA WorldCover tiles, mosaic, and remap class labels                   |
-| `04_extract_patches`           | Create the dataset by dividing the composite and labels rasters into patches    |
+| Script                                                                      | Description                                                                     |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [`00_select_aoi`](./scripts/00_select_aoi.py)                               | Query Sentinel-2 scene counts for candidate AOIs and creates a report           |
+| [`01_download_sentinel2`](./scripts/01_download_sentinel2.py)               | Download all Sentinel-2 L2A scenes for the selected AOI                         |
+| [`02_create_seasonal_composite`](./scripts/02_create_seasonal_composite.py) | Apply cloud masking, compute spectral indices, and build the seasonal composite |
+| [`03_download_world_cover`](./scripts/03_download_world_cover.py)           | Download ESA WorldCover tiles, mosaic, and remap class labels                   |
+| [`04_extract_patches`](./scripts/04_extract_patches.py)                     | Create the dataset by dividing the composite and labels rasters into patches    |
 
 List the available scripts:
 
