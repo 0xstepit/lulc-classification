@@ -31,8 +31,8 @@ logger = logging.getLogger("sentinel2")
 MGRS_PREFIX = "MGRS-"
 
 
-class SentinelClient:
-    """The sentinel clinet for the CDSE database."""
+class StacClient:
+    """A thin STAC client wrapper to simplify data access and management."""
 
     def __init__(self, cfg: Config) -> None:
         # By configuring the Retry on the STAC client we can re-execute
@@ -208,7 +208,6 @@ def get_data_profile(item_path: str | Path) -> Profile:
     -------
     Profile
         The Rasterio profile of the item.
-
     """
     with rasterio.open(item_path) as src:
         profile = src.profile
@@ -251,7 +250,7 @@ def get_scene(
     return data
 
 
-def download_all_bands_scene(
+def create_all_bands_scene(
     out_file: Path,
     profile: Profile,
     window: Window,
@@ -259,13 +258,33 @@ def download_all_bands_scene(
     assets: dict,
     bands: list[str],
 ) -> None:
+    """Create an raster downloading all the assets from the provided STAC catalog and store it on
+    disk. Bands with different resolution from the target one are resampled.
+
+    Parameters
+    ----------
+    out_file : Path
+        Filepath where the raster is stored.
+    profile : Profile
+        Rasterio profile to use for the raster.
+    window : Window
+        Rasterio window to use for the area of interest.
+    target_res : float
+        Final resolution for the raster.
+    assets : dict
+        STAC assets to download.
+    bands : list[str]
+        Bands to include in the raster.
+    """
+    # Open a file in write mode with rasterio and the provided profile.
     with rasterio.open(out_file, "w", **profile) as dst:
         for idx, band in enumerate(bands):
-            logger.info(f"starting download for band {band} and index {idx}")
+            logger.info(f"starting download for band ({band}) and index {idx}")
 
-            # Resolution information
             resolution = get_resolution_from_band_name(band)
 
+            # Resampling strategy is bilinear for continuous variables and nearest
+            # for categorical, like the SCL mask.
             resampling_strategy = ResamplingStrategy(
                 resolution / target_res,
                 Resampling.bilinear if "SCL" not in band else Resampling.nearest,
@@ -280,8 +299,7 @@ def download_all_bands_scene(
 
 
 def validate_scene_band(profile: Profile, data: np.ndarray) -> None:
-    """
-    Validate a downloaded scene against the desired composition profile.
+    """Validate a downloaded scene against the desired composition profile.
 
     Parameters
     ----------

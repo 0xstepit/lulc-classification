@@ -10,7 +10,7 @@ from pathlib import Path
 from src.config import load_config, load_reporter_config
 from src.data.sentinel2 import (
     MGRS_PREFIX,
-    SentinelClient,
+    StacClient,
     count_scenes_by_seasons,
     evaluate_candidate_validity,
     get_tile_id,
@@ -30,7 +30,7 @@ REPORT_NAME = "preliminary_aoi_results.json"
 def main():
     # Load config and create the Sentinel client for CDSE.
     cfg = load_config(GLOBAL_CONFIG)
-    client = SentinelClient(cfg)
+    client = StacClient(cfg)
 
     # Load and instantiate analysis reporter.
     reporter = Reporter(REPORTS_DIR, load_reporter_config(REPORTER_CONFIG))

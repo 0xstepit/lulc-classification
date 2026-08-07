@@ -78,9 +78,11 @@ def create_bbox(gcs: GCS, size_m: float) -> BoundingBox:
     )
 
 
-def create_window_from_bbox(bbox: BoundingBox, crs, transform) -> tuple[Window, Affine]:
+def create_window_and_transform_from_bbox(
+    bbox: BoundingBox, crs, transform
+) -> tuple[Window, Affine]:
     """Create a rasterio window from a bounding box and geometric information of the Items
-    that will be windowed with it. Windows computed values are rounded.
+    that will be windowed. The computed window values are rounded.
 
     Parameters
     ----------
@@ -95,7 +97,6 @@ def create_window_from_bbox(bbox: BoundingBox, crs, transform) -> tuple[Window, 
     -------
     tuple[Window, Affine]
         The Rasterio Window to crops a raster and its associated affine transformation matrix.
-
     """
     # Transform from degree to meters.
     left, bottom, right, top = warp.transform_bounds("EPSG:4326", crs, *bbox)
@@ -107,7 +108,8 @@ def create_window_from_bbox(bbox: BoundingBox, crs, transform) -> tuple[Window, 
         top=top,
         transform=transform,
     )
-    window = window.round_offsets(op="floor").round_lengths(op="ceil")
+    # Get the smalles pixel-aligned window that fully contains the bounding box.
+    window = window.round_offsets().round_lengths()
 
     cropped_transform = window_transform(window, transform)
 
