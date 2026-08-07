@@ -1,5 +1,6 @@
 [![Unit Tests](https://img.shields.io/github/actions/workflow/status/0xstepit/lulc-classification/tests.yml?style=flat&logo=githubactions&logoColor=white&label=tests&labelColor=grey)](https://github.com/0xstepit/lu-lc-classification-with-unet/actions/workflows/tests.yml)
 [![Python](https://img.shields.io/badge/python-3.14%2B-blue.svg)](https://www.python.org/downloads/)
+![Static Badge](https://img.shields.io/badge/project_status-WIP-yellow)
 
 # LULC Classification
 
@@ -11,10 +12,11 @@ process evaluates and compares the results obtained from a classic ML approach
 based on Random Forest and a more advanced one based on deep learning via the
 U-Net architecture.
 
-The goal is to assess if it is possible to train models to learn the
-spectrotemporal patterns of land through optical data from satellite imagery.
+The goal of the project is the definition of a clear and statically sound
+approach for the generation of a geospatial dataset, and to assess how
+data-driven techniques can be used in the analysis of spatio-temporal patterns.
 
-## Land Use and Land Cover
+## What is Land Use and Land Cover?
 
 Land Use and Land Cover (LULC) are two different types of analysis that can be
 performed on a piece of land. Land Cover concerns the physical classification of
@@ -33,60 +35,79 @@ of carbon dioxide emissions.
 
 ## Process
 
-The project is divided in three steps:
+The project is divided in three milestones:
 
-- AOI selection and generation of a all seasons image based on optical data
-  obtained from Sentinel-2 satellites. (DONE)
-- Creation of the dataset based on the seasonal image created on the previous
-  step and the WorldCover dataset provided by the European Space Agency (ESA).
-  (TODO)
-- Training and evaluation of a random forest and a U-Net models. (TODO)
+- AOI selection and generation of an all-seasons raster based on optical data
+  obtained from Sentinel-2 satellites.
+- Creation of the dataset based on the seasonal imagery from the previous step
+  and the WorldCover dataset provided by the European Space Agency (ESA).
+- Training, evaluation, and validation of data-driven models.
 
-Each step is then divided into finer tasks that are described in detail in the
-[docs](./docs/).
-
-After selecting the area of interest, the data is preprocessed to create all
-spectral bands and seasonal composites.
-
-The ESA WorldCover 2021 dataset is used to create the training labels for the
-selected area.
-
-The AOI is divided into tiles of a selected size and models are evaluated on
-held-out tiles. The model performs classification based on the classes present
-in the WorldCover dataset.
+Each milestone is then divided into finer tasks that are described in detail in
+the [docs](./docs/).
 
 ## Structure
 
 The project is structured in the following main folders:
 
-- `./src/`: contains the source code for the framework including configuration
-  loader, data models, and core functions.
-- `./scripts/`: contains Python scripts that are the entrypoints for the
-  workflow execution. The order of the scripts is defined by the number
-  prefixing the script name.
-- `./config/`: contains configuration files in [TOML](https://toml.io/en/)
-  format that define the main variables of the analysis, such as the AOI, the
-  optical bands used, and other parameters.
-- `./tests/`: contains unit tests for the core functions.
-- `./data/`: stores raw and processed data (not tracked by git).
+- `src/`: contains the source code for the analysis pipeline, including
+  configuration loader, data models, and core functions.
+- `scripts/`: contains Python scripts that are used for the workflow execution.
+  The order of the scripts is defined by the number prefixing the filename.
+- `config/`: contains configuration files in [TOML](https://toml.io/en/) format
+  that define the main variables of the analysis, such as the AOI, the optical
+  bands used, and other parameters.
+- `tests/`: contains unit tests for the core functions.
+- `data/`: stores raw and processed data (not tracked by git).
 
-Other relevant folders are `./notebooks/`, containing exploration files for
-visual inspection, and `./docs/`, containing detailed documentation for each
-phase.
+Other relevant folders are `notebooks/`, containing exploration files for visual
+inspection, and `docs/`, containing detailed documentation for each phase.
 
 ## Usage
 
-The project dependencies are managed with the [uv](https://docs.astral.sh/uv/)
-package manager. Please, refer to the uv documentation to understand how to
-install it. After you have uv available on your machine:
+The best way to use this project, is via its Makefile. You can see which
+commands are available by running:
 
 ```sh
-uv sync
+make help
 ```
 
-A Makefile is provided to simplify the usage of the source code.
+### Install
 
-### Configure
+The project dependencies are managed with the [uv](https://docs.astral.sh/uv/)
+package manager. To install the dependencies in a virtual environment:
+
+```sh
+make install
+```
+
+### Scripts
+
+Scripts are the main entry-point for running the pipeline. They must be executed
+in order, as each step depends on the outputs of the previous one. Before
+running scripts, please review the [configuration section](#configure)
+
+| Script                         | Description                                                                     |
+| ------------------------------ | ------------------------------------------------------------------------------- |
+| `00_select_aoi`                | Query Sentinel-2 scene counts for candidate AOIs and creates a report           |
+| `01_download_sentinel2`        | Download all Sentinel-2 L2A scenes for the selected AOI                         |
+| `02_create_seasonal_composite` | Apply cloud masking, compute spectral indices, and build the seasonal composite |
+| `03_download_world_cover`      | Download ESA WorldCover tiles, mosaic, and remap class labels                   |
+| `04_extract_patches`           | Create the dataset by dividing the composite and labels rasters into patches    |
+
+List the available scripts:
+
+```sh
+make list-scripts
+```
+
+Run a script by specifying the filename without extension with:
+
+```sh
+make run-script file=00_select_aoi
+```
+
+### Configuration
 
 To configure the behavior of the scripts, you can modify the associated
 configuration files in the `/config/` folder. There are two files you can
@@ -102,40 +123,23 @@ customize:
 For more details about each parameter you can configure, please head over the
 associated file and read the description of the variables you want to customize.
 
+### Env
+
+Copy and rename the environment file and add your credentials for the Copernicus
+Data Space Ecosystem (CDSE).
+
+```sh
+mv .env.examples .env
+```
+
+If you don't want to use CDSE, please update the configuration accordingly.
+
 ### Tests
 
 Unit tests can be executed with:
 
 ```sh
 make unit-tests
-```
-
-### Env
-
-```sh
-mv .env.examples .env
-```
-
-Add your Copernicus Data Space Ecosystem (CDSE) credentials.
-
-### Scripts
-
-Scripts are the main entrypoints for running the pipeline. They must be executed
-in order, as each step depends on the outputs of the previous one. Before
-running, review and adjust `config/config.toml` to set the AOI and any other
-parameters.
-
-| Script                         | Description                                                                     |
-| ------------------------------ | ------------------------------------------------------------------------------- |
-| `00_select_aoi`                | Query Sentinel-2 scene counts for candidate AOIs and creates a report           |
-| `01_download_sentinel2`        | Download all Sentinel-2 L2A scenes for the selected AOI                         |
-| `02_create_seasonal_composite` | Apply cloud masking, compute spectral indices, and build the seasonal composite |
-| `03_download_world_cover`      | Download ESA WorldCover 2021 tiles, mosaic, and remap class labels              |
-
-Run a script with:
-
-```sh
-make run-script script=00_select_aoi
 ```
 
 ## Notebooks
@@ -146,7 +150,7 @@ visualization of the geospatial operations performed in the scripts.
 To use them, please first install a new IPython kernel:
 
 ```sh
-make create-notebook-kernel
+make kernel
 ```
 
 Start Jupyter to access the notebooks:
@@ -156,30 +160,6 @@ make start-notebook
 ```
 
 Then select the just created kernel when opening the notebook.
-
-## Scope
-
-The goal of this project is to develop an end-to-end LULC classification
-pipeline for learning purpose by using Sentinel-2 satellite imagery, random
-forests, and U-net machine learning models.
-
-The development of the framework has been focused around:
-
-- Understanding how to reproduce an end-to-end geospatial ML pipeline from
-  scratch.
-- Understanding how to handle geospatial blocks for a real-world scenario and
-  properly consider memory requirements for raster.
-- Handling real-world messy geospatial data with masking, coordinates
-  alignments, and seasonal analysis.
-
-It is not part of the scope to create a general purpose LULC classifier but only
-a model capable of predicting pixel classes for held-out tiles in the AOI.
-
-## Future Works
-
-- Create the AOI with size multiple of the tiled reading blocks.
-- Improve management of the band references.
-- Parallelize raster tile reading and writing with positional queue.
 
 ## References
 
