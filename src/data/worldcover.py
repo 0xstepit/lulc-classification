@@ -86,7 +86,7 @@ def compute_class_stats(file_path: Path, class_names: dict[int, str]) -> dict:
                 "pixels": int(count),
                 "pct_total": round(100 * count / total_pixels, 3),
                 "pct_valid": round(100 * count / total_valid, 3),
-                "is_rare": 100 * count / total_valid < 0.5,
+                "is_rare": bool(100 * count / total_valid < 0.5),
             }
         )
     present = {int(c) for c in count_by_id if c != nodata}
