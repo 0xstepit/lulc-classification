@@ -9,6 +9,7 @@ CONFIG_DIR = ROOT / "config"
 
 REPORTER_CONFIG = CONFIG_DIR / "reporter.toml"
 GLOBAL_CONFIG = CONFIG_DIR / "analysis.toml"
+VIZ_CONFIG = CONFIG_DIR / "viz.toml"
 
 # Folder containing all the data used in the project.
 DATA_DIR = ROOT / "data"
