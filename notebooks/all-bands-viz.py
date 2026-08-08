@@ -8,15 +8,15 @@
 #       format_version: '1.3'
 #       jupytext_version: 1.19.3
 #   kernelspec:
-#     display_name: lulc-classification-with-unet
+#     display_name: lulc-classification
 #     language: python
-#     name: lulc-classification-with-unet
+#     name: lulc-classification
 # ---
 
 # %% [markdown]
 # # All bands viz
 #
-# This notebook is used to get a sense of the downloaded and aggregated bands for each scene.
+# This notebook is used to get a sense of the downloaded and aggregated bands for each scene over the AOI
 
 # %%
 # %load_ext autoreload

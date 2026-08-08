@@ -7,9 +7,9 @@
 #       format_version: '1.3'
 #       jupytext_version: 1.19.3
 #   kernelspec:
-#     display_name: lulc-classification-with-unet
+#     display_name: geospatial-misc
 #     language: python
-#     name: lulc-classification-with-unet
+#     name: geospatial-misc
 # ---
 
 # %% [markdown]

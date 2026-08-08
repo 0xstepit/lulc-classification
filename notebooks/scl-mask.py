@@ -8,9 +8,9 @@
 #       format_version: '1.3'
 #       jupytext_version: 1.19.3
 #   kernelspec:
-#     display_name: lulc-classification-with-unet
+#     display_name: lulc-classification
 #     language: python
-#     name: lulc-classification-with-unet
+#     name: lulc-classification
 # ---
 
 # %% [markdown]
