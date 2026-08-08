@@ -11,8 +11,8 @@ LABELS_TO_SET = {v: k for k, v in SETS_TO_LABEL.items()}
 
 
 def validate_block_size(raster_size: int, block_size: int):
-    """Check that the provided block size is a factor of both the raster size. This check
-    assumes that both the raster and the block are squared.
+    """Check that the provided_block size is a factor of the raster_size to force no
+    pixel annihilation. This check assumes that both the raster and the block are squared.
 
     Parameters
     ----------
@@ -226,12 +226,34 @@ def select_seed(
     num_candidates: int,
     set_fractions: dict[str, float],
 ):
+    """
+
+    Parameters
+    ----------
+    patch_class_count : np.ndarray
+        An array containing the index of the patch in the first two dimensions, and the counts
+        of the label classes in the others.
+    grid_size : int
+        The number of block along each raster dimension.
+    buffer_radius : int
+        The buffer to apply around the boundary of two blocks not belonging to the same set. The
+        buffer is defined in proportion of patches number.
+    patches_per_block : int
+        The number of patches in each block.
+    num_candidates : int
+        Number of seeds to try starting from 0.
+    set_fractions : dict[str, float]
+        The fraction of patches for each subset of the dataset.
+
+    Returns
+    -------
+    """
     # Create a boolean vector indicating whether a class is present in the
     # labelled raster or not.
     present = patch_class_count.sum(axis=(0, 1)) > 0
 
     # We rank the seeds based on the total number of patches retained in all the
-    # training set.
+    # dataset subsets.
     ranked = []
     for seed in range(num_candidates):
         block_labels = assign_blocks(seed, grid_size, set_fractions)
@@ -256,12 +278,13 @@ def select_seed(
                 seed,
                 patch_labels,
                 keep_mask,
+                block_labels,
             )
         )
     # Rank from the seed associated with the biggest smaller set.
     ranked.sort(key=lambda item: item[0], reverse=True)
 
-    for _, seed, patch_labels, keep_mask in ranked:
+    for _, seed, patch_labels, keep_mask, block_labels in ranked:
         covered = True
         for label in LABELS_TO_SET.values():
             # Select the patches that are both kept and in the currently selected set.
@@ -273,7 +296,7 @@ def select_seed(
                 break
 
         if covered:
-            return seed, patch_labels, keep_mask
+            return seed, patch_labels, keep_mask, block_labels
 
     raise ValueError(
         f"no seed in the range [0, {num_candidates}] produce a split with every class in every set"
@@ -282,6 +305,16 @@ def select_seed(
 
 @dataclass(frozen=True)
 class PatchSpec:
+    """Helper class defining patch specific information and a method to easily get a rasterio
+    window containing the patch.
+
+    Attributes
+    ----------
+    row : the position of the patch in the raster rows when divided in patches.
+    col : the position of the patch in the raster columns when divided in patches.
+    set_name : the string identifier of the patch set.
+    """
+
     row: int
     col: int
     set_name: str
@@ -296,6 +329,21 @@ class PatchSpec:
 def build_patch_specs(
     patch_labels: np.ndarray, keep_mask: np.ndarray
 ) -> list[PatchSpec]:
+    """Create a patch spec list containing only the patches specified with the
+    keep_mask boolean mask.
+
+    Parameters
+    ----------
+    patch_labels : np.ndarray
+        An array containing the set for each patch index. If there are N patches along x and M
+        along y, the array will be NxM and the content will be the associated set identifier.
+    keep_mask : np.ndarray
+        A boolean mask specifying which patch has to be retained.
+
+    Returns
+    -------
+    list[PatchSpec]
+    """
     rows, cols = patch_labels.shape
 
     patch_specs = []

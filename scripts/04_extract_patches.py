@@ -1,12 +1,14 @@
 """
-Extract patches from the composite and labels raster to create a train/val/test
-dataset. Patches are created based on the [patch] configuration and after applying
-a spatial buffer around each set block. Since the shunting of blocks into
-dataset sets is randomic based on sets size, the script iterates over different
-seeds to ensure that all sets contains all the classes present in the original
-labels raster.
+Extract patches from the features and labels rasters to create a train/val/test
+dataset. Patches are created based on the [patch] configuration. Each raster is
+divided into blocks, and then a spatial buffer is applied on the boundary of the blocks
+that are not associated with the same set. Since the shunting of blocks into
+the three sets is randomic based on sets size specified in the [patch] config,
+the script iterates over different seeds to discover a value that allows to represet all
+classes in each set.
 """
 
+import json
 import logging
 from pathlib import Path
 
@@ -15,10 +17,9 @@ import rasterio
 from rasterio.windows import Window
 
 from src.config import load_config, load_reporter_config
-from src.data.labels import build_remap_lookup_table
+from src.data.labels import IGNORE_IDX, build_remap_lookup_table
 from src.data.patches import (
     LABELS_TO_SET,
-    SETS_TO_LABEL,
     PatchSpec,
     build_patch_specs,
     compute_buffer_radius,
@@ -26,13 +27,15 @@ from src.data.patches import (
     select_seed,
     validate_block_size,
 )
-from src.data.worldcover import compute_class_stats
+from src.data.rasterio import SeasonalStack
 from src.io import (
-    ANALYSIS_DIR,
     GLOBAL_CONFIG,
-    MULTISEASONAL_SCENE,
+    NORMALIZATION_PARAMS,
     PATCHES_DIR,
+    PATCHES_METADATA,
     REPORTER_CONFIG,
+    REPORTS_DIR,
+    SEASONAL_SCENES,
     WORLDCOVER_LABELS,
 )
 from src.logger import setup_logging
@@ -41,27 +44,29 @@ from src.reporter.reporter import Reporter
 setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
 
+NUM_SEEDS = 200
+
 
 def main():
-    cfg = load_config(GLOBAL_CONFIG)
+    reporter = Reporter(REPORTS_DIR, load_reporter_config(REPORTER_CONFIG))
 
-    cfg_reporter = load_reporter_config(REPORTER_CONFIG)
-    reporter = Reporter(ANALYSIS_DIR, cfg_reporter)
+    cfg = load_config(GLOBAL_CONFIG)
 
     patch_size = cfg.patches.size
     block_size = cfg.patches.block_size
     patches_per_block = cfg.patches.patches_per_block
     max_nan_fraction = cfg.patches.max_nan_fraction
-
     num_label_classes = len(cfg.worldcover.class_names.keys())
 
     with (
-        rasterio.open(MULTISEASONAL_SCENE) as composite_src,
+        SeasonalStack(SEASONAL_SCENES) as composite_src,
         rasterio.open(WORLDCOVER_LABELS) as labels_src,
     ):
+        # We enforce square rasters for simplicity.
         if composite_src.width != composite_src.height:
             raise ValueError(
-                f"composite raster width and height must be equal, obtained {composite_src.width} and {composite_src.height}"
+                f"composite raster width and height must be equal, "
+                f"obtained {composite_src.width} and {composite_src.height}"
             )
 
         if (composite_src.width, composite_src.height) != (
@@ -69,50 +74,55 @@ def main():
             labels_src.height,
         ):
             raise ValueError(
-                "composite and labels have different shapes:"
+                "composite and labels rasters have different shapes:"
                 f"{(composite_src.width, composite_src.height)} != {(labels_src.width, labels_src.height)}"
             )
 
         if composite_src.crs != labels_src.crs:
             raise ValueError(
-                "composite and labels have different CRS:"
+                "composite and labels rasters have different CRS:"
                 f"{composite_src.crs} != {labels_src.crs}"
             )
 
         if not composite_src.transform.almost_equals(labels_src.transform):
-            raise ValueError("composite and labels rasters are not aligned")
+            raise ValueError("composite and labels rasters are not spatially aligned")
 
         validate_block_size(composite_src.shape[0], block_size)
 
+        # The grid defines the number of blocks in each dimension.
         grid_shape = (
             composite_src.height // block_size,
             composite_src.width // block_size,
         )
-        grid_size = composite_src.width // block_size
+        grid_size = grid_shape[0]
+
         num_channels = composite_src.count
-        pixel_res = abs(composite_src.transform.a)
+        pixel_resolution = abs(composite_src.transform.a)
 
         logging.info(
-            f"raster of size {composite_src.shape} with {num_channels} channels and {pixel_res}m pixel resolution"
+            f"raster of size ({composite_src.shape}) with ({num_channels}) channels "
+            f"and ({pixel_resolution}m) pixel resolution, "
+            f"is divided into ({grid_size}, {grid_size}) blocks"
         )
 
-        radius = compute_buffer_radius(cfg.patches.buffer, patch_size, pixel_res)
-        logging.info(f"buffer radius is {radius} patches")
+        buffer_radius = compute_buffer_radius(
+            cfg.patches.buffer, patch_size, pixel_resolution
+        )
+        logging.info(f"buffer radius is ({buffer_radius}) patches")
 
+        # The label raster is 1 band so we can load in memory without issues.
         labels = labels_src.read(1)
-        # labels = labels[labels != 0]
-        lut, mapping = build_remap_lookup_table(labels, 0, 256)
 
         patch_class_count = counts_classes_per_patch(
             labels, patch_size, num_label_classes
         )
 
-        seed, patch_labels, keep_mask = select_seed(
+        seed, patch_labels, keep_mask, block_sets = select_seed(
             patch_class_count,
             grid_size,
-            radius,
+            buffer_radius,
             patches_per_block,
-            200,
+            NUM_SEEDS,
             cfg.patches.split,
         )
 
@@ -132,14 +142,22 @@ def main():
             block = (spec.row // patches_per_block, spec.col // patches_per_block)
             specs_by_block.setdefault(block, []).append(spec)
 
+        # Mask to NaN the WorldCover no data value.
+        # labels = np.where(labels == cfg.worldcover.nodata_value, labels, np.nan)
+        lut, mapping = build_remap_lookup_table(
+            labels, cfg.worldcover.nodata_value, 256
+        )
+        class_counts = {
+            split: np.zeros(len(mapping), dtype=np.int64) for split in LABELS_TO_SET
+        }
         patch_counters = dict.fromkeys(LABELS_TO_SET, 0)
-        samples = []
+        normalization_samples = []
         discarded = []  # discared patches
 
         # Iterate over all the blocks containing valid patches.
         for (block_row, block_col), block_specs in sorted(specs_by_block.items()):
             logger.info(
-                f"processing block ({block_row}, {block_col})"
+                f"processing block ({block_row}, {block_col}) "
                 f"with ({len(block_specs)}) valid patches in ({block_specs[0].set_name}) set"
             )
 
@@ -190,48 +208,77 @@ def main():
 
                 out_dir = PATCHES_DIR / spec.set_name
                 np.save(
-                    out_dir / f"patch_{patch_counters[spec.set_name]}_feature.npy",
+                    out_dir / f"patch_{patch_counters[spec.set_name]:04d}_feature.npy",
                     patch.astype(np.float32),
                 )
                 np.save(
-                    out_dir / f"patch_{patch_counters[spec.set_name]}_label.npy",
+                    out_dir / f"patch_{patch_counters[spec.set_name]:04d}_label.npy",
                     patch_labels,
                 )
                 patch_counters[spec.set_name] += 1
 
+                valid = patch_labels != IGNORE_IDX
+                class_counts[spec.set_name] += np.bincount(
+                    patch_labels[valid].ravel(), minlength=len(mapping)
+                )
+
+                if spec.set_name == "train":
+                    random_sampler = np.random.choice(
+                        [True, False],
+                        size=(patch_size, patch_size),
+                        p=(
+                            cfg.patches.stats_retention_fraction,
+                            1 - cfg.patches.stats_retention_fraction,
+                        ),
+                    )
+
+                    normalization_samples.append(patch[:, random_sampler])
+
+    low, high = cfg.patches.normalization_percentiles
+    stacked = np.concatenate(normalization_samples, axis=1)
+    normalization = {
+        "percentiles": [low, high],
+        "low": np.nanpercentile(stacked, low, axis=1).tolist(),
+        "high": np.nanpercentile(stacked, high, axis=1).tolist(),
+        "median": np.nanmedian(stacked, axis=1).tolist(),
+        "mean": np.nanmean(stacked, axis=1).tolist(),
+        "std": np.nanstd(stacked, axis=1).tolist(),
+    }
+
+    NORMALIZATION_PARAMS.write_text(json.dumps(normalization, indent=4))
+
+    PATCHES_METADATA.write_text(
+        json.dumps(
+            {
+                "seed": seed,
+                "buffer_radius": buffer_radius,
+                "grid_shape": list(grid_shape),
+                "patch_size": patch_size,
+                "block_size": block_size,
+                "num_channels": num_channels,
+                "label_mapping": {str(k): v for k, v in mapping.items()},
+                "class_names": {
+                    str(index): cfg.worldcover.class_names[value]
+                    for value, index in mapping.items()
+                },
+                "patches_per_split": patch_counters,
+                "class_counts_per_split": {
+                    split: counts.tolist() for split, counts in class_counts.items()
+                },
+                "discarded": discarded,
+                # We keep also the patch_labels and keep_mask so we can
+                # plot the raster split.
+                "block_labels": block_sets.tolist(),
+                "keep_mask": keep_mask.astype(int).tolist(),
+            },
+            indent=4,
+        )
+    )
+    reporter.add("patch_split", {"seed": seed, "patches_per_split": patch_counters})
+    for split, counts in class_counts.items():
+        reporter.add("patches_class_distribution", counts.tolist(), split=split)
+    reporter.save("extract_patches.json")
+
 
 if __name__ == "__main__":
     main()
-
-# def _compute_global_band_medians(files: list[Path], tiles_size: int) -> np.ndarray:
-#     block_medians: list[np.ndarray] = []
-#
-#     with contextlib.ExitStack() as stack:
-#         sources = [stack.enter_context(rasterio.open(f)) for f in files]
-#
-#         for _, window in sources[0].block_windows(1):
-#             if (window.width, window.height) != (tiles_size, tiles_size):
-#                 continue
-#
-#             for source in sources:
-#                 block = source.read(window=window)
-#                 block_medians.append(np.nanmedian(block, axis=(1, 2)))
-#
-#     return np.median(np.stack(block_medians, axis=0), axis=0)
-#
-#
-# def _fill_seasonal_nans(
-#     season_block: list[np.ndarray], global_band_medians: np.ndarray
-# ) -> list[np.ndarray]:
-#     season_stack = np.stack(season_block, axis=0)  # [n_seasons, C, H, W]
-#
-#     annual_median = np.nanmedian(season_stack, axis=0)  # [C, H, W]
-#
-#     still_nan = np.isnan(annual_median)
-#     if still_nan.sum() > 0:
-#         fallback = np.broadcast_to(
-#             global_band_medians[:, None, None], annual_median.shape
-#         )
-#         annual_median[still_nan] = fallback[still_nan]
-#     filled = np.where(np.isnan(season_stack), annual_median[None], season_stack)
-#     return [filled[i] for i in range(filled.shape[0])]
