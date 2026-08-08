@@ -1,17 +1,14 @@
+import dataclasses
 import json
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
+
+import numpy as np
 
 from src.config.reporter import DatetimeConfig, JSONConfig
 from src.reporter.models import ReportEntry
 
 SUFFIX = ".json"
-
-import dataclasses
-from datetime import date, datetime
-from pathlib import Path
-
-import numpy as np
 
 
 def _json(obj):

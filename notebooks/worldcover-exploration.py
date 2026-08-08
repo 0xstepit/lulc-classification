@@ -12,50 +12,57 @@
 #     name: lulc-classification
 # ---
 
+# %% [markdown]
+# # WorldCover Exploration
+
 # %%
 # %load_ext autoreload
 # %autoreload 2
 
 # %%
 import geopandas as gpd
+import requests
+from tqdm.auto import tqdm
+from pathlib import Path
+
+# %% [markdown]
+# We can use [Natural Earth](https://www.naturalearthdata.com/about/), a public domain map dataset available at scales to get vector data about a region of interest.
 
 # %%
-# load natural earth low res shapefile
-url = "https://naciscdn.org/naturalearth/110m/cultural/ne_110m_admin_0_countries.zip"
-# Reads directly from URL (downloads and extracts automatically)
+res = "110m"
+url = f"https://naciscdn.org/naturalearth/{res}/cultural/ne_{res}_admin_0_countries.zip"
 ne = gpd.read_file(url)
-
-# %%
 ne.head()
+
+# %% [markdown]
+# We can get the columns of the `DataFrame`:
 
 # %%
 ne.columns.tolist()[:8]
 
-# %%
-sum(ne["SOVEREIGNT"] == "Italy")
+# %% [markdown]
+# The `SOVEREIGN` column is what we can use to only get data from Italy:
 
 # %%
-s3_url_prefix = "https://esa-worldcover.s3.eu-central-1.amazonaws.com"
-
-# get AOI geometry (Italy in this case)
 country = "Italy"
 geom = ne[ne["SOVEREIGNT"] == country].iloc[0].geometry
+
+# %% [markdown]
+# The geometry, as expected, is stored as a `shapely` geometry:
 
 # %%
 type(geom)
 
 # %%
-# load worldcover grid
+s3_url_prefix = "https://esa-worldcover.s3.eu-central-1.amazonaws.com"
 url = f"{s3_url_prefix}/esa_worldcover_grid.geojson"
+
 grid = gpd.read_file(url)
 
-# get grid tiles intersecting AOI
 tiles = grid[grid.intersects(geom)]
 
 # use requests library to download them
-import requests
-from tqdm.auto import tqdm  # provides a progressbar
-from pathlib import Path
+
 
 year = 2021  # setting this to 2020 will download the v100 product instead
 

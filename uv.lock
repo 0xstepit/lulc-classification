@@ -1191,6 +1191,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "boto3" },
+    { name = "cycler" },
     { name = "dask", extra = ["complete"] },
     { name = "dotenv" },
     { name = "geopandas" },
@@ -1226,6 +1227,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "boto3", specifier = ">=1.43.53" },
+    { name = "cycler", specifier = ">=0.12.1" },
     { name = "dask", extras = ["complete"], specifier = ">=2026.7.1" },
     { name = "dotenv", specifier = ">=0.9.9" },
     { name = "geopandas", specifier = ">=1.1.3" },

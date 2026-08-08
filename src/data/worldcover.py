@@ -44,11 +44,8 @@ def get_worldcover_tile_ids(grid: gpd.GeoDataFrame, bbox: BoundingBox) -> list:
 
 
 def create_worldcover_tile(
-    cfg: WorldCoverConfig, tile_ids: list[str], target: xr.DataArray, out_file: Path
-) -> None:
-    if out_file.exists():
-        logger.info(f"file {out_file} already exists, skipping")
-        return
+    cfg: WorldCoverConfig, tile_ids: list[str], target: xr.DataArray
+) -> xr.DataArray:
 
     worldcover_rasters = []
     for tile_id in tile_ids:
@@ -57,8 +54,7 @@ def create_worldcover_tile(
 
     worldcover_raster = merge_arrays(worldcover_rasters)
     worldcover_raster = worldcover_raster.rio.reproject_match(target)
-    worldcover_raster = _reclass_raster(worldcover_raster, cfg.class_mapping)
-    worldcover_raster.rio.to_raster(out_file)
+    return _reclass_raster(worldcover_raster, cfg.class_mapping)
 
 
 def compute_class_stats(file_path: Path, class_names: dict[int, str]) -> dict:

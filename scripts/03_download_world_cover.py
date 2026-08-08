@@ -1,3 +1,9 @@
+"""
+Download the WorldCover data associated with the AOI. Since the WolrdCover uses a different tiling
+system, the tiles intersectiong with our created seasonal raster are reprojected and merged to
+create labels raster.
+"""
+
 import logging
 from pathlib import Path
 
@@ -52,7 +58,8 @@ def main():
     if not isinstance(composite, xr.DataArray):  # to make basedpyright happy...
         raise TypeError(f"expected [{SEASONAL_SCENES[0]}] to open as a DataArray")
 
-    create_worldcover_tile(cfg.worldcover, tiles, composite, WORLDCOVER_LABELS)
+    labels = create_worldcover_tile(cfg.worldcover, tiles, composite)
+    labels.rio.to_raster(WORLDCOVER_LABELS)
 
     report = compute_class_stats(WORLDCOVER_LABELS, cfg.worldcover.class_names)
 

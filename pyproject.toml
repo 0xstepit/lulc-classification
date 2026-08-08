@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "boto3>=1.43.53",
+    "cycler>=0.12.1",
     "dask[complete]>=2026.7.1",
     "dotenv>=0.9.9",
     "geopandas>=1.1.3",
