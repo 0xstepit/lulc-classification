@@ -206,11 +206,13 @@ def main():
 
                 out_dir = PATCHES_DIR / spec.set_name
                 np.save(
-                    out_dir / f"patch_{patch_counters[spec.set_name]:04d}_feature.npy",
+                    out_dir
+                    / f"{PATCH_PREFIX}{patch_counters[spec.set_name]:04d}{FEATURE_SUFFIX}",
                     patch.astype(np.float32),
                 )
                 np.save(
-                    out_dir / f"patch_{patch_counters[spec.set_name]:04d}_label.npy",
+                    out_dir
+                    / f"{PATCH_PREFIX}{patch_counters[spec.set_name]:04d}{LABEL_SUFFIX}",
                     patch_labels,
                 )
                 patch_counters[spec.set_name] += 1

@@ -44,3 +44,7 @@ SEASONAL_SCENES = [
 ]
 
 IMGS_DIR = ROOT / "assets" / "images"
+
+PATCH_PREFIX = "patch_"
+FEATURE_SUFFIX = "_feature.npy"
+LABEL_SUFFIX = "_label.npy"
