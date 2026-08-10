@@ -129,11 +129,13 @@ class MSIConfig:
     scl_mask_classes :
     num_bands :
     bands :
+    band_names:
     """
 
     target_resolution: int
     scl_mask_classes: list[int]
     bands: dict
+    band_names: dict
 
     def __post_init__(self):
         self.num_bands = len([band for res in self.bands for band in self.bands[res]])
@@ -144,6 +146,12 @@ class MSIConfig:
                 f"target resolution {self.target_resolution} is not in the analysed bands"
             )
 
+        if len(self.band_names.keys()) != self.num_bands:
+            raise ValueError(
+                "band names is different than number of bands, "
+                f"expected {self.num_bands} but got {len(self.band_names.keys())}"
+            )
+
     def get_bands_list(self) -> list[str]:
         """Returns the sorted list of Sentinel-2 bands used in the analysis.
 
@@ -151,7 +159,6 @@ class MSIConfig:
         -------
         list[str]
             The sorted list of band names.
-
         """
         return sorted([band for res in self.bands for band in self.bands[res]])
 

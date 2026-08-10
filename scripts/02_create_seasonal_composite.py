@@ -13,6 +13,7 @@ import rasterio
 from dotenv import load_dotenv
 
 from src.config import load_config, load_reporter_config
+from src.constants import seasonal_band_names
 from src.data.rasterio import (
     create_masked_bands_and_indices_tile,
     create_seasonal_profile,
@@ -86,6 +87,9 @@ def main():
             sources = [stack.enter_context(rasterio.open(f)) for f in files]
 
             with rasterio.open(out_file, "w", **profile) as dst:
+                # Add band names into the file.
+                dst.descriptions = tuple(seasonal_band_names(cfg.msi))
+
                 # We safely assume that all sources have the same shape and are on the
                 # same region.
                 for block_idx, window in sources[0].block_windows(1):

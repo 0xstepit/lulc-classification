@@ -78,6 +78,19 @@ target_resolution = 10 # target resolution for the composite in [m]
     "SCL_20m",
 ]
 
+[msi.band_names]
+"B02_10m" = "blue"
+"B03_10m" = "green"
+"B04_10m" = "red"
+"B08_10m" = "nir"
+"B05_20m" = "red_edge1"
+"B06_20m" = "red_edge2"
+"B07_20m" = "red_edge3"
+"B8A_20m" = "narrow_nir"
+"B11_20m" = "swir1"
+"B12_20m" = "swir2"
+"SCL_20m" = "scl"
+
 # =================================================================================================
 # Composites
 # =================================================================================================

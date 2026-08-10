@@ -59,6 +59,21 @@ def main():
         raise TypeError(f"expected [{SEASONAL_SCENES[0]}] to open as a DataArray")
 
     labels = create_worldcover_tile(cfg.worldcover, tiles, composite)
+    # Remap the classes stored in the legend:
+    legend = {
+        int(k): v
+        for k, v in (
+            line.split(maxsplit=1)
+            for line in labels.attrs["legend"].strip().splitlines()
+        )
+    }
+    new_legend = {}
+    for index, name in legend.items():
+        new_legend[cfg.worldcover.class_mapping[index]] = name
+    labels = labels.rio.update_attrs(
+        {"legend": "\n".join([f"{k} {v}" for k, v in new_legend.items()])}
+    )
+
     labels.rio.to_raster(WORLDCOVER_LABELS)
 
     report = compute_class_stats(WORLDCOVER_LABELS, cfg.worldcover.class_names)
