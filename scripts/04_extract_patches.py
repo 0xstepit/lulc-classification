@@ -44,8 +44,6 @@ from src.reporter.reporter import Reporter
 setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
 
-NUM_SEEDS = 200
-
 
 def main():
     reporter = Reporter(REPORTS_DIR, load_reporter_config(REPORTER_CONFIG))
@@ -122,7 +120,7 @@ def main():
             grid_size,
             buffer_radius,
             patches_per_block,
-            NUM_SEEDS,
+            cfg.patches.seed_candidates,
             cfg.patches.split,
         )
 
