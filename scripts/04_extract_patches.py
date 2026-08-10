@@ -1,7 +1,6 @@
 """
 Extract patches from the features and labels rasters to create a train/val/test
-dataset. Patches are created based on the [patch] configuration. Each raster is
-divided into blocks, and then a spatial buffer is applied on the boundary of the blocks
+dataset. Patches are created based on the [patch] configuration. Each raster is divided into blocks, and then a spatial buffer is applied on the boundary of the blocks
 that are not associated with the same set. Since the shunting of blocks into
 the three sets is randomic based on sets size specified in the [patch] config,
 the script iterates over different seeds to discover a value that allows to represet all
@@ -29,8 +28,11 @@ from src.data.patches import (
 )
 from src.data.rasterio import SeasonalStack
 from src.io import (
+    FEATURE_SUFFIX,
     GLOBAL_CONFIG,
+    LABEL_SUFFIX,
     NORMALIZATION_PARAMS,
+    PATCH_PREFIX,
     PATCHES_DIR,
     PATCHES_METADATA,
     REPORTER_CONFIG,
