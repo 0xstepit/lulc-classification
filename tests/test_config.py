@@ -44,6 +44,19 @@ url        = "https://stac.dataspace.copernicus.eu/v1"
 scl_mask_classes  = [0, 1, 3, 7, 8, 9, 10, 11]
 target_resolution = 10
 
+[msi.band_names]
+"B02_10m" = "blue"
+"B03_10m" = "green"
+"B04_10m" = "red"
+"B08_10m" = "nir"
+"B05_20m" = "red_edge1"
+"B06_20m" = "red_edge2"
+"B07_20m" = "red_edge3"
+"B8A_20m" = "narrow_nir"
+"B11_20m" = "swir1"
+"B12_20m" = "swir2"
+"SCL_20m" = "scl"
+
 [msi.bands]
 10 = ["B02_10m", "B03_10m", "B04_10m", "B08_10m"]
 20 = ["B05_20m", "B06_20m", "B07_20m", "B8A_20m", "B11_20m", "B12_20m", "SCL_20m"]
@@ -284,12 +297,26 @@ class TestMSIConfig:
             "SCL_20m",
         ],
     }
+    BAND_NAMES = {
+        "B02_10m": "blue",
+        "B03_10m": "green",
+        "B04_10m": "red",
+        "B08_10m": "nir",
+        "B05_20m": "red_edge1",
+        "B06_20m": "red_edge2",
+        "B07_20m": "red_edge3",
+        "B8A_20m": "narrow_nir",
+        "B11_20m": "swir1",
+        "B12_20m": "swir2",
+        "SCL_20m": "scl",
+    }
 
     def _config(self, **overrides) -> MSIConfig:
         kwargs = {
             "target_resolution": 10,
             "scl_mask_classes": [0, 1, 3, 7, 8, 9, 10, 11],
             "bands": {key: list(value) for key, value in self.BANDS.items()},
+            "band_names": {key: value for key, value in self.BAND_NAMES.items()},
         }
         kwargs.update(overrides)
         return MSIConfig(**kwargs)
@@ -307,6 +334,18 @@ class TestMSIConfig:
     def test_raises_when_the_target_resolution_has_no_bands(self):
         with pytest.raises(ValueError, match="target resolution 60"):
             self._config(target_resolution=60)
+
+    def test_raises_when_band_names_number_wrong(self):
+        with pytest.raises(
+            ValueError, match="band names is different than number of bands"
+        ):
+            self._config(
+                band_names={
+                    key: value
+                    for key, value in self.BAND_NAMES.items()
+                    if value != "red"
+                }
+            )
 
     def test_get_bands_list_is_flat_and_sorted(self):
         cfg = self._config()
