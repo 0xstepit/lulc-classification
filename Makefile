@@ -58,3 +58,6 @@ start-notebook: ## Start the Jupyter Notebook server
 	@echo "==================================================================="
 	@echo "Starting notebook..."
 	@uv run jupyter-lab
+
+data-size: ## Compute the size of the data folder
+	@du -sh ./data/
