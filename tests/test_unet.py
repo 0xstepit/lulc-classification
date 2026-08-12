@@ -1,9 +1,7 @@
 import dataclasses
-from ast import mod
 
 import pytest
 import torch
-from torch import nn
 
 from src.models.unet import DoubleConv, UNet, UNetConfig
 
@@ -30,7 +28,8 @@ class TestUNetConfig:
 
     def test_is_frozen(self):
         with pytest.raises(dataclasses.FrozenInstanceError):
-            UNetConfig().num_classes = 3
+            # Pyright flags this statically, which is the point of the test.
+            UNetConfig().num_classes = 3  # pyright: ignore[reportGeneralTypeIssues]
 
     @pytest.mark.parametrize(
         "overrides",
@@ -41,7 +40,7 @@ class TestUNetConfig:
             {"encoder_channels": (64, 0)},
         ],
     )
-    def test_invalid_values_are_rejectedc(self, overrides):
+    def test_invalid_values_are_rejected(self, overrides):
         with pytest.raises(ValueError):
             dataclasses.replace(UNetConfig(), **overrides)
 
@@ -76,6 +75,10 @@ class TestArchitecture:
         for block, stage_width in zip(
             model.decoder_blocks, reversed(UNetConfig().encoder_channels), strict=True
         ):
+            # Iterating an nn.ModuleList yields Module, which loses the
+            # DoubleConv type. The assert narrows it and checks the wiring.
+            assert isinstance(block, DoubleConv)
+
             first_conv = block.block[0]
             assert first_conv.in_channels == stage_width * 2
             assert first_conv.out_channels == stage_width
@@ -97,3 +100,41 @@ class TestArchitecture:
         assert len(model.decoder_blocks) == 3
         assert model.cfg.size_divisor == 8
         assert tuple(model(torch.randn(1, 3, 24, 24)).shape) == (1, 2, 24, 24)
+
+
+class TestReproducibility:
+    def test_state_dict_round_trips_including_batchnorm_buffers(self, small_model):
+        # Run a few batches in train mode so the BatchNorm running statistics
+        # move away from their (0, 1) initialisation; otherwise a checkpoint
+        # that dropped them would still reproduce the same predictions.
+        small_model.train()
+        for _ in range(3):
+            small_model(torch.randn(2, 3, 32, 32))
+
+        restored = UNet(SMALL_CONFIG)
+        restored.load_state_dict(small_model.state_dict())
+
+        small_model.eval()
+        restored.eval()
+        x = torch.randn(1, 3, 32, 32)
+        with torch.no_grad():
+            torch.testing.assert_close(restored(x), small_model(x))
+
+    def test_batchnorm_buffers_are_in_the_state_dict(self, small_model):
+        keys = small_model.state_dict().keys()
+
+        # named_parameters() does not see these, but --resume depends on them.
+        assert any(k.endswith("running_mean") for k in keys)
+        assert any(k.endswith("running_var") for k in keys)
+
+    def test_running_statistics_only_update_in_train_mode(self, small_model):
+        small_model.eval()
+        batch_norm = small_model.bottleneck.block[1]
+        before = batch_norm.running_mean.clone()
+
+        with torch.no_grad():
+            small_model(torch.randn(2, 3, 32, 32))
+
+        # Catches a validation loop that forgot model.eval(), which corrupts the
+        # running statistics with validation data and leaks it into inference.
+        torch.testing.assert_close(batch_norm.running_mean, before)
