@@ -11,7 +11,6 @@ import contextlib
 import logging
 from pathlib import Path
 
-import numpy as np
 import rasterio
 from dotenv import load_dotenv
 
@@ -113,7 +112,7 @@ def main():  # noqa: D103
                         continue
 
                     # Used to store nan percentage info for each scene block.
-                    file_percentage: list[dict[str, str | np.float16]] = []
+                    file_percentage: list[dict[str, str | float]] = []
                     block_scenes = []
                     for source in sources:
                         block_scene = create_masked_bands_and_indices_tile(

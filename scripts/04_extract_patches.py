@@ -165,11 +165,13 @@ def main():  # noqa: D103
                 f"with ({len(block_specs)}) valid patches in ({block_specs[0].set_name}) set"
             )
 
+            # Ignoring the pyright diagnostic becauset it cannot see rasterio signatures
+            # and flags them as wrong.
             window = Window(
-                col_off=block_col * block_size,
-                row_off=block_row * block_size,
-                width=block_size,
-                height=block_size,
+                col_off=block_col * block_size,  # pyright: ignore[reportCallIssue]
+                row_off=block_row * block_size,  # pyright: ignore[reportCallIssue]
+                width=block_size,  # pyright: ignore[reportCallIssue]
+                height=block_size,  # pyright: ignore[reportCallIssue]
             )
 
             block_data = composite_src.read(window=window)

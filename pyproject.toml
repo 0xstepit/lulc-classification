@@ -71,14 +71,22 @@ require-lazy = { include = "all" }
 docstring-code-format      = true
 docstring-code-line-length = 80
 
-# [tool.pyright]
-# venvPath = "."
-# venv     = ".venv"
-# pythonVersion  = "3.14"
-# pythonPlatform = "All"
-# include = ["src", "tests", "scripts"]
-# exclude = ["**/__pycache__", "**/.ipynb_checkpoints", "notebooks", ".venv"]
-# typeCheckingMode = "standard"
+[tool.pyright]
+# Needed when pyright is launched outside `uv run` (an editor's language server),
+# which otherwise resolves against its own interpreter and reports every
+# third-party import as unresolved.
+venvPath = "."
+venv     = ".venv"
+
+pythonVersion  = "3.14"
+pythonPlatform = "All"
+
+# Without an explicit `include`, pyright analyses the whole project root and
+# sweeps in notebooks.
+include = ["src", "tests", "scripts"]
+exclude = ["**/__pycache__", "**/.ipynb_checkpoints", "notebooks", ".venv"]
+
+typeCheckingMode = "standard"
 
 [tool.jupytext]
 formats = "ipynb,py:percent"

@@ -1,8 +1,7 @@
+"""Functions and classes uses to work with the WorldCover dataset."""
+
 import logging
-import os
-import urllib.request as ureq
 from pathlib import Path
-from urllib.parse import urlparse
 
 import geopandas as gpd
 import numpy as np
@@ -18,8 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 def get_worldcover_tile_ids(grid: gpd.GeoDataFrame, bbox: BoundingBox) -> list:
-    """Returns the WorldCover tile IDs from the provided grid that intersect with the
-    bounding box.
+    """Return the WorldCover tile IDs from the provided grid that intersect with the bounding box.
 
     Parameters
     ----------
@@ -40,13 +38,13 @@ def get_worldcover_tile_ids(grid: gpd.GeoDataFrame, bbox: BoundingBox) -> list:
     geom = gpd.GeoSeries(aoi_geom, crs="EPSG:4326").to_crs(grid.crs).iloc[0]
     aoi_grids = grid[grid.intersects(geom)]
 
-    return list(aoi_grids["ll_tile"].values)
+    return list(aoi_grids["ll_tile"].values)  # pyright: ignore[reportAttributeAccessIssue]
 
 
 def create_worldcover_tile(
     cfg: WorldCoverConfig, tile_ids: list[str], target: xr.DataArray
 ) -> xr.DataArray:
-
+    """Create the WorldCover raster matching the target."""
     worldcover_rasters = []
     for tile_id in tile_ids:
         url = get_worldcover_url(cfg.year, cfg.version, tile_id)
@@ -58,6 +56,7 @@ def create_worldcover_tile(
 
 
 def compute_class_stats(file_path: Path, class_names: dict[int, str]) -> dict:
+    """Compute the statistics in the file for the provided classes."""
     nodata = 0
 
     composite = rxr.open_rasterio(file_path)
@@ -65,7 +64,7 @@ def compute_class_stats(file_path: Path, class_names: dict[int, str]) -> dict:
         raise TypeError(f"expected [{file_path}] to open as a DataArray")
 
     ids, counts = np.unique(composite, return_counts=True)
-    count_by_id = dict(zip(ids, counts))
+    count_by_id = dict(zip(ids, counts, strict=True))
 
     total_pixels = int(composite.size)
     total_nodata = count_by_id.get(nodata, 0)
@@ -113,25 +112,10 @@ def _reclass_raster(
     return raster.copy(data=reclassed)
 
 
-# NOTE: this function is deprecated in favor of on-the-fly wc raster creation.
-def download_tile(cfg: WorldCoverConfig, tile: str, out_dir: Path) -> None:
-    url = get_worldcover_url(cfg.year, cfg.version, tile)
-
-    parsed_url = urlparse(url)
-    filename = os.path.basename(parsed_url.path)
-    out_file = out_dir / filename
-
-    if out_file.exists():
-        logger.info(f"file {out_file} already exists, skipping")
-        return
-
-    logger.info(f"downloading tile {tile} at {url}")
-
-    ureq.urlretrieve(url, out_file)
-
-
 def get_worldcover_url(year: str, version: str, tile_id: str) -> str:
-    """Return the URL identifying the location of the tile associated with the provided ID
+    """Return the worldcover URL for the provided inputs.
+
+    Return the URL identifying the location of the tile associated with the provided ID
     and for the specific year and WorldCover dataset version.
 
     Parameters

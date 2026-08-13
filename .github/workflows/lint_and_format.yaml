@@ -17,6 +17,8 @@ jobs:
       # Execution
       - name: Lint with Ruff
         run: uv run ruff check --output-format=github .
+      - name: Type check with Pyright
+        run: uv run pyright
   format:
     runs-on: ubuntu-latest
     steps:

@@ -30,7 +30,7 @@ class TestUNetConfig:
     def test_is_frozen(self):
         with pytest.raises(dataclasses.FrozenInstanceError):
             # Pyright flags this statically, which is the point of the test.
-            UNetConfig().num_classes = 3  # pyright: ignore[reportGeneralTypeIssues]
+            UNetConfig().num_classes = 3  # pyright: ignore[reportAttributeAccessIssue]
 
     @pytest.mark.parametrize(
         "overrides",

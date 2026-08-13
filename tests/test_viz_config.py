@@ -92,7 +92,7 @@ class TestLoadVizConfig:
 class TestColors:
     def test_converts_the_prop_cycle_keys_to_int(self):
         colors = Colors(
-            text="white", facecolor="black", prop_cycle={"0": "#1B4965", "1": "#2A9D8F"}
+            text="white", facecolor="black", prop_cycle={0: "#1B4965", 1: "#2A9D8F"}
         )
 
         assert colors.prop_cycle == {0: "#1B4965", 1: "#2A9D8F"}

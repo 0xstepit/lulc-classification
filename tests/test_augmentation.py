@@ -43,7 +43,7 @@ ALL_OFF = AugmentationConfig(
 class TestAugmentationConfig:
     def test_is_frozen(self):
         with pytest.raises(dataclasses.FrozenInstanceError):
-            AugmentationConfig().horizontal_flip = False
+            AugmentationConfig().horizontal_flip = False  # pyright: ignore[reportAttributeAccessIssue]
 
     def test_defaults_enable_the_full_dihedral_groud(self):
         cfg = AugmentationConfig()

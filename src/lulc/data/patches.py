@@ -1,3 +1,5 @@
+"""Functions and classes uses to work with raster patches."""
+
 from dataclasses import dataclass
 from math import ceil
 
@@ -6,13 +8,15 @@ from rasterio.windows import Window
 
 from lulc.config.dataset import SET_NAMES
 
-SETS_TO_LABEL = {k: v for k, v in enumerate(SET_NAMES)}
+SETS_TO_LABEL = dict(enumerate(SET_NAMES))
 LABELS_TO_SET = {v: k for k, v in SETS_TO_LABEL.items()}
 
 
 def validate_block_size(raster_size: int, block_size: int):
-    """Check that the provided_block size is a factor of the raster_size to force no
-    pixel annihilation. This check assumes that both the raster and the block are squared.
+    """Check that the provided_block size is a factor of the raster_size.
+
+    By performing this check we force no pixel annihilation. Assumes that
+    both the raster and the block are squared.
 
     Parameters
     ----------
@@ -30,7 +34,7 @@ def validate_block_size(raster_size: int, block_size: int):
 def compute_buffer_radius(
     buffer_m: float, patch_size: int, pixel_resolution_m: float
 ) -> int:
-    """Returns the buffer radius to apply to each blocks as a fraction of the patch_size.
+    """Return the buffer radius to apply to each blocks as a fraction of the patch_size.
 
     Parameters
     ----------
@@ -56,8 +60,9 @@ def compute_buffer_radius(
 
 
 def create_buffer_mask(patch_labels: np.ndarray, buffer_radius: int) -> np.ndarray:
-    """Create a boolean buffer mask indicating which patch has to be retained (1) and
-    which one has to be removed (0).
+    """Create a boolean buffer mask for the patches.
+
+    The mask indicates which patch has to be retained (1) and which one has to be removed (0).
 
     Parameters
     ----------
@@ -121,8 +126,10 @@ def create_buffer_mask(patch_labels: np.ndarray, buffer_radius: int) -> np.ndarr
 def assign_blocks(
     seed: int, grid_size: int, set_fractions: dict[str, float]
 ) -> np.ndarray:
-    """Divide the the raster into blocks and assign each block to one set based on the
-    associated fraction. Randomness in the set dispatching is controlled by the provided seed.
+    """Divide the the raster into blocks and assign each block to one dataset subset.
+
+    The assignment is based on the associated fraction. Randomness in the set dispatching is
+    controlled by the provided seed.
 
     Parameters
     ----------
@@ -164,6 +171,7 @@ def assign_blocks(
 def create_labelled_patches(
     block_labels: np.ndarray, patches_per_block: int
 ) -> np.ndarray:
+    """Create a labelled grid with patches from the labelled block grid."""
     return np.repeat(
         np.repeat(block_labels, patches_per_block, axis=0), patches_per_block, axis=1
     )
@@ -226,7 +234,7 @@ def select_seed(
     num_candidates: int,
     set_fractions: dict[str, float],
 ):
-    """
+    """Select the first seed that preserves all classes in all the dataset subsets.
 
     Parameters
     ----------
@@ -247,6 +255,7 @@ def select_seed(
 
     Returns
     -------
+        The best seed value and associated patch_labels, keep_mask, and block_labels.
     """
     # Create a boolean vector indicating whether a class is present in the
     # labelled raster or not.
@@ -305,8 +314,7 @@ def select_seed(
 
 @dataclass(frozen=True)
 class PatchSpec:
-    """Helper class defining patch specific information and a method to easily get a rasterio
-    window containing the patch.
+    """Patch specific information and a methods to get a rasterio window containing the patch.
 
     Attributes
     ----------
@@ -321,16 +329,20 @@ class PatchSpec:
 
     def window(self, patch_size: int) -> Window:
         """Rasterio window covering the patch."""
+        # Ignoring the pyright diagnostic becauset it cannot see rasterio signatures
+        # and flags them as wrong.
         return Window(
-            self.col * patch_size, self.row * patch_size, patch_size, patch_size
+            self.col * patch_size,  # pyright: ignore[reportCallIssue]
+            self.row * patch_size,
+            patch_size,
+            patch_size,
         )
 
 
 def build_patch_specs(
     patch_labels: np.ndarray, keep_mask: np.ndarray
 ) -> list[PatchSpec]:
-    """Create a patch spec list containing only the patches specified with the
-    keep_mask boolean mask.
+    """Create a patch spec list containing only the patches specified by the mask.
 
     Parameters
     ----------
