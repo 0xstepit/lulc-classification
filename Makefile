@@ -23,6 +23,13 @@ format: ## Format codebase
 	@echo "Completed formatting"
 	@echo "==================================================================="
 
+lint: ## Lint codebase
+	@echo "==================================================================="
+	@echo 'Running formatting...'
+	uv run ruff check .
+	@echo "Completed formatting"
+	@echo "==================================================================="
+
 unit-tests: ## Run unit tests
 	@echo "==================================================================="
 	@echo 'Running unit tests...'
