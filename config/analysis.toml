@@ -63,6 +63,7 @@ scl_mask_classes = [
     11,
 ] # classes used to filter rasters with the SCL mask.
 target_resolution = 10 # target resolution for the composite in [m]
+scl_bank_index = 10
 
 [msi.bands]
 # 10: blue, green, red, NIR.

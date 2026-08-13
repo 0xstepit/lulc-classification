@@ -369,7 +369,7 @@ class TestMSIConfig:
         # the download script writes.
         cfg = self._config()
 
-        assert cfg.get_bands_list()[cfg.get_scl_band_index()] == "SCL_20m"
+        assert cfg.get_bands_list()[cfg.scl_band_index] == "SCL_20m"
 
 
 class TestCompositesConfig:

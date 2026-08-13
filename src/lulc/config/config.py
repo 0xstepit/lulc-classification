@@ -61,7 +61,7 @@ class AoiConfig:
 
     @classmethod
     def from_dict(cls, aoi_data: dict) -> Self:
-
+        """Create a class instance from the provided dictionary."""
         return cls(
             max_cloud_coverage=aoi_data["max_cloud_coverage"],
             min_scenes=aoi_data["min_scenes"],
@@ -115,6 +115,7 @@ class IndicesConfig:
     bands_to_channels: dict[str, dict[str, int]]
 
     def get_channel(self, index: str, band: str) -> int:
+        """Returns the channel associated with the provided band and index."""
         return self.bands_to_channels[index][band]
 
 
@@ -124,22 +125,21 @@ class MSIConfig:
 
     Attributes
     ----------
-    bands :
-    target_resolution :
-    scl_mask_classes :
-    num_bands :
-    bands :
-    band_names:
+    target_resolution : the resolution used in the generation of raster.
+    bands : maps each band name to the associated original resolution.
+    scl_mask_classes : the classes in the SCL band to mask out
+    scl_band_index : the position in the bands of the SCL mask in the downloaded scenes.
+    bands_names : a map between the band names used in the project, and the names used
+    in the data provider.
     """
 
     target_resolution: int
     scl_mask_classes: list[int]
+    scl_band_index: int
     bands: dict
     band_names: dict
 
     def __post_init__(self):
-        self.num_bands = len([band for res in self.bands for band in self.bands[res]])
-        self.bands = {int(k): v for k, v in self.bands.items()}
 
         if self.target_resolution not in list(self.bands.keys()):
             raise ValueError(
@@ -152,27 +152,15 @@ class MSIConfig:
                 f"expected {self.num_bands} but got {len(self.band_names.keys())}"
             )
 
+    @property
+    def num_bands(self) -> int:
+        """Total number of Sentinel-2 bands across every resolution."""
+        return sum(len(bands) for bands in self.bands.values())
+
+    # TODO: make it a property
     def get_bands_list(self) -> list[str]:
-        """Returns the sorted list of Sentinel-2 bands used in the analysis.
-
-        Returns
-        -------
-        list[str]
-            The sorted list of band names.
-        """
+        """Returns the sorted list of Sentinel-2 bands used in the analysis."""
         return sorted([band for res in self.bands for band in self.bands[res]])
-
-    def get_scl_band_index(self):
-        """Returns the SCL Sentinel2 band position in the scenes. This value is hardcoded
-        because it assumes that each scene has bands ordered like in the configuration
-        file.
-
-        Returns
-        -------
-        int
-            The SCL map index in a scene.
-        """
-        return 10
 
 
 @dataclass(frozen=True)
@@ -263,7 +251,12 @@ def load_config(file_path: Path) -> Config:
 
         aoi = AoiConfig.from_dict(_cfg.pop("aoi"))
         stac = StacConfig(**_cfg.pop("stac"))
-        msi = MSIConfig(**_cfg.pop("msi"))
+
+        # Clean way to handle the issue that TOML keys are always string.
+        msi_data = _cfg.pop("msi")
+        msi_data["bands"] = {int(k): v for k, v in msi_data["bands"].items()}
+        msi = MSIConfig(**msi_data)
+
         composites = CompositesConfig(**_cfg.pop("composites"))
         indices = IndicesConfig(**_cfg.pop("indices"))
         worldcover = WorldCoverConfig(**_cfg.pop("worldcover"))

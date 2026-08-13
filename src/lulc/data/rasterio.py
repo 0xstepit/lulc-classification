@@ -91,8 +91,8 @@ def create_masked_bands_and_indices_tile(
     # Windowed read.
     data = src.read(window=window)
 
-    mask = create_scl_mask(data, cfg.msi.get_scl_band_index(), cfg.msi.scl_mask_classes)
-    masked_bands = get_masked_bands(data, cfg.msi.get_scl_band_index(), mask)
+    mask = create_scl_mask(data, cfg.msi.scl_band_index, cfg.msi.scl_mask_classes)
+    masked_bands = get_masked_bands(data, cfg.msi.scl_band_index, mask)
 
     rescaled_bands = rescale_reflectances(masked_bands)
 
