@@ -3,9 +3,9 @@ import pytest
 import torch
 from torch.utils.data import DataLoader
 
-from src.data.dataset import LULCPatchDataset
-from src.io import FEATURE_SUFFIX, LABEL_SUFFIX
-from src.preprocessing.normalization import NormalizationParams, apply_normalization
+from lulc.data.dataset import LULCPatchDataset
+from lulc.io import FEATURE_SUFFIX, LABEL_SUFFIX
+from lulc.preprocessing.normalization import NormalizationParams, apply_normalization
 
 NUM_CHANNELS = 3
 HEIGHT = 4

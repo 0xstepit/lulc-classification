@@ -6,8 +6,8 @@ import numpy as np
 import torch
 from torch.utils.data import Dataset
 
-from src.io import FEATURE_SUFFIX, LABEL_SUFFIX
-from src.preprocessing.normalization import NormalizationParams, apply_normalization
+from lulc.io import FEATURE_SUFFIX, LABEL_SUFFIX
+from lulc.preprocessing.normalization import NormalizationParams, apply_normalization
 
 # [[features, labels], tuple[transformed_features, transformed_labels]]
 Transform = Callable[[torch.Tensor, torch.Tensor], tuple[torch.Tensor, torch.Tensor]]

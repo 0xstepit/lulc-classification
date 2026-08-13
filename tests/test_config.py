@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from src.config.config import (
+from lulc.config.config import (
     AoiConfig,
     CompositesConfig,
     Config,
@@ -14,7 +14,7 @@ from src.config.config import (
     WorldCoverConfig,
     load_config,
 )
-from src.config.dataset import PatchesConfig
+from lulc.config.dataset import PatchesConfig
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 

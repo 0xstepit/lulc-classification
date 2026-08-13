@@ -7,10 +7,10 @@ import rasterio
 from rasterio.profiles import Profile
 from rasterio.windows import Window
 
-from src.config import Config
-from src.data.sentinel2 import rescale_reflectances
-from src.preprocessing.indices import compute_indices
-from src.preprocessing.masking import (
+from lulc.config import Config
+from lulc.data.sentinel2 import rescale_reflectances
+from lulc.preprocessing.indices import compute_indices
+from lulc.preprocessing.masking import (
     create_scl_mask,
     get_masked_bands,
 )

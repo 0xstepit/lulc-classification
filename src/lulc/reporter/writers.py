@@ -5,8 +5,8 @@ from pathlib import Path
 
 import numpy as np
 
-from src.config.reporter import DatetimeConfig, JSONConfig
-from src.reporter.models import ReportEntry
+from lulc.config.reporter import DatetimeConfig, JSONConfig
+from lulc.reporter.models import ReportEntry
 
 SUFFIX = ".json"
 

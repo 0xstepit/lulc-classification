@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from src.preprocessing.indices import compute_ndbi, compute_ndvi, compute_ndwi
+from lulc.preprocessing.indices import compute_ndbi, compute_ndvi, compute_ndwi
 
 
 @pytest.mark.parametrize("fn", [compute_ndvi, compute_ndbi, compute_ndwi])

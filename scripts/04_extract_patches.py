@@ -15,9 +15,9 @@ import numpy as np
 import rasterio
 from rasterio.windows import Window
 
-from src.config import load_config, load_reporter_config
-from src.data.labels import IGNORE_IDX, build_remap_lookup_table
-from src.data.patches import (
+from lulc.config import load_config, load_reporter_config
+from lulc.data.labels import IGNORE_IDX, build_remap_lookup_table
+from lulc.data.patches import (
     LABELS_TO_SET,
     PatchSpec,
     build_patch_specs,
@@ -26,8 +26,8 @@ from src.data.patches import (
     select_seed,
     validate_block_size,
 )
-from src.data.rasterio import SeasonalStack
-from src.io import (
+from lulc.data.rasterio import SeasonalStack
+from lulc.io import (
     FEATURE_SUFFIX,
     GLOBAL_CONFIG,
     LABEL_SUFFIX,
@@ -40,8 +40,8 @@ from src.io import (
     SEASONAL_SCENES,
     WORLDCOVER_LABELS,
 )
-from src.logger import setup_logging
-from src.reporter.reporter import Reporter
+from lulc.logger import setup_logging
+from lulc.reporter.reporter import Reporter
 
 setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)

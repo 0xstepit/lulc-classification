@@ -4,7 +4,7 @@ from math import ceil
 import numpy as np
 from rasterio.windows import Window
 
-from src.config.dataset import SET_NAMES
+from lulc.config.dataset import SET_NAMES
 
 SETS_TO_LABEL = {k: v for k, v in enumerate(SET_NAMES)}
 LABELS_TO_SET = {v: k for k, v in SETS_TO_LABEL.items()}

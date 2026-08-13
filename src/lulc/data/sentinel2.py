@@ -21,9 +21,9 @@ from tenacity import (
 )
 from urllib3.util.retry import Retry
 
-from src.config import Config
-from src.constants import SEASON_MONTHS
-from src.geometry import BoundingBox
+from lulc.config import Config
+from lulc.constants import SEASON_MONTHS
+from lulc.geometry import BoundingBox
 
 logger = logging.getLogger(__name__)
 

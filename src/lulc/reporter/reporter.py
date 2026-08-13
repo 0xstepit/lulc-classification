@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Any
 
-from src.config import ReporterConfig
+from lulc.config import ReporterConfig
 
 from .models import ReportEntry
 from .writers import JSONWriter

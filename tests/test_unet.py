@@ -4,7 +4,7 @@ import pytest
 import torch
 from torch import nn
 
-from src.models.unet import DoubleConv, UNet, UNetConfig
+from lulc.models.unet import DoubleConv, UNet, UNetConfig
 
 EXPECTED_PARAMS = 31_066_312
 

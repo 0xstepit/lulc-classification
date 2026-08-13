@@ -3,7 +3,7 @@ import json
 import numpy as np
 import pytest
 
-from src.preprocessing.normalization import NormalizationParams, apply_normalization
+from lulc.preprocessing.normalization import NormalizationParams, apply_normalization
 
 
 @pytest.fixture

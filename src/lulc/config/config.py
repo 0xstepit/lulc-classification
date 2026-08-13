@@ -3,8 +3,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Self
 
-from src.config.dataset import PatchesConfig
-from src.geometry import BoundingBox
+from lulc.config.dataset import PatchesConfig
+from lulc.geometry import BoundingBox
 
 
 @dataclass(frozen=True)

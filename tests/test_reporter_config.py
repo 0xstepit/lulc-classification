@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from src.config.reporter import (
+from lulc.config.reporter import (
     DatetimeConfig,
     JSONConfig,
     ReporterConfig,

@@ -1,5 +1,5 @@
 # Defines the correct order of the season IDs.
-from src.config import MSIConfig
+from lulc.config import MSIConfig
 
 SEASONS_ORDER = ["DJF", "MAM", "JJA", "SON"]
 

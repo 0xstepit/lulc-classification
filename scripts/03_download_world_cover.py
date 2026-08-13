@@ -11,13 +11,13 @@ import geopandas as gpd
 import rioxarray as rxr
 import xarray as xr
 
-from src.config import load_config, load_reporter_config
-from src.data.worldcover import (
+from lulc.config import load_config, load_reporter_config
+from lulc.data.worldcover import (
     compute_class_stats,
     create_worldcover_tile,
     get_worldcover_tile_ids,
 )
-from src.io import (
+from lulc.io import (
     GLOBAL_CONFIG,
     LABELS_DIR,
     REPORTER_CONFIG,
@@ -25,8 +25,8 @@ from src.io import (
     SEASONAL_SCENES,
     WORLDCOVER_LABELS,
 )
-from src.logger import setup_logging
-from src.reporter.reporter import Reporter
+from lulc.logger import setup_logging
+from lulc.reporter.reporter import Reporter
 
 setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)

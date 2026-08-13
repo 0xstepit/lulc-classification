@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.constants import SEASONS_ORDER
+from lulc.constants import SEASONS_ORDER
 
 ROOT = Path(__file__).parent.parent
 

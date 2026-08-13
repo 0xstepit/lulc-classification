@@ -9,16 +9,16 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-from src.config import load_config
-from src.data.sentinel2 import (
+from lulc.config import load_config
+from lulc.data.sentinel2 import (
     StacClient,
     create_all_bands_scene,
     get_data_profile,
 )
-from src.data.utils import evenly_spaced_indexes
-from src.geometry import create_window_and_transform_from_bbox
-from src.io import ALL_BANDS_SCENE_SUFFIX, GLOBAL_CONFIG, RAW_DATA_DIR
-from src.logger import setup_logging
+from lulc.data.utils import evenly_spaced_indexes
+from lulc.geometry import create_window_and_transform_from_bbox
+from lulc.io import ALL_BANDS_SCENE_SUFFIX, GLOBAL_CONFIG, RAW_DATA_DIR
+from lulc.logger import setup_logging
 
 # We access the Copernicus DB so we need the env variable for the S3-like access.
 load_dotenv()

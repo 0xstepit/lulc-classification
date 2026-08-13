@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from src.config.viz import Colors, Font, VizConfig, load_viz_config
+from lulc.config.viz import Colors, Font, VizConfig, load_viz_config
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 

@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 from cycler import cycler
 from matplotlib.figure import Figure
 
-from src.config.viz import VizConfig
-from src.io import IMGS_DIR
+from lulc.config.viz import VizConfig
+from lulc.io import IMGS_DIR
 
 
 def store_figure(

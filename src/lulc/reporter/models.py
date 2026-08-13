@@ -2,8 +2,8 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from typing import Any
 
-from src.data.sentinel2 import SceneCounts
-from src.geometry import BoundingBox
+from lulc.data.sentinel2 import SceneCounts
+from lulc.geometry import BoundingBox
 
 
 @dataclass

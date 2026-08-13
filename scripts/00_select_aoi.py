@@ -7,19 +7,19 @@ use in the project analysis.
 import logging
 from pathlib import Path
 
-from src.config import load_config, load_reporter_config
-from src.data.sentinel2 import (
+from lulc.config import load_config, load_reporter_config
+from lulc.data.sentinel2 import (
     MGRS_PREFIX,
     StacClient,
     count_scenes_by_seasons,
     evaluate_candidate_validity,
     get_tile_id,
 )
-from src.geometry import GCS, create_bbox
-from src.io import GLOBAL_CONFIG, REPORTER_CONFIG, REPORTS_DIR
-from src.logger import setup_logging
-from src.reporter.models import CandidateResult, PreliminaryAnalysisResult
-from src.reporter.reporter import Reporter
+from lulc.geometry import GCS, create_bbox
+from lulc.io import GLOBAL_CONFIG, REPORTER_CONFIG, REPORTS_DIR
+from lulc.logger import setup_logging
+from lulc.reporter.models import CandidateResult, PreliminaryAnalysisResult
+from lulc.reporter.reporter import Reporter
 
 setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)

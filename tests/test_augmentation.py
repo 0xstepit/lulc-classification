@@ -4,7 +4,7 @@ import numpy as np
 import pytest
 import torch
 
-from src.training.augmentation import AugmentationConfig, PatchAugmentation
+from lulc.training.augmentation import AugmentationConfig, PatchAugmentation
 
 NUM_CHANNELS = 3
 HEIGHT = 4

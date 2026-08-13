@@ -11,8 +11,8 @@ import xarray as xr
 from rioxarray.merge import merge_arrays
 from shapely.geometry import box
 
-from src.config import WorldCoverConfig
-from src.geometry import BoundingBox
+from lulc.config import WorldCoverConfig
+from lulc.geometry import BoundingBox
 
 logger = logging.getLogger(__name__)
 

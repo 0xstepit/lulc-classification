@@ -2,7 +2,7 @@ import dataclasses
 
 import pytest
 
-from src.config.dataset import SET_NAMES, PatchesConfig
+from lulc.config.dataset import SET_NAMES, PatchesConfig
 
 VALID_SPLIT = {"train": 0.7, "test": 0.15, "val": 0.15}
 

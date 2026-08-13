@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from src.preprocessing.masking import create_scl_mask, get_masked_bands
+from lulc.preprocessing.masking import create_scl_mask, get_masked_bands
 
 
 def _scene(n_bands: int, height: int, width: int, fill: int = 0) -> np.ndarray:

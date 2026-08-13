@@ -1,6 +1,6 @@
 import numpy as np
 
-from src.config import IndicesConfig
+from lulc.config import IndicesConfig
 
 
 def compute_ndvi(nir: np.ndarray, red: np.ndarray) -> np.ndarray:

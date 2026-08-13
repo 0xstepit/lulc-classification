@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from src.data.patches import (
+from lulc.data.patches import (
     LABELS_TO_SET,
     assign_blocks,
     compute_buffer_radius,

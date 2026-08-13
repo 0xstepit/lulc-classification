@@ -12,17 +12,17 @@ import numpy as np
 import rasterio
 from dotenv import load_dotenv
 
-from src.config import load_config, load_reporter_config
-from src.constants import seasonal_band_names
-from src.data.rasterio import (
+from lulc.config import load_config, load_reporter_config
+from lulc.constants import seasonal_band_names
+from lulc.data.rasterio import (
     create_masked_bands_and_indices_tile,
     create_seasonal_profile,
 )
-from src.data.sentinel2 import (
+from lulc.data.sentinel2 import (
     get_data_profile,
 )
-from src.data.utils import compute_nan_pct
-from src.io import (
+from lulc.data.utils import compute_nan_pct
+from lulc.io import (
     GLOBAL_CONFIG,
     RAW_DATA_DIR,
     REPORTER_CONFIG,
@@ -30,9 +30,9 @@ from src.io import (
     SEASONAL_SCENE_DIR,
     SEASONAL_SCENE_SUFFIX,
 )
-from src.logger import setup_logging
-from src.preprocessing.composites import create_seasonal_composite
-from src.reporter.reporter import Reporter
+from lulc.logger import setup_logging
+from lulc.preprocessing.composites import create_seasonal_composite
+from lulc.reporter.reporter import Reporter
 
 # We access the Copernicus DB so we need the env variable for the S3-like access.
 load_dotenv()
