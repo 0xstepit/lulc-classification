@@ -2,6 +2,7 @@ import dataclasses
 
 import pytest
 import torch
+from torch import nn
 
 from src.models.unet import DoubleConv, UNet, UNetConfig
 
@@ -138,3 +139,38 @@ class TestReproducibility:
         # Catches a validation loop that forgot model.eval(), which corrupts the
         # running statistics with validation data and leaks it into inference.
         torch.testing.assert_close(batch_norm.running_mean, before)
+
+
+class TestGradients:
+    def test_backward_reaches_every_parameter(self, small_model):
+        logits = small_model(torch.randn(2, 3, 32, 32))
+        target = torch.randint(0, 4, (2, 32, 32))
+
+        nn.functional.cross_entropy(logits, target).backward()
+
+        unreached = [
+            name for name, p in small_model.named_parameters() if p.grad is None
+        ]
+        assert unreached == []
+
+    def test_gradients_are_finite(self, small_model):
+        logits = small_model(torch.randn(2, 3, 32, 32))
+        target = torch.randint(0, 4, (2, 32, 32))
+
+        nn.functional.cross_entropy(logits, target).backward()
+
+        for name, p in small_model.named_parameters():
+            assert torch.isfinite(p.grad).all(), name
+
+    def test_ignore_index_pixels_do_not_block_learning(self, small_model):
+        # 255 is the nodata label. A fully ignored batch has no signal, but a
+        # partially ignored one must still produce gradients.
+        logits = small_model(torch.randn(2, 3, 32, 32))
+        target = torch.full((2, 32, 32), 255)
+        target[:, :16, :] = torch.randint(0, 4, (2, 16, 32))
+
+        loss = nn.functional.cross_entropy(logits, target, ignore_index=255)
+        loss.backward()
+
+        assert torch.isfinite(loss)
+        assert small_model.head.weight.grad.abs().sum() > 0
