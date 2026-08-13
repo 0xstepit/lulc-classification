@@ -28,10 +28,17 @@ dependencies = [
 pythonpath = ["."]
 
 [tool.ruff.lint]
-select = ["D", "I"]
+select = ["D", "I", "G004"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"
+
+[tool.ruff.lint.flake8-tidy-imports]
+require-lazy = { include = "all" }
+
+# Ignore all pydocstyle rules for tests.
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*" = ["D"]
 
 [tool.ruff.format]
 docstring-code-format      = true
