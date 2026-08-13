@@ -71,6 +71,15 @@ require-lazy = { include = "all" }
 docstring-code-format      = true
 docstring-code-line-length = 80
 
+# [tool.pyright]
+# venvPath = "."
+# venv     = ".venv"
+# pythonVersion  = "3.14"
+# pythonPlatform = "All"
+# include = ["src", "tests", "scripts"]
+# exclude = ["**/__pycache__", "**/.ipynb_checkpoints", "notebooks", ".venv"]
+# typeCheckingMode = "standard"
+
 [tool.jupytext]
 formats = "ipynb,py:percent"
 
@@ -88,4 +97,5 @@ dev = [
     "taplo>=0.9.3",
     "geodataset>=0.3.2",
     "geodatasets>=2026.5.1",
+    "dvc>=3.67.1",
 ]
