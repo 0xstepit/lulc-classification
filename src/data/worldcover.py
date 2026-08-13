@@ -14,7 +14,7 @@ from shapely.geometry import box
 from src.config import WorldCoverConfig
 from src.geometry import BoundingBox
 
-logger = logging.getLogger("worldcover")
+logger = logging.getLogger(__name__)
 
 
 def get_worldcover_tile_ids(grid: gpd.GeoDataFrame, bbox: BoundingBox) -> list:

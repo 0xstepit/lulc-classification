@@ -25,7 +25,7 @@ from src.config import Config
 from src.constants import SEASON_MONTHS
 from src.geometry import BoundingBox
 
-logger = logging.getLogger("sentinel2")
+logger = logging.getLogger(__name__)
 
 # Militaty Grid Reference System prefix used in the Setninel-2 data.
 MGRS_PREFIX = "MGRS-"
