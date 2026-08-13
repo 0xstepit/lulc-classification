@@ -1,13 +1,11 @@
 from dataclasses import dataclass
 from math import cos, radians
-from typing import TypeAlias
 
 from rasterio import Affine, warp
 from rasterio.windows import Window, from_bounds
 from rasterio.windows import transform as window_transform
 
-# Helper alias for  w | s | e | n
-BoundingBox: TypeAlias = tuple[float, float, float, float]
+from lulc.domain import BoundingBox
 
 
 @dataclass(frozen=True)

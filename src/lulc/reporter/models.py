@@ -2,8 +2,7 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from typing import Any
 
-from lulc.data.sentinel2 import SceneCounts
-from lulc.geometry import BoundingBox
+from lulc.domain import BoundingBox, SceneCounts
 
 
 @dataclass

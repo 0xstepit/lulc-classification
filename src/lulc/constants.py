@@ -1,6 +1,21 @@
-# Defines the correct order of the season IDs.
-from lulc.config import MSIConfig
+"""Project-wide constants and the band-naming helpers derived from them.
 
+This module is a leaf: it holds no runtime dependency on any other `lulc`
+subpackage. `MSIConfig` is imported for typing only, so that `lulc.io` — which
+imports this module for `SEASONS_ORDER` — does not end up sitting above the
+configuration package in the dependency graph.
+"""
+
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+# We need it to reference to MSIConfig in the annotation without actually
+# importing it.
+if TYPE_CHECKING:
+    from lulc.config import MSIConfig
+
+# Defines the correct order of the season IDs.
 SEASONS_ORDER = ["DJF", "MAM", "JJA", "SON"]
 
 # Season acronym to associated month numbers.

@@ -2,7 +2,11 @@ from pathlib import Path
 
 from lulc.constants import SEASONS_ORDER
 
-ROOT = Path(__file__).parent.parent
+# This file lives at <repo>/src/lulc/io.py, so the repository root is three
+# levels up. Resolved explicitly rather than chained `.parent` calls so that a
+# future move of this module fails loudly on the index instead of silently
+# pointing one directory off.
+ROOT = Path(__file__).resolve().parents[2]
 
 # Configuration directories.
 CONFIG_DIR = ROOT / "config"

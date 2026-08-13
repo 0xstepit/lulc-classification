@@ -1,6 +1,6 @@
 import logging
 from collections import Counter
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
@@ -23,7 +23,7 @@ from urllib3.util.retry import Retry
 
 from lulc.config import Config
 from lulc.constants import SEASON_MONTHS
-from lulc.geometry import BoundingBox
+from lulc.domain import BoundingBox, SceneCounts
 
 logger = logging.getLogger(__name__)
 
@@ -126,35 +126,6 @@ class ResamplingStrategy:
 
     def get_method(self) -> Resampling:
         return self.method
-
-
-@dataclass
-class SceneCounts:
-    """Contains information associated with the number of scenes found for each season.
-
-    Attributes
-    ----------
-    total : int
-        The overall number of scenes.
-    by_season : dict[str, int]
-        The number of available scenes per season.
-    """
-
-    total: int = 0
-    by_season: dict = field(
-        default_factory=lambda: dict.fromkeys(
-            SEASON_MONTHS.keys(), 0
-        )  # {"DJF": 0, "MAM": 0, "JJA": 0, "SON": 0}
-    )
-
-    def increment_counter(self, season: str):
-        """Increment the number of total scenes and scenes for the provided season."""
-        if season not in self.by_season.keys():
-            raise KeyError(
-                f"season {season} is not valid; valid seasons are {self.by_season.keys()}"
-            )
-        self.by_season[season] += 1
-        self.total += 1
 
 
 def count_scenes_by_seasons(items: list[pystac.Item]) -> SceneCounts:

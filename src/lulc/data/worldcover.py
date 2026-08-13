@@ -12,7 +12,7 @@ from rioxarray.merge import merge_arrays
 from shapely.geometry import box
 
 from lulc.config import WorldCoverConfig
-from lulc.geometry import BoundingBox
+from lulc.domain import BoundingBox
 
 logger = logging.getLogger(__name__)
 

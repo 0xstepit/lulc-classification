@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import Self
 
 from lulc.config.dataset import PatchesConfig
-from lulc.geometry import BoundingBox
+from lulc.domain import BoundingBox
 
 
 @dataclass(frozen=True)
