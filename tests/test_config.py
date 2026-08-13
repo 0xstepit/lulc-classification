@@ -43,6 +43,7 @@ url        = "https://stac.dataspace.copernicus.eu/v1"
 [msi]
 scl_mask_classes  = [0, 1, 3, 7, 8, 9, 10, 11]
 target_resolution = 10
+scl_band_index = 10
 
 [msi.band_names]
 "B02_10m" = "blue"
@@ -151,6 +152,15 @@ class TestLoadConfig:
         assert cfg.worldcover.version == "v200"
         assert cfg.patches.split == {"test": 0.15, "train": 0.7, "val": 0.15}
 
+    def test_converts_the_toml_string_band_resolutions_to_int(self, tmp_path):
+        # TOML keys are always strings, so `[msi.bands] 10 = [...]` parses as
+        # "10". The coercion lives in the loader rather than in MSIConfig, which
+        # is what lets MSIConfig stay frozen.
+        cfg = load_config(_write_toml(tmp_path))
+
+        assert set(cfg.msi.bands) == {10, 20}
+        assert cfg.msi.target_resolution in cfg.msi.bands
+
     def test_raises_when_the_file_does_not_exist(self, tmp_path):
         with pytest.raises(FileNotFoundError):
             load_config(tmp_path / "missing.toml")
@@ -183,19 +193,8 @@ class TestSelectedCandidate:
 
 
 class TestAoiConfig:
-    AOI_DATA = {
-        "max_cloud_coverage": 10.0,
-        "min_scenes": 30,
-        "min_scenes_per_season": 5,
-        "single_tile": True,
-        "candidates": {"andalusia": [-6.0805, 37.2323]},
-        "size": 50_000,
-        "year": 2022,
-        "selected": {"name": "andalusia", "tile": "MGRS-30STG"},
-    }
-
-    def test_from_dict_nests_the_selected_candidate(self):
-        cfg = AoiConfig.from_dict(dict(self.AOI_DATA))
+    def test_from_dict_nests_the_selected_candidate(self, aoi_data):
+        cfg = AoiConfig.from_dict(aoi_data)
 
         assert isinstance(cfg.selected, SelectedCandidate)
         assert cfg.selected.name == "andalusia"
@@ -214,18 +213,18 @@ class TestAoiConfig:
         assert cfg.size == 50
         assert cfg.single_tile is True
 
-    def test_raises_when_there_are_no_candidates(self):
-        data = dict(self.AOI_DATA, candidates={})
+    def test_raises_when_there_are_no_candidates(self, aoi_data):
+        aoi_data["candidates"] = {}
 
         with pytest.raises(ValueError, match="at least one area of interest"):
-            AoiConfig.from_dict(data)
+            AoiConfig.from_dict(aoi_data)
 
     @pytest.mark.parametrize("coordinates", [[], [1.0], [1.0, 2.0, 3.0]])
-    def test_raises_when_a_candidate_is_not_a_lon_lat_pair(self, coordinates):
-        data = dict(self.AOI_DATA, candidates={"andalusia": coordinates})
+    def test_raises_when_a_candidate_is_not_a_lon_lat_pair(self, aoi_data, coordinates):
+        aoi_data["candidates"] = {"andalusia": coordinates}
 
         with pytest.raises(ValueError, match="defined by lat/lon"):
-            AoiConfig.from_dict(data)
+            AoiConfig.from_dict(aoi_data)
 
 
 class TestStacConfig:
@@ -262,93 +261,50 @@ class TestStacConfig:
 
 
 class TestIndicesConfig:
-    BANDS_TO_CHANNELS = {"ndvi": {"nir": 6, "red": 2}, "ndwi": {"green": 1, "nir": 6}}
-
-    def test_get_channel_returns_the_mapped_position(self):
-        cfg = IndicesConfig(bands_to_channels=dict(self.BANDS_TO_CHANNELS))
+    def test_get_channel_returns_the_mapped_position(self, bands_to_channels):
+        cfg = IndicesConfig(bands_to_channels=bands_to_channels)
 
         assert cfg.get_channel("ndvi", "nir") == 6
         assert cfg.get_channel("ndvi", "red") == 2
         assert cfg.get_channel("ndwi", "green") == 1
 
-    def test_raises_for_an_unknown_index(self):
-        cfg = IndicesConfig(bands_to_channels=dict(self.BANDS_TO_CHANNELS))
+    def test_raises_for_an_unknown_index(self, bands_to_channels):
+        cfg = IndicesConfig(bands_to_channels=bands_to_channels)
 
         with pytest.raises(KeyError):
             cfg.get_channel("ndbi", "swir")
 
-    def test_raises_for_a_band_missing_from_the_index(self):
-        cfg = IndicesConfig(bands_to_channels=dict(self.BANDS_TO_CHANNELS))
+    def test_raises_for_a_band_missing_from_the_index(self, bands_to_channels):
+        cfg = IndicesConfig(bands_to_channels=bands_to_channels)
 
         with pytest.raises(KeyError):
             cfg.get_channel("ndvi", "swir")
 
 
 class TestMSIConfig:
-    BANDS = {
-        "10": ["B02_10m", "B03_10m", "B04_10m", "B08_10m"],
-        "20": [
-            "B05_20m",
-            "B06_20m",
-            "B07_20m",
-            "B8A_20m",
-            "B11_20m",
-            "B12_20m",
-            "SCL_20m",
-        ],
-    }
-    BAND_NAMES = {
-        "B02_10m": "blue",
-        "B03_10m": "green",
-        "B04_10m": "red",
-        "B08_10m": "nir",
-        "B05_20m": "red_edge1",
-        "B06_20m": "red_edge2",
-        "B07_20m": "red_edge3",
-        "B8A_20m": "narrow_nir",
-        "B11_20m": "swir1",
-        "B12_20m": "swir2",
-        "SCL_20m": "scl",
-    }
-
-    def _config(self, **overrides) -> MSIConfig:
-        kwargs = {
-            "target_resolution": 10,
-            "scl_mask_classes": [0, 1, 3, 7, 8, 9, 10, 11],
-            "bands": {key: list(value) for key, value in self.BANDS.items()},
-            "band_names": {key: value for key, value in self.BAND_NAMES.items()},
-        }
-        kwargs.update(overrides)
-        return MSIConfig(**kwargs)
-
-    def test_converts_the_toml_string_resolutions_to_int(self):
-        cfg = self._config()
-
-        assert set(cfg.bands) == {10, 20}
-
-    def test_counts_every_band_across_the_resolutions(self):
-        cfg = self._config()
+    def test_counts_every_band_across_the_resolutions(self, make_msi):
+        cfg = make_msi()
 
         assert cfg.num_bands == 11
 
-    def test_raises_when_the_target_resolution_has_no_bands(self):
+    def test_raises_when_the_target_resolution_has_no_bands(self, make_msi):
         with pytest.raises(ValueError, match="target resolution 60"):
-            self._config(target_resolution=60)
+            make_msi(target_resolution=60)
 
-    def test_raises_when_band_names_number_wrong(self):
+    def test_raises_when_band_names_number_wrong(self, make_msi, msi_kwargs):
+        without_red = {
+            key: value
+            for key, value in msi_kwargs["band_names"].items()
+            if value != "red"
+        }
+
         with pytest.raises(
             ValueError, match="band names is different than number of bands"
         ):
-            self._config(
-                band_names={
-                    key: value
-                    for key, value in self.BAND_NAMES.items()
-                    if value != "red"
-                }
-            )
+            make_msi(band_names=without_red)
 
-    def test_get_bands_list_is_flat_and_sorted(self):
-        cfg = self._config()
+    def test_get_bands_list_is_flat_and_sorted(self, make_msi):
+        cfg = make_msi()
 
         assert cfg.get_bands_list() == [
             "B02_10m",
@@ -364,10 +320,11 @@ class TestMSIConfig:
             "SCL_20m",
         ]
 
-    def test_scl_index_points_at_the_scl_band(self):
-        # The index is hardcoded, so it must stay consistent with the band order
-        # the download script writes.
-        cfg = self._config()
+    def test_scl_index_points_at_the_scl_band(self, make_msi):
+        # scl_band_index is configured rather than derived, so it can drift away
+        # from the band ordering the download script actually writes. This is
+        # the guard against that drift.
+        cfg = make_msi()
 
         assert cfg.get_bands_list()[cfg.scl_band_index] == "SCL_20m"
 
