@@ -50,7 +50,7 @@ ifndef file
 endif
 	@echo "==================================================================="
 	@echo 'Running "$(file)" script...'
-	@PYTHONPATH=. uv run python scripts/$(file).py
+	@uv run python scripts/$(file).py
 	@echo "Completed script execution"
 	@echo "==================================================================="
 
