@@ -1,14 +1,20 @@
+from pathlib import Path
+
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from cycler import cycler
+from matplotlib.figure import Figure
 
 from src.config.viz import VizConfig
 from src.io import IMGS_DIR
 
-IMGS_DIR.mkdir(parents=True, exist_ok=True)
 
-
-def store_figure(title: str, transparent: bool = True):
+def store_figure(
+    title: str,
+    img_dir: Path | None = None,
+    transparent: bool = True,
+    fig: Figure | None = None,
+) -> Path:
     """Store the the active figure using the provided title as file name.
 
     Parameters
@@ -18,14 +24,19 @@ def store_figure(title: str, transparent: bool = True):
     transparent : bool
         Whether the backgeound of the figure must be transparent or not
     """
+    dir = IMGS_DIR if img_dir is None else img_dir
+    dir.mkdir(parents=True, exist_ok=True)
+
     _title = title.lower().replace(" ", "_").replace("(", "").replace(")", "")
-    plt.savefig(
-        (IMGS_DIR / _title).with_suffix(".png"),
+    (fig if fig is not None else plt.gcf()).savefig(
+        (dir / _title).with_suffix(".png"),
         dpi=200,
         bbox_inches="tight",
         pad_inches=0.1,
         transparent=transparent,
     )
+
+    return dir
 
 
 def set_matplotlib_global_config(cfg: VizConfig) -> None:
