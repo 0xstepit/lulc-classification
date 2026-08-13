@@ -1,6 +1,7 @@
-"""
-Extract patches from the features and labels rasters to create a train/val/test
-dataset. Patches are created based on the [patch] configuration. Each raster is divided into blocks, and then a spatial buffer is applied on the boundary of the blocks
+"""Extract patches from the features and labels rasters to create a train/val/test dataset.
+
+Patches are created based on the [patch] configuration. Each raster is divided into blocks, and
+then a spatial buffer is applied on the boundary of the blocks
 that are not associated with the same set. Since the shunting of blocks into
 the three sets is randomic based on sets size specified in the [patch] config,
 the script iterates over different seeds to discover a value that allows to represet all
@@ -26,7 +27,7 @@ from lulc.data.patches import (
     select_seed,
     validate_block_size,
 )
-from lulc.data.rasterio import SeasonalStack
+from lulc.data.raster import SeasonalStack
 from lulc.io import (
     FEATURE_SUFFIX,
     GLOBAL_CONFIG,
@@ -47,7 +48,7 @@ setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
 
 
-def main():
+def main():  # noqa: D103
     reporter = Reporter(REPORTS_DIR, load_reporter_config(REPORTER_CONFIG))
 
     cfg = load_config(GLOBAL_CONFIG)
@@ -57,6 +58,8 @@ def main():
     patches_per_block = cfg.patches.patches_per_block
     max_nan_fraction = cfg.patches.max_nan_fraction
     num_label_classes = len(cfg.worldcover.class_names.keys())
+
+    rng = np.random.default_rng(seed=3)
 
     with (
         SeasonalStack(SEASONAL_SCENES) as composite_src,
@@ -99,7 +102,7 @@ def main():
         num_channels = composite_src.count
         pixel_resolution = abs(composite_src.transform.a)
 
-        logging.info(
+        logger.info(
             f"raster of size ({composite_src.shape}) with ({num_channels}) channels "
             f"and ({pixel_resolution}m) pixel resolution, "
             f"is divided into ({grid_size}, {grid_size}) blocks"
@@ -108,7 +111,7 @@ def main():
         buffer_radius = compute_buffer_radius(
             cfg.patches.buffer, patch_size, pixel_resolution
         )
-        logging.info(f"buffer radius is ({buffer_radius}) patches")
+        logger.info(f"buffer radius is ({buffer_radius}) patches")
 
         # The label raster is 1 band so we can load in memory without issues.
         labels = labels_src.read(1)
@@ -132,7 +135,7 @@ def main():
 
         specs = build_patch_specs(patch_labels, keep_mask)
 
-        for set_ in LABELS_TO_SET.keys():
+        for set_ in LABELS_TO_SET:
             (PATCHES_DIR / set_).mkdir(parents=True, exist_ok=True)
 
         # We have the block size which is equal to the raster window block.
@@ -225,7 +228,7 @@ def main():
                 )
 
                 if spec.set_name == "train":
-                    random_sampler = np.random.choice(
+                    random_sampler = rng.choice(
                         [True, False],
                         size=(patch_size, patch_size),
                         p=(

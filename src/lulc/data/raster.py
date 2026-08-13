@@ -1,3 +1,5 @@
+"""Collection of functions and classes to work with rasters."""
+
 import contextlib
 import logging
 from pathlib import Path
@@ -21,8 +23,11 @@ logger = logging.getLogger(__name__)
 def create_seasonal_profile(
     profile: Profile, num_channels: int, tiles_size: int, discard_partial: bool = True
 ) -> Profile:
-    """Update the provide reference profile to account for the 10 bands + 3 indices channels and
-    the possible final W and H reduction due to not complete tile clearing.
+    """Update the provided reference profile for the seasonal composite.
+
+    The updated profile is created taking into account for the 10 reflectance bands and
+    3 indices channels and the possible final W and H reduction due to not complete
+    tile clearing.
 
     Parameters
     ----------
@@ -66,11 +71,11 @@ def create_seasonal_profile(
     return profile
 
 
+# TODO: this function should be splitted
 def create_masked_bands_and_indices_tile(
     cfg: Config, src: rasterio.DatasetReader, window: Window
 ) -> np.ndarray:
-    """Apply an SCL mask to a windowed tile of the source file and stack bands and indices. The
-    SCL channel is removed from the tile.
+    """Apply SCL mask to a windowed tile of the source file and stack bands and indices. The SCL channel is removed from the tile.
 
     Parameters
     ----------
@@ -104,6 +109,12 @@ def create_masked_bands_and_indices_tile(
 
 
 class SeasonalStack:
+    """Class manager for raster reads with many underlying raster sources.
+
+    This class is used to read from multiple source patches of rasters associated with the same
+    window. The class can be used to genreate an all seasons composite raaster out of single seasons.
+    """
+
     def __init__(self, files: list[Path]) -> None:
         if not files:
             raise ValueError("no seasonal files provided")
@@ -113,6 +124,7 @@ class SeasonalStack:
         self._sources: list[rasterio.DatasetReader] = []
 
     def __enter__(self) -> SeasonalStack:
+        """Openthe contextes associated with underlying sources."""
         self._sources = [
             self._exit_stack.enter_context(rasterio.open(f)) for f in self._files
         ]
@@ -120,6 +132,7 @@ class SeasonalStack:
         return self
 
     def __exit__(self, *exec_info) -> None:
+        """Close all the contextes associated with opened sources."""
         self._exit_stack.close()
 
     def _validate_alignment(self) -> None:
@@ -146,32 +159,44 @@ class SeasonalStack:
 
     @property
     def width(self) -> int:
+        """Return the underlying rasters width."""
         return self._sources[0].width
 
     @property
     def height(self) -> int:
+        """Return the underlying rasters height."""
         return self._sources[0].height
 
     @property
     def shape(self) -> tuple[int, int]:
+        """Return the underlying rasters shape."""
         return self._sources[0].shape
 
     @property
     def crs(self):
+        """Return the CRS used."""
         return self._sources[0].crs
 
     @property
     def transform(self):
+        """Return the transformation used."""
         return self._sources[0].transform
 
     @property
     def count(self):
+        """Return the number of sources used."""
         return sum(source.count for source in self._sources)
 
     def block_window(self, band_index: int):
+        """Return the block window used for the provided band index."""
         return self._sources[0].block_windows(band_index)
 
     def read(self, window: Window | None = None) -> np.ndarray:
+        """Read a possibly patched window seasonal composite raster.
+
+        Read from all the sources a possibly windowed patch, and return their
+        combination as a stacked array.
+        """
         return np.concatenate(
             [source.read(window=window) for source in self._sources], axis=0
         )

@@ -48,7 +48,7 @@ select = [
     "RET",
     "PTH",
     "LOG",
-    "G",
+    # "G", must be renabled after cleaning
     "NPY",
     "PD",
     "ARG",

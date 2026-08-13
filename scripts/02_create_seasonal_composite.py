@@ -1,7 +1,10 @@
+"""Create a seasonal composite rasters.
+
+A seasonal composite raster is created for each season by combining each season
+images into a median aggregate, and then by stacking together all the bands for
+each seasons and spectral indexes into a single raster.
 """
-Create a seasonal composite raster by combining each season images into a median aggregate, and then
-by stacking together all the bands for each seasons and spectral indexes into a single raster.
-"""
+
 # TODO: rescale properly reflectances
 
 import contextlib
@@ -14,7 +17,7 @@ from dotenv import load_dotenv
 
 from lulc.config import load_config, load_reporter_config
 from lulc.constants import seasonal_band_names
-from lulc.data.rasterio import (
+from lulc.data.raster import (
     create_masked_bands_and_indices_tile,
     create_seasonal_profile,
 )
@@ -41,7 +44,7 @@ setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
 
 
-def main():
+def main():  # noqa: D103
     cfg = load_config(GLOBAL_CONFIG)
 
     reporter = Reporter(REPORTS_DIR, load_reporter_config(REPORTER_CONFIG))
@@ -69,7 +72,7 @@ def main():
             continue
 
         # Create an array containing all the scene paths for the considered season.
-        files = [f for f in season_dir.glob("*.tif")]
+        files = list(season_dir.glob("*.tif"))
 
         # No need here to update the affine transform since in case of scene cutting,
         # only the pixels far from the origin are removed.
