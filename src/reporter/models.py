@@ -25,7 +25,9 @@ class ReportEntry:
 
     step: str
     data: Any
-    timestamp: str = datetime.now(UTC).isoformat()
+    # We should consider to use datetime in config instead of the string so
+    # Ruff can catch function calls.
+    timestamp: str = field(default_factory=lambda: datetime.now(UTC).isoformat())
     metadata: dict = field(default_factory=dict)
 
 
