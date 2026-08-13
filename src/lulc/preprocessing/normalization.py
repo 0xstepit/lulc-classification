@@ -1,5 +1,8 @@
+"""Functions and classes uses in the normalization pre-processing of the dataset."""
+
 import json
 from dataclasses import dataclass
+from functools import cached_property
 from pathlib import Path
 from typing import Self
 
@@ -8,11 +11,14 @@ import numpy as np
 
 @dataclass(frozen=True)
 class NormalizationParams:
+    """Parameters used in the dataset normalization process."""
+
     low: np.ndarray
     high: np.ndarray
     median: np.ndarray
 
     def __post_init__(self) -> None:
+        """Instance values validation."""
         if not np.all(self.low.shape == self.high.shape == self.median.shape):
             raise ValueError("low, high, and median must have the same shape")
 
@@ -27,6 +33,7 @@ class NormalizationParams:
 
     @classmethod
     def from_json(cls, path: Path) -> Self:
+        """Create an instance from a JSON formatted file."""
         with path.open() as fp:
             params = json.load(fp)
 
@@ -38,14 +45,17 @@ class NormalizationParams:
 
     @property
     def num_channels(self) -> int:
+        """Return the number of channels used in the percentiles."""
         return self.low.shape[0]
 
     @property
     def percentile_range(self) -> np.ndarray:
+        """Return the difference between the high and low percentiles used in normalization."""
         return self.high - self.low
 
-    @property
+    @cached_property
     def normalized_median(self) -> np.ndarray:
+        """Normalize the median with the percentile values."""
         # Clip medians outliers to percentile boundaries.
         clipped_median = np.clip(self.median, self.low, self.high)
         return _scale(clipped_median, self)
@@ -64,6 +74,7 @@ def apply_normalization(
     patch: np.ndarray,
     params: NormalizationParams,
 ) -> np.ndarray:
+    """Apply the normalization to the patch."""
     if patch.ndim != 3:
         raise ValueError(
             f"patch must have 3 dimensions (C, H, W), obtained ({patch.ndim})"
