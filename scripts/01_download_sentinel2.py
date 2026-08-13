@@ -1,6 +1,6 @@
-"""
-Download all the required imagey from the Sentinel-2 mission database and create the associated
-all bands raster. The result of the execution is a series of scenes composed by all the
+"""Download imagey from the Sentinel-2 mission database and create the associated all bands raster.
+
+The result of the execution is a series of scenes composed by all the
 bands of interest resampled at the configured resolution.
 """
 
@@ -20,14 +20,15 @@ from lulc.geometry import create_window_and_transform_from_bbox
 from lulc.io import ALL_BANDS_SCENE_SUFFIX, GLOBAL_CONFIG, RAW_DATA_DIR
 from lulc.logger import setup_logging
 
-# We access the Copernicus DB so we need the env variable for the S3-like access.
-load_dotenv()
-
-setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
 
 
-def main():
+def main():  # noqa: D103
+    # We access the Copernicus DB so we need the env variable for the S3-like access.
+    load_dotenv()
+
+    setup_logging()
+
     # Create folder to store raw Setninel-2 scenes if it does not exist yet.
     RAW_DATA_DIR.mkdir(parents=True, exist_ok=True)
 

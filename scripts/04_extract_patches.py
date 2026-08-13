@@ -44,11 +44,12 @@ from lulc.io import (
 from lulc.logger import setup_logging
 from lulc.reporter.reporter import Reporter
 
-setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
 
 
 def main():  # noqa: D103
+    setup_logging()
+
     reporter = Reporter(REPORTS_DIR, load_reporter_config(REPORTER_CONFIG))
 
     cfg = load_config(GLOBAL_CONFIG)

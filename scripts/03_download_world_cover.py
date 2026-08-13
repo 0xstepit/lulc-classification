@@ -1,5 +1,6 @@
-"""
-Download the WorldCover data associated with the AOI. Since the WolrdCover uses a different tiling
+"""Download the WorldCover data associated with the AOI.
+
+Since the WolrdCover uses a different tiling
 system, the tiles intersectiong with our created seasonal raster are reprojected and merged to
 create labels raster.
 """
@@ -28,11 +29,12 @@ from lulc.io import (
 from lulc.logger import setup_logging
 from lulc.reporter.reporter import Reporter
 
-setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
 
 
-def main():
+def main():  # noqa: D103
+    setup_logging()
+
     cfg = load_config(GLOBAL_CONFIG)
 
     # Load and instantiate analysis reporter.

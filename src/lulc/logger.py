@@ -1,17 +1,23 @@
+"""Project logger configuration functions."""
+
 import logging
 
 from rich.logging import RichHandler
 
 
 def setup_logging(level: int = logging.INFO, force: bool = False) -> None:
-    """Common logging configuration handler. This function has to be called
-    before every logger instantiation in all the files that require logs.
+    """Configure root logging for an enrty point.
+
+    Call this once, from `main()`, before anything is logged and
+    library modules under `lulc/` must never call this.
 
     Parameters
     ----------
     level : int
         Level of the logger.
-
+    force : bool
+        Specifies if any existing handler attached to the root logger must
+        be removed or not.
     """
     logging.basicConfig(
         level=level,

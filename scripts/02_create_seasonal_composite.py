@@ -37,14 +37,14 @@ from lulc.logger import setup_logging
 from lulc.preprocessing.composites import create_seasonal_composite
 from lulc.reporter.reporter import Reporter
 
-# We access the Copernicus DB so we need the env variable for the S3-like access.
-load_dotenv()
-
-setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
 
 
 def main():  # noqa: D103
+    # We access the Copernicus DB so we need the env variable for the S3-like access.
+    load_dotenv()
+
+    setup_logging()
     cfg = load_config(GLOBAL_CONFIG)
 
     reporter = Reporter(REPORTS_DIR, load_reporter_config(REPORTER_CONFIG))

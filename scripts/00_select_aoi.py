@@ -1,5 +1,5 @@
-"""
-Run a preliminary investigation of the candidate Area Of Interests (AOI)s.
+"""Run a preliminary investigation of the candidate Area Of Interests (AOI)s.
+
 The result of this script is a `.json` file containing relevant information to select which AOI
 use in the project analysis.
 """
@@ -21,13 +21,14 @@ from lulc.logger import setup_logging
 from lulc.reporter.models import CandidateResult, PreliminaryAnalysisResult
 from lulc.reporter.reporter import Reporter
 
-setup_logging()
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
 
 REPORT_NAME = "preliminary_aoi_results.json"
 
 
-def main():
+def main():  # noqa: D103
+    setup_logging()
+
     # Load config and create the Sentinel client for CDSE.
     cfg = load_config(GLOBAL_CONFIG)
     client = StacClient(cfg)
@@ -49,9 +50,9 @@ def main():
         logger.info("starting scenes analysis")
         scene_counts = count_scenes_by_seasons(scenes)
 
-        mgrs = set(
-            [MGRS_PREFIX + tid for s in scenes if (tid := get_tile_id(s)) is not None]
-        )
+        mgrs = {
+            MGRS_PREFIX + tid for s in scenes if (tid := get_tile_id(s)) is not None
+        }
 
         candidate_result = CandidateResult(list(mgrs), bbox, scene_counts)
         preliminary_analysis_result.candidates_results[name] = candidate_result
