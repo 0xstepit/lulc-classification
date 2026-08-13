@@ -44,6 +44,6 @@ def load_reporter_config(file_path: Path) -> ReporterConfig:
     if writer == "json":
         file_config = JSONConfig(**_cfg.pop("json"))
     else:
-        raise ValueError(f"only JSON writer is supported")
+        raise ValueError("only JSON writer is supported")
 
     return ReporterConfig(writer=writer, dt=dt, file_config=file_config)

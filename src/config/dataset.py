@@ -36,7 +36,7 @@ class PatchesConfig:
             raise ValueError("normalization_percentiles must be [low, high]")
 
         low, high = self.normalization_percentiles
-        if not (0 <= low and high <= 100):
+        if not (low >= 0 and high <= 100):
             raise ValueError(
                 "normalization percentiles must be 0 <= low and high <= 100"
             )

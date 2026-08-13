@@ -112,7 +112,7 @@ class SeasonalStack:
         self._exit_stack = contextlib.ExitStack()
         self._sources: list[rasterio.DatasetReader] = []
 
-    def __enter__(self) -> "SeasonalStack":
+    def __enter__(self) -> SeasonalStack:
         self._sources = [
             self._exit_stack.enter_context(rasterio.open(f)) for f in self._files
         ]

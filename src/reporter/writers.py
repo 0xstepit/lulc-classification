@@ -1,6 +1,6 @@
 import dataclasses
 import json
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 import numpy as np
@@ -45,7 +45,7 @@ class JSONWriter:
             )
 
         if timestamped:
-            filename = f"{filename_path.stem}_{datetime.now(timezone.utc).strftime(self.dt_format)}{SUFFIX}"
+            filename = f"{filename_path.stem}_{datetime.now(UTC).strftime(self.dt_format)}{SUFFIX}"
 
         path = self.output_dir / filename
         payload = [

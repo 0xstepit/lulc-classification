@@ -22,7 +22,7 @@ class UNetConfig:
             raise ValueError(f"num_classes must be at least 2, got {self.num_classes}")
 
         if not self.encoder_channels:
-            raise ValueError(f"encoder_channels must be provided, received empty")
+            raise ValueError("encoder_channels must be provided, received empty")
 
         if any([chan < 1 for chan in self.encoder_channels]):
             raise ValueError(

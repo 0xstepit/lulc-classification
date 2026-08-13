@@ -19,8 +19,8 @@ __all__ = [
     "JSONConfig",
     "MSIConfig",
     "ReporterConfig",
-    "WorldCoverConfig",
     "StacConfig",
-    "load_reporter_config",
+    "WorldCoverConfig",
     "load_config",
+    "load_reporter_config",
 ]

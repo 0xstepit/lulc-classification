@@ -44,9 +44,9 @@ def main():
         bbox = create_bbox(GCS(point[1], point[0]), cfg.aoi.size)
 
         scenes = client.search_items(bbox, single_tile=cfg.aoi.single_tile)
-        logger.info(f"completed STAC request and collected scenes")
+        logger.info("completed STAC request and collected scenes")
 
-        logger.info(f"starting scenes analysis")
+        logger.info("starting scenes analysis")
         scene_counts = count_scenes_by_seasons(scenes)
 
         mgrs = set(
@@ -67,7 +67,7 @@ def main():
 
     logger.info(f"report saved in [{REPORT_NAME}]")
 
-    logger.info(f"completed preliminary analysis of area of interests")
+    logger.info("completed preliminary analysis of area of interests")
 
 
 if __name__ == "__main__":

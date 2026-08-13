@@ -53,7 +53,7 @@ def get_masked_bands(
         raise ValueError(f"scl_band_index {scl_band_index} is out of bands")
 
     if data.shape[0] == 1:
-        raise ValueError(f"provided array must have >1 dimension")
+        raise ValueError("provided array must have >1 dimension")
 
     # Since NaN is a float, we have to cast the raster data.
     bands = np.concatenate(

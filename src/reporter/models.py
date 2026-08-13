@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 from src.data.sentinel2 import SceneCounts
@@ -25,7 +25,7 @@ class ReportEntry:
 
     step: str
     data: Any
-    timestamp: str = datetime.now(timezone.utc).isoformat()
+    timestamp: str = datetime.now(UTC).isoformat()
     metadata: dict = field(default_factory=dict)
 
 
