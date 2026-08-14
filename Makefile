@@ -68,3 +68,6 @@ start-notebook: ## Start the Jupyter Notebook server
 
 data-size: ## Compute the size of the data folder
 	@du -sh ./data/
+
+revision: ## Print project revision
+	@uv run revision

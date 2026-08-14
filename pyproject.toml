@@ -33,6 +33,9 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/lulc"]
 
+[project.scripts]
+revision = "lulc.provenance:print_git_revision"
+
 [tool.ruff.lint]
 select = [
     "E4",
@@ -107,4 +110,5 @@ dev = [
     "geodatasets>=2026.5.1",
     "dvc>=3.67.1",
     "pytest-cov>=7.1.0",
+    "pyright>=1.1.411",
 ]
