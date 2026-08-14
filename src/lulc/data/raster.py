@@ -65,7 +65,11 @@ def create_seasonal_profile(
     # block_windows() always starts at (0, 0), so only trailing right/bottom
     # blocks are ever skipped, never the leading ones.
     profile.update(
-        count=num_channels, dtype="float32", width=new_width, height=new_height
+        count=num_channels,
+        dtype="float32",
+        width=new_width,
+        height=new_height,
+        nodata=np.nan,
     )
 
     return profile

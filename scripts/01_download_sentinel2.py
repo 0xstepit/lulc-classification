@@ -75,7 +75,10 @@ def main():  # noqa: D103
         blockysize=tiles_size,
     )
 
+    # Provider asset names to download, and the canonical channel names they land
+    # under.
     bands = cfg.msi.get_bands_list()
+    channels = cfg.msi.band_order
 
     for name, dates in cfg.composites.seasons.items():
         logger.info(f"starting all bands composition for season ({name})")
@@ -118,6 +121,11 @@ def main():  # noqa: D103
                         target_resolution,
                         item.assets,
                         bands,
+                        cfg=cfg,
+                        channels=channels,
+                        stage="raw_scene",
+                        stac_item=item.id,
+                        season=name,
                     )
                     tmp_file.rename(out_file)
                 except Exception:

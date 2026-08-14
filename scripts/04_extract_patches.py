@@ -17,6 +17,7 @@ import rasterio
 from rasterio.windows import Window
 
 from lulc.config import load_config, load_reporter_config
+from lulc.constants import SEASONS_ORDER, seasonal_band_names
 from lulc.data.labels import IGNORE_IDX, build_remap_lookup_table
 from lulc.data.patches import (
     LABELS_TO_SET,
@@ -42,6 +43,7 @@ from lulc.io import (
     WORLDCOVER_LABELS,
 )
 from lulc.logger import setup_logging
+from lulc.provenance import git_revision
 from lulc.reporter.reporter import Reporter
 
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
@@ -253,7 +255,30 @@ def main():  # noqa: D103
         "std": np.nanstd(stacked, axis=1).tolist(),
     }
 
-    NORMALIZATION_PARAMS.write_text(json.dumps(normalization, indent=4))
+    # A patch stacks the 13 composite channels over the four seasons, so the
+    # channel dimension reads season-major.
+    channel_names = [
+        f"{season}_{band}"
+        for season in SEASONS_ORDER
+        for band in seasonal_band_names(cfg.msi)
+    ]
+
+    NORMALIZATION_PARAMS.write_text(
+        json.dumps(
+            {
+                "normalization": normalization,
+                "seasons": SEASONS_ORDER,
+                # One entry per channel of a patch, in the same order as the
+                # statistics above: the 13 composite channels repeated over the
+                # four seasons. `band_order` is deliberately absent — it
+                # describes a downloaded scene, which still carries SCL, and the
+                # patches do not.
+                "channel_names": channel_names,
+                **git_revision(),
+            },
+            indent=4,
+        )
+    )
 
     PATCHES_METADATA.write_text(
         json.dumps(
@@ -264,6 +289,9 @@ def main():  # noqa: D103
                 "patch_size": patch_size,
                 "block_size": block_size,
                 "num_channels": num_channels,
+                "seasons": SEASONS_ORDER,
+                "channel_names": channel_names,
+                **git_revision(),
                 "label_mapping": {str(k): v for k, v in mapping.items()},
                 "class_names": {
                     str(index): cfg.worldcover.class_names[value]

@@ -34,6 +34,7 @@ from lulc.io import (
 )
 from lulc.logger import setup_logging
 from lulc.preprocessing.composites import create_seasonal_composite
+from lulc.provenance import stamp
 from lulc.reporter.reporter import Reporter
 
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
@@ -90,7 +91,14 @@ def main():  # noqa: D103
 
             with rasterio.open(out_file, "w", **profile) as dst:
                 # Add band names into the file.
-                dst.descriptions = tuple(seasonal_band_names(cfg.msi))
+                stamp(
+                    dst,
+                    cfg,
+                    seasonal_band_names(cfg.msi),
+                    stage="seasonal_composite",
+                    season=season_dir.name,
+                    n_scenes=str(len(files)),
+                )
 
                 # We safely assume that all sources have the same shape and are on the
                 # same region.

@@ -1,3 +1,5 @@
+"""Functions and classes to work with the Sentinel-2 mission data."""
+
 import logging
 from collections import Counter
 from dataclasses import dataclass
@@ -24,6 +26,7 @@ from urllib3.util.retry import Retry
 from lulc.config import Config
 from lulc.constants import SEASON_MONTHS
 from lulc.domain import BoundingBox, SceneCounts
+from lulc.provenance import stamp
 
 logger = logging.getLogger(__name__)
 
@@ -122,14 +125,16 @@ class ResamplingStrategy:
     method: Resampling = Resampling.nearest
 
     def get_factor(self) -> float:
+        """Return the strategy resampling factor."""
         return self.factor
 
     def get_method(self) -> Resampling:
+        """Return the strategy sampling method."""
         return self.method
 
 
 def count_scenes_by_seasons(items: list[pystac.Item]) -> SceneCounts:
-    """Counts the number of scene per each season.
+    """Count the number of scene per each season.
 
     Parameters
     ----------
@@ -168,7 +173,7 @@ def _log_retry(retry_state) -> None:
     before_sleep=_log_retry,
 )
 def get_data_profile(item_path: str | Path) -> Profile:
-    """Returns the rasterio Profile for the raster at the provided path.
+    """Return the rasterio Profile for the raster at the provided path.
 
     Parameters
     ----------
@@ -181,9 +186,7 @@ def get_data_profile(item_path: str | Path) -> Profile:
         The Rasterio profile of the item.
     """
     with rasterio.open(item_path) as src:
-        profile = src.profile
-
-    return profile
+        return src.profile
 
 
 @retry(
@@ -195,7 +198,7 @@ def get_data_profile(item_path: str | Path) -> Profile:
 def get_scene(
     item_path: str,
     window: Window,
-    resampling_strategy: ResamplingStrategy = ResamplingStrategy(),
+    resampling_strategy: ResamplingStrategy,
 ) -> np.ndarray:
     """Get the data associated with a scene with support for windowing and resampling."""
     resampling_factor = resampling_strategy.get_factor()
@@ -212,13 +215,12 @@ def get_scene(
         # An output shape is always created and used, so it should be ok to always set it here,
         # even with the original size.
         # https://github.com/rasterio/rasterio/blob/4e5bce88ea3c84b41a394244fe1cad6a5b8eb854/rasterio/_io.pyx#L544-L547
-        data = src.read(
+        return src.read(
             1,
             window=scaled_window,
             out_shape=(int(window.height), int(window.width)),
             resampling=resampling_method,
         )
-    return data
 
 
 def create_all_bands_scene(
@@ -228,9 +230,13 @@ def create_all_bands_scene(
     target_res: float,
     assets: dict,
     bands: list[str],
+    cfg: Config,
+    channels: list[str],
+    **extra: str,
 ) -> None:
-    """Create an raster downloading all the assets from the provided STAC catalog and store it on
-    disk. Bands with different resolution from the target one are resampled.
+    """Create a raster from the provided STAC assets and store it on disk.
+
+    Bands whose resolution differs from the target one are resampled.
 
     Parameters
     ----------
@@ -245,7 +251,14 @@ def create_all_bands_scene(
     assets : dict
         STAC assets to download.
     bands : list[str]
-        Bands to include in the raster.
+        Provider asset names to include, in write order.
+    cfg : Config
+        Project configuration, used to build the provenance tags.
+    channels : list[str]
+        Canonical channel names, aligned with `bands`. Written as the band
+        descriptions and recorded in the provenance tags.
+    **extra : str
+        Additional provenance tags, e.g. the originating STAC item id.
     """
     # Open a file in write mode with rasterio and the provided profile.
     with rasterio.open(out_file, "w", **profile) as dst:
@@ -267,6 +280,9 @@ def create_all_bands_scene(
 
             # Notice that bands are stored starting from 1 in GDAL.
             dst.write(data, idx + 1)
+
+        # Stamped once, after every band is written, rather than inside the loop.
+        stamp(dst, cfg, channels, **extra)
 
 
 def validate_scene_band(profile: Profile, data: np.ndarray) -> None:
@@ -299,25 +315,28 @@ def validate_scene_band(profile: Profile, data: np.ndarray) -> None:
 
 
 def get_resolution_from_band_name(band: str) -> float:
-    """Returns the resolution from the band name. This is a shortcut instead of looking at the
-    transform matric of the associated data because we know we are using Sentinel2 dataset.
-    This way, we don't have to read the dataset twice to know the resolution and perform pre-processing.
+    """Return the resolution from the band name.
+
+    This is a shortcut instead of looking at the transform matric of the associated data because
+    we know we are using Sentinel2 dataset. This way, we don't have to read the dataset twice
+    to know the resolution and perform pre-processing.
     """
     res_with_unit = band.split("_")[1]
     res = res_with_unit.replace("m", "")
 
     try:
         return float(res)
-    except ValueError:
+    except ValueError as e:
         raise ValueError(
             f"{band} does not contain resolution info in the form of <BAND_NAME>_<RES>m"
-        )
+        ) from e
 
 
 def get_tile_id(item: pystac.Item) -> str | None:
-    """Get the identifier of the tile associated with the provided STAC item. The function
-    is valid only for Sentinel-2 data. The function assumes that the ID is contained in the
-    STAC properties at the key `grid:code`.
+    """Get the identifier of the tile associated with the provided STAC item.
+
+    The function is valid only for Sentinel-2 data. The function assumes that the
+    ID is contained in the STAC properties at the key `grid:code`.
 
     Parameters
     ----------
@@ -339,6 +358,7 @@ def get_tile_id(item: pystac.Item) -> str | None:
 
 
 def filter_most_frequent_tile(items: list[pystac.Item]) -> list[pystac.Item]:
+    """Return the Items of the most frequent tile."""
     tile_counts = Counter(get_tile_id(item) for item in items)
     selected_tile = tile_counts.most_common(1)[0][0]
     return [item for item in items if get_tile_id(item) == selected_tile]
@@ -346,6 +366,7 @@ def filter_most_frequent_tile(items: list[pystac.Item]) -> list[pystac.Item]:
 
 def evaluate_candidate_validity(cfg: Config, scene_counts: SceneCounts) -> bool:
     """Check if an AOI is a valid area based on the provided result.
+
     The validity is based on the number of scenes available.
 
     Parameters
@@ -371,7 +392,9 @@ def evaluate_candidate_validity(cfg: Config, scene_counts: SceneCounts) -> bool:
     return True
 
 
+# TODO: here we should use the value in the Item asset.
 def rescale_reflectances(raster: np.ndarray):
+    """Rescale reflectances values to original range."""
     rescaled = raster.astype(np.float32)
     rescaled = np.where(rescaled == 0, np.nan, rescaled)
     # Clip negative reflectances.

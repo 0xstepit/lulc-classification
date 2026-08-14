@@ -9,6 +9,7 @@ import logging
 from pathlib import Path
 
 import geopandas as gpd
+import rasterio
 import rioxarray as rxr
 import xarray as xr
 
@@ -27,6 +28,7 @@ from lulc.io import (
     WORLDCOVER_LABELS,
 )
 from lulc.logger import setup_logging
+from lulc.provenance import stamp
 from lulc.reporter.reporter import Reporter
 
 logger = logging.getLogger(__name__ if __name__ != "__main__" else Path(__file__).stem)
@@ -77,6 +79,29 @@ def main():  # noqa: D103
     )
 
     labels.rio.to_raster(WORLDCOVER_LABELS)
+
+    with rasterio.open(WORLDCOVER_LABELS, "r+") as dst:
+        stamp(
+            dst,
+            cfg,
+            ["lulc_class"],
+            stage="worldcover_labels",
+            worldcover_version=cfg.worldcover.version,
+            worldcover_year=str(cfg.worldcover.year),
+            clas_legend="; ".join(
+                f"{k}={v}" for k, v in sorted(cfg.worldcover.class_names.items())
+            ),
+            class_mapping="; ".join(
+                f"{k}->{v}" for k, v in sorted(cfg.worldcover.class_mapping.items())
+            ),
+        )
+        dst.write_colormap(
+            1,
+            {
+                class_id: (*rgb, 0 if class_id == cfg.worldcover.nodata_value else 255)
+                for class_id, rgb in cfg.worldcover.class_to_color.items()
+            },
+        )
 
     report = compute_class_stats(WORLDCOVER_LABELS, cfg.worldcover.class_names)
 
