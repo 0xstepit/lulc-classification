@@ -23,23 +23,23 @@
 # %load_ext autoreload
 # %autoreload 2
 
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath(".."))
 
 # %%
-from src.io import PATCHES_DIR, PATCHES_METADATA, MULTISEASONAL_SCENE
+import json
 import pathlib
 import random
-import math
-import json
-import rasterio
 
 import matplotlib.colors as mcolors
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
 import numpy as np
+import rasterio
+
+from lulc.io import MULTISEASONAL_SCENE, PATCHES_DIR, PATCHES_METADATA
 
 # %%
 BACKGROUND_HEX = "#1a1a1a"
@@ -49,7 +49,7 @@ BACKGROUND_RGB = (0, 0, 0)
 # ## Block grid visualization
 
 # %%
-with open(PATCHES_METADATA, "r") as json_file:
+with open(PATCHES_METADATA) as json_file:
     file = json.load(json_file)
     grid_mask = np.array(file["keep_mask"])
     sets_mask = np.array(file["block_labels"])
@@ -75,7 +75,7 @@ pixel_sets.shape, pixel_mask.shape
 # %%
 rgb_indexes = np.array([1, 2, 3])
 
-with rasterio.open(MULTISEASONAL_SCENE, "r") as  src:
+with rasterio.open(MULTISEASONAL_SCENE, "r") as src:
     rgb_raster = src.read(rgb_indexes.tolist())
 
 # %% [markdown]
@@ -87,33 +87,39 @@ rgb.shape
 # %%
 dim_transposition = (1, 2, 0)
 rgb = np.transpose(rgb_raster, dim_transposition)
-rgb = rgb [:, :, ::-1]
+rgb = rgb[:, :, ::-1]
 rgb = rgb * 0.0001 - 0.1
 p2, p98 = np.nanpercentile(rgb, [2, 98])
-rgb = np.clip((rgb - p2)/ (p98 - p2), 0, 1)
+rgb = np.clip((rgb - p2) / (p98 - p2), 0, 1)
 
 # %%
 
 # %%
-fig, ax = plt.subplots(figsize=(8, 8), layout='constrained')
+fig, ax = plt.subplots(figsize=(8, 8), layout="constrained")
 _ = ax.imshow(rgb, alpha=1)
 
-colors = ['red', "blue", "green"]
+colors = ["red", "blue", "green"]
 cmap = mcolors.ListedColormap(colors)
 ax.imshow(pixel_sets, cmap=cmap, alpha=0.2)
 
-overlay = np.zeros((*pixel_mask_buffer.shape, 4))   # RGBA, all zeros = black, alpha=0
+overlay = np.zeros((*pixel_mask_buffer.shape, 4))  # RGBA, all zeros = black, alpha=0
 is_zero = pixel_mask_buffer == 0
 overlay[..., 3] = np.where(is_zero, 1.0, 0.0)
 ax.imshow(overlay)
 patches = [
-    mpatches.Patch(facecolor=(1, 0, 0, 0.2), label="train set", edgecolor='black', linewidth=1),
-    mpatches.Patch(facecolor=(0, 1, 0, 0.2), label="val set", edgecolor='black', linewidth=1),
-    mpatches.Patch(facecolor=(0, 0, 1, 0.2), label="test set", edgecolor='black', linewidth=1),
-    mpatches.Patch(facecolor="black",label="buffer", edgecolor='black', linewidth=2)
+    mpatches.Patch(
+        facecolor=(1, 0, 0, 0.2), label="train set", edgecolor="black", linewidth=1
+    ),
+    mpatches.Patch(
+        facecolor=(0, 1, 0, 0.2), label="val set", edgecolor="black", linewidth=1
+    ),
+    mpatches.Patch(
+        facecolor=(0, 0, 1, 0.2), label="test set", edgecolor="black", linewidth=1
+    ),
+    mpatches.Patch(facecolor="black", label="buffer", edgecolor="black", linewidth=2),
 ]
 fig.legend(
-    loc='outside lower center',
+    loc="outside lower center",
     handles=patches,
     frameon=False,
     fontsize=12,
@@ -122,7 +128,7 @@ fig.legend(
     columnspacing=1.2,
 )
 fig.suptitle(
-    f"Pixels buffering and dataset subsets",
+    "Pixels buffering and dataset subsets",
     fontsize=15,
     fontweight="bold",
 )
@@ -150,8 +156,13 @@ def get_set_labels_sample(sample_path: pathlib.PosixPath, n_samples: int):
     sample = list(sample_path.glob("*label.npy"))
     return random.sample(sample, n_samples)
 
-def features_from_labels_path(labels_path: list[pathlib.PosixPath]) -> list[pathlib.PosixPath]:
-    return [pathlib.Path(str(p).replace("_label.npy", "_feature.npy")) for p in labels_path]
+
+def features_from_labels_path(
+    labels_path: list[pathlib.PosixPath],
+) -> list[pathlib.PosixPath]:
+    return [
+        pathlib.Path(str(p).replace("_label.npy", "_feature.npy")) for p in labels_path
+    ]
 
 
 # %%
@@ -169,9 +180,10 @@ samples_labels_train[:3]
 def normalize_rgb(rgb):
     return tuple([x / 255 for x in rgb])
 
+
 WORLDCOVER_CLASSES = {
     0: ("No Data", (255, 255, 255)),
-    1: ("Tree cover", (0,100,0)),
+    1: ("Tree cover", (0, 100, 0)),
     2: ("Shrubland", (255, 187, 34)),
     3: ("Grassland", (255, 255, 76)),
     4: ("Cropland", (240, 150, 255)),
@@ -185,11 +197,19 @@ WORLDCOVER_CLASSES = {
 }
 
 n = len(WORLDCOVER_CLASSES.items())
-colors = [normalize_rgb(WORLDCOVER_CLASSES.get(i, ("", (0, 0, 0)))[1]) for i in range(n)]
+colors = [
+    normalize_rgb(WORLDCOVER_CLASSES.get(i, ("", (0, 0, 0)))[1]) for i in range(n)
+]
 cmap = mcolors.ListedColormap(colors)
 norm = mcolors.BoundaryNorm(boundaries=range(n + 1), ncolors=n)
 patches = [
-    mpatches.Patch(facecolor=normalize_rgb(color), label=f"{_label}", edgecolor='black', linewidth=2) for (_label, color) in WORLDCOVER_CLASSES.values()
+    mpatches.Patch(
+        facecolor=normalize_rgb(color),
+        label=f"{_label}",
+        edgecolor="black",
+        linewidth=2,
+    )
+    for (_label, color) in WORLDCOVER_CLASSES.values()
 ]
 
 # %%
@@ -197,8 +217,7 @@ fig, ax = plt.subplots(
     ncols=N_COLS,
     nrows=N_ROWS + 1,
     figsize=(4 * 4, 2 * N_ROWS),
-    gridspec_kw = {"height_ratios": [2] + [2] * N_ROWS},
-
+    gridspec_kw={"height_ratios": [2] + [2] * N_ROWS},
 )
 
 for a in ax[0]:

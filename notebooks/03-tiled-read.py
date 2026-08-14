@@ -22,15 +22,13 @@
 # %autoreload 2
 
 # %%
-import sys
-import pathlib
 import os
+import sys
 
 sys.path.append(os.path.abspath(".."))
 
 # %%
-from src.io import GLOBAL_CONFIG, RAW_DATA_DIR
-from src.config import load_config
+from lulc.io import RAW_DATA_DIR
 
 # %%
 root, target = next(
@@ -42,10 +40,9 @@ all_band_file = root / target
 all_band_file
 
 # %%
-import rasterio
-import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
+import numpy as np
+import rasterio
 
 # %% [markdown]
 # When opening a file with rasterio, we can get the [tiles size for the raster](https://rasterio.readthedocs.io/en/latest/topics/windowed-rw.html) with `src.block_shapes`.

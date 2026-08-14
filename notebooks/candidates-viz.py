@@ -33,11 +33,17 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 from shapely.geometry import Point
 
-from src.config import load_config
-from src.io import GLOBAL_CONFIG
+from lulc.config import load_config
+from lulc.config.viz import load_viz_config
+from lulc.io import GLOBAL_CONFIG, VIZ_CONFIG
+from lulc.viz.images import set_matplotlib_global_config, store_figure
 
 # %%
 cfg = load_config(GLOBAL_CONFIG)
+
+# %%
+viz_cfg = load_viz_config(VIZ_CONFIG)
+set_matplotlib_global_config(viz_cfg)
 
 # %%
 aois = cfg.aoi.candidates
@@ -65,23 +71,8 @@ aoi_points
 min(aoi_points["lat"]), max(aoi_points["lat"])
 
 # %%
-import matplotlib as mpl
-from cycler import cycler
+title = "Areas of interest (Europe)"
 
-cartograph = [
-    '#1B4965',  # ocean blue
-    '#2A9D8F',  # teal green
-    '#E9C46A',  # sand
-    '#F4A261',  # clay orange
-    '#E76F51',  # terracotta
-    '#6A4C93',  # plum violet
-    '#5C80BC',  # slate blue
-    '#606C38',  # olive
-]
-
-mpl.rcParams['axes.prop_cycle'] = cycler(color=cartograph)
-
-# %%
 fig, ax = plt.subplots(
     ncols=2,
     figsize=(12, 6),
@@ -107,6 +98,9 @@ ax[1].set_xlim(min(aoi_points["lon"]) - margin, max(aoi_points["lon"]) + margin)
 ax[1].set_xlabel("longitude [deg]")
 ax[1].set_ylabel("latitude [deg]")
 
-_ = fig.suptitle(f"Areas of interest (Europe)", fontsize=15, fontweight="bold", y=0.9)
+# Add some space as fraction of the entire width.
+fig.get_layout_engine().set(wspace=0.1)
 
-fig.savefig("../assets/aois.png")
+_ = fig.suptitle(title, fontweight="bold", y=0.9)
+
+store_figure(title)

@@ -24,12 +24,11 @@
 
 # %%
 import os
-import pathlib
 import sys
 
 sys.path.append(os.path.abspath(".."))
 
-from src.io import RAW_DATA_DIR
+from lulc.io import RAW_DATA_DIR
 
 # %%
 counter = 0
@@ -63,7 +62,7 @@ with rasterio.open(root / target, "r") as src:
 data.shape
 
 # %%
-from src.config import load_config
+from lulc.config import load_config
 
 # %%
 cfg = load_config()

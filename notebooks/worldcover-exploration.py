@@ -20,10 +20,9 @@
 # %autoreload 2
 
 # %%
-import geopandas as gpd
-import requests
-from tqdm.auto import tqdm
 from pathlib import Path
+
+import geopandas as gpd
 
 # %% [markdown]
 # We can use [Natural Earth](https://www.naturalearthdata.com/about/), a public domain map dataset available at scales to get vector data about a region of interest.
@@ -131,7 +130,6 @@ def get_worldcover_url(tile_id: str) -> str:
 
 # %%
 import rioxarray
-import matplotlib.pyplot as plt
 
 url = get_worldcover_url("N36W009")
 
@@ -150,7 +148,6 @@ import numpy as np
 np.unique(aaa)
 
 # %%
-from urllib.parse import urlparse
 import os
 
 # %%

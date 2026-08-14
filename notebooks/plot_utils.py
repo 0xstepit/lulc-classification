@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-from src.io import IMGS_DIR
+from lulc.io import IMGS_DIR
 
 IMGS_DIR.mkdir(parents=True, exist_ok=True)
 

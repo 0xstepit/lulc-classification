@@ -32,8 +32,6 @@ import numpy as np
 import rasterio
 from rasterio import transform, warp
 from rasterio.enums import Resampling
-from rasterio.profiles import Profile
-from rasterio.transform import rowcol, xy
 from rasterio.windows import from_bounds
 
 # %% [markdown]

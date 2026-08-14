@@ -22,22 +22,22 @@
 # %autoreload 2
 
 # %%
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath(".."))
 
 # %%
-from src.io import WORLDCOVER_LABELS, GLOBAL_CONFIG
-import rasterio
-from src.config import load_config
-from src.viz.images import store_figure
-from src.viz.colors import normalize_rgb
-import numpy as np
-
 import matplotlib.colors as mcolors
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
+import numpy as np
+import rasterio
+
+from lulc.config import load_config
+from lulc.io import GLOBAL_CONFIG, WORLDCOVER_LABELS
+from lulc.viz.colors import normalize_rgb
+from lulc.viz.images import store_figure
 
 # %%
 config = load_config(GLOBAL_CONFIG)
@@ -64,47 +64,46 @@ NUM_CLASSES = len(config.worldcover.class_names)
 
 colors = [normalize_rgb(ctc.get(idx, (0, 0, 0))) for idx in range(NUM_CLASSES)]
 cmap = mcolors.ListedColormap(colors)
-norm = mcolors.BoundaryNorm(boundaries=range(NUM_CLASSES+1), ncolors=NUM_CLASSES)
+norm = mcolors.BoundaryNorm(boundaries=range(NUM_CLASSES + 1), ncolors=NUM_CLASSES)
 
 patches = [
     mpatches.Patch(
         facecolor=normalize_rgb(ctc.get(idx, (0, 0, 0))),
-        label=f"{cn.get(idx, (""))}",
+        label=f"{cn.get(idx, (''))}",
         edgecolor="black",
-        linewidth=1
-    ) for idx in range(NUM_CLASSES)
+        linewidth=1,
+    )
+    for idx in range(NUM_CLASSES)
 ]
 
 # %%
 title = f"WorldCover composite {config.aoi.selected.name.title()}"
 
-fig, ax = plt.subplots(figsize=(8, 8), layout='constrained')
+fig, ax = plt.subplots(figsize=(8, 8), layout="constrained")
 
 ax.imshow(labels[0, :, :], cmap=cmap, norm=norm)
 
 # Suptitle centers on the entire figure
-#plt.suptitle(
+# plt.suptitle(
 #    title,
 #    fontsize=18,
 #    fontweight="bold",
 #    color="black"
-#)
-ax.set_title(
-    title,
-    fontsize=18,
-    fontweight="bold",
-    color="black",
-    pad=20
-)
+# )
+ax.set_title(title, fontsize=18, fontweight="bold", color="black", pad=20)
 fig.legend(
-# Without the layout=contrained allows to set it below the figure
-#    handles=patches, loc="upper center", ncols=NUM_CLASSES / 3, bbox_to_anchor=(0.5, -0.01), frameon=False, fontsize=9
-    handles=patches, ncols=1, loc="outside right center", frameon=False, fontsize=9
+    # Without the layout=contrained allows to set it below the figure
+    #    handles=patches, loc="upper center", ncols=NUM_CLASSES / 3, bbox_to_anchor=(0.5, -0.01), frameon=False, fontsize=9
+    handles=patches,
+    ncols=1,
+    loc="outside right center",
+    frameon=False,
+    fontsize=9,
 )
 ax.axis("off")
 
 store_figure(title)
 
-#plt.tight_layout(pad=1.5, h_pad=1, w_pad=1)
+# plt.tight_layout(pad=1.5, h_pad=1, w_pad=1)
 
 # %%

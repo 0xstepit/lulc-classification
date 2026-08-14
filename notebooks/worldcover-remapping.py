@@ -23,16 +23,16 @@
 # %load_ext autoreload
 # %autoreload 2
 
-import sys
-import pathlib
 import os
+import sys
 
 sys.path.append(os.path.abspath(".."))
 
 # %%
-from src.io import WORLDCOVER_LABELS
-import rasterio
 import numpy as np
+import rasterio
+
+from lulc.io import WORLDCOVER_LABELS
 
 # %%
 with rasterio.open(WORLDCOVER_LABELS) as labels_src:

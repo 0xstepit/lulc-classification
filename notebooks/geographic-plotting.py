@@ -26,7 +26,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import rasterio
 from rasterio import transform
-from rasterio.transform import xy
 
 # %%
 href_andalusia = "s3://eodata/Sentinel-2/MSI/L2A_N0500/2022/12/27/S2B_MSIL2A_20221227T111359_N0510_R137_T30STG_20240807T153102.SAFE/GRANULE/L2A_T30STG_A030336_20221227T111439/IMG_DATA/R10m/T30STG_20221227T111359_B02_10m.jp2"
@@ -63,7 +62,7 @@ vmin, vmax = np.percentile(data, [2, 98])
 fig, ax = plt.subplots(ncols=2, figsize=(12, 8))
 
 im = ax[0].imshow(data, cmap="viridis", vmin=vmin, vmax=vmax)
-ax[0].set_title(f"Array axis", size="large")
+ax[0].set_title("Array axis", size="large")
 ax[0].set_xlabel("Longitude [array position]")
 ax[0].set_ylabel("Latitude [array position]")
 

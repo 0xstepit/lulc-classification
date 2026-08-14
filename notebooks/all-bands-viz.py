@@ -28,7 +28,7 @@ import sys
 
 sys.path.append(os.path.abspath(".."))
 
-from src.io import RAW_DATA_DIR
+from lulc.io import RAW_DATA_DIR
 
 # %%
 file_name = (
@@ -86,7 +86,7 @@ def robust_plot(data, bounds: list | None = None) -> None:
 robust_plot(data[9], bounds)
 
 # %%
-from src.config import load_config
+from lulc.config import load_config
 
 cfg = load_config()
 

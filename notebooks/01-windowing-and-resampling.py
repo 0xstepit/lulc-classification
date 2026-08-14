@@ -26,8 +26,7 @@
 # Configure the .env variable with your authentication values.
 from dotenv import load_dotenv
 
-load_dotenv();
-
+load_dotenv()
 # %%
 from dataclasses import dataclass
 
@@ -36,8 +35,6 @@ import numpy as np
 import rasterio
 from rasterio import transform, warp
 from rasterio.enums import Resampling
-from rasterio.profiles import Profile
-from rasterio.transform import rowcol, xy
 from rasterio.windows import from_bounds
 
 # %% [markdown]
@@ -88,6 +85,7 @@ bounds_tile_deg
 # %% [markdown]
 # Let's first visualize the original tile:
 
+
 # %%
 def robust_plot(data, bounds) -> None:
     """
@@ -117,6 +115,7 @@ robust_plot(data_tile, bounds_tile_list)
 
 # %% [markdown]
 # Now we want to only download the cropped AOI from the STAC database. When our computational resources are limited this helps us in reducing the required burden.
+
 
 # %%
 @dataclass

@@ -7,9 +7,9 @@
 #       format_version: '1.3'
 #       jupytext_version: 1.19.3
 #   kernelspec:
-#     display_name: lulc-classification
+#     display_name: geospatial-misc
 #     language: python
-#     name: lulc-classification
+#     name: geospatial-misc
 # ---
 
 # %% [markdown]
@@ -22,20 +22,19 @@
 # %autoreload 2
 
 # %%
-import sys
-import pathlib
 import os
+import sys
 
 sys.path.append(os.path.abspath(".."))
 
 # %%
-import rasterio
-import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-from src.io import SEASONAL_SCENES, IMGS_DIR, GLOBAL_CONFIG
-from src.config import load_config
+import numpy as np
+import rasterio
 from plot_utils import store_figure
+
+from lulc.config import load_config
+from lulc.io import GLOBAL_CONFIG, IMGS_DIR, SEASONAL_SCENES
 
 # %%
 cfg = load_config(GLOBAL_CONFIG)
@@ -139,12 +138,7 @@ for i, _indices in enumerate(indices_per_season):
     cbar.ax.yaxis.set_tick_params(color="black")
     plt.setp(cbar.ax.yaxis.get_ticklabels(), color="black")
 
-plt.suptitle(
-    title,
-    fontsize=15,
-    fontweight="bold",
-    color="black"
-)
+plt.suptitle(title, fontsize=15, fontweight="bold", color="black")
 
 plt.tight_layout(pad=1.5, h_pad=1, w_pad=1)
 
@@ -178,16 +172,11 @@ for i, _indices in enumerate(indices_per_season):
     cbar.ax.yaxis.set_tick_params(color="black")
     plt.setp(cbar.ax.yaxis.get_ticklabels(), color="black")
 
-plt.suptitle(
-    title,
-    fontsize=15,
-    fontweight="bold",
-    color="black"
-)
+plt.suptitle(title, fontsize=15, fontweight="bold", color="black")
 
 plt.tight_layout(pad=1.5, h_pad=1, w_pad=1)
 
-#store_figure(title)
+# store_figure(title)
 
 # %% [markdown]
 # Why is the NDVI compressed in such a small range without negative values?
@@ -213,12 +202,7 @@ for i, _indices in enumerate(indices_per_season):
     cbar.ax.yaxis.set_tick_params(color="black")
     plt.setp(cbar.ax.yaxis.get_ticklabels(), color="black")
 
-plt.suptitle(
-    title,
-    fontsize=15,
-    fontweight="bold",
-    color="black"
-)
+plt.suptitle(title, fontsize=15, fontweight="bold", color="black")
 
 plt.tight_layout(pad=1.5, h_pad=1, w_pad=1)
 
@@ -242,16 +226,11 @@ for i, _indices in enumerate(indices_per_season):
     cbar.ax.yaxis.set_tick_params(color="black")
     plt.setp(cbar.ax.yaxis.get_ticklabels(), color="black")
 
-plt.suptitle(
-    title,
-    fontsize=15,
-    fontweight="bold",
-    color="black"
-)
+plt.suptitle(title, fontsize=15, fontweight="bold", color="black")
 
 plt.tight_layout(pad=1.5, h_pad=1, w_pad=1)
 
-#store_figure(title)
+# store_figure(title)
 
 # %%
 title = f"NDBI seasonal median composite {cfg.aoi.selected.name.title()}"
@@ -270,12 +249,7 @@ for i, _indices in enumerate(indices_per_season):
     cbar.ax.yaxis.set_tick_params(color="black")
     plt.setp(cbar.ax.yaxis.get_ticklabels(), color="black")
 
-plt.suptitle(
-    title,
-    fontsize=15,
-    fontweight="bold",
-    color="black"
-)
+plt.suptitle(title, fontsize=15, fontweight="bold", color="black")
 
 plt.tight_layout(pad=1.5, h_pad=1, w_pad=1)
 
@@ -299,13 +273,8 @@ for i, _indices in enumerate(indices_per_season):
     cbar.ax.yaxis.set_tick_params(color="black")
     plt.setp(cbar.ax.yaxis.get_ticklabels(), color="black")
 
-plt.suptitle(
-    title,
-    fontsize=15,
-    fontweight="bold",
-    color="black"
-)
+plt.suptitle(title, fontsize=15, fontweight="bold", color="black")
 
 plt.tight_layout(pad=1.5, h_pad=1, w_pad=1)
 
-#store_figure(title)
+# store_figure(title)

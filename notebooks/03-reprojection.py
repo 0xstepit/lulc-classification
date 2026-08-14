@@ -23,24 +23,22 @@
 
 # %%
 import os
-import pathlib
 import sys
 
 sys.path.append(os.path.abspath(".."))
 
-import rioxarray as rxr
-from rioxarray.merge import merge_arrays
-from rasterio.enums import Resampling
-import numpy as np
-import xarray as xr
-from sklearn.metrics import confusion_matrix
-
 import matplotlib.colors as mcolors
 import matplotlib.patches as mpatches
 import matplotlib.pyplot as plt
+import numpy as np
+import rioxarray as rxr
+import xarray as xr
+from rasterio.enums import Resampling
+from rioxarray.merge import merge_arrays
+from sklearn.metrics import confusion_matrix
 
-from src.io import WORLDCOVER_RAW_DIR, MULTISEASONAL_SCENE_DIR
-from src.data.sentinel2 import get_data_profile
+from lulc.data.sentinel2 import get_data_profile
+from lulc.io import MULTISEASONAL_SCENE_DIR, WORLDCOVER_RAW_DIR
 
 # %% [markdown]
 # Get the file paths of two `.tif` images associated with the WorldCover dataset:
@@ -55,7 +53,7 @@ list(files)
 # Now we get the profile information from the composite image we will use as the feture raster:
 
 # %%
-profile = get_data_profile(str(MULTISEASONAL_SCENE_DIR/"composite.tif"))
+profile = get_data_profile(str(MULTISEASONAL_SCENE_DIR / "composite.tif"))
 profile
 
 # %%
@@ -103,7 +101,9 @@ type(file_N36W006.variable._data), file_N36W006.chunks
 # We can now investigate how to reproject the WorldCover categorical tiles on the specific area of interest we care about defined by the multi seasonal composite raster:
 
 # %%
-composite = rxr.open_rasterio(MULTISEASONAL_SCENE_DIR / "composite.tif", chunks=True, lock=False)
+composite = rxr.open_rasterio(
+    MULTISEASONAL_SCENE_DIR / "composite.tif", chunks=True, lock=False
+)
 
 # %%
 composite.rio.crs
@@ -133,7 +133,9 @@ file_N36W006_reprojected.rio.bounds()
 # We can finally combine the two reprojected raster into a single raster:
 
 # %%
-wc = xr.where(file_N36W009_reprojected != 0, file_N36W009_reprojected, file_N36W006_reprojected)
+wc = xr.where(
+    file_N36W009_reprojected != 0, file_N36W009_reprojected, file_N36W006_reprojected
+)
 
 # %%
 wc
@@ -147,13 +149,17 @@ wc
 # We can also adopt the first clip and then reproject approach. This way, we will be able to merge the WorldCover tiles, making the process easier if there are more than 2 rasters, since using the `where` method would not be that easy in this case.
 
 # %%
-file_N36W006_clipped = file_N36W006.rio.reproject(composite.rio.crs).rio.clip_box(*composite.rio.bounds())
+file_N36W006_clipped = file_N36W006.rio.reproject(composite.rio.crs).rio.clip_box(
+    *composite.rio.bounds()
+)
 
 # %%
 file_N36W006_clipped.rio.bounds()
 
 # %%
-file_N36W009_clipped = file_N36W009.rio.reproject(composite.rio.crs).rio.clip_box(*composite.rio.bounds())
+file_N36W009_clipped = file_N36W009.rio.reproject(composite.rio.crs).rio.clip_box(
+    *composite.rio.bounds()
+)
 
 # %% [markdown]
 # The merge order is important like for the `where` method.
@@ -168,7 +174,11 @@ wc_merged = wc_merged.rio.reproject_match(composite)
 wc_merged
 
 # %%
-np.sum(wc_merged != wc).values, np.sum(wc_merged == wc).values, wc_merged.size == wc.size
+(
+    np.sum(wc_merged != wc).values,
+    np.sum(wc_merged == wc).values,
+    wc_merged.size == wc.size,
+)
 
 # %%
 np.sum(wc_merged != wc).values / wc_merged.size * 100
@@ -191,7 +201,7 @@ np.sum(wc_merged_2 != wc).values / wc_merged_2.size * 100
 # %%
 WORLDCOVER_CLASSES = {
     0: ("No Data", (255, 255, 255)),
-    1: ("Tree cover", (0,100,0)),
+    1: ("Tree cover", (0, 100, 0)),
     2: ("Shrubland", (255, 187, 34)),
     3: ("Grassland", (255, 255, 76)),
     4: ("Cropland", (240, 150, 255)),
@@ -228,7 +238,15 @@ ax.set_title("Approach 1 vs 2 agreement")
 for i in range(len(present_classes)):
     for j in range(len(present_classes)):
         if cm[i, j]:
-            ax.text(j, i, f"{cm[i, j]:,}", ha="center", va="center", fontsize=8, color="black")
+            ax.text(
+                j,
+                i,
+                f"{cm[i, j]:,}",
+                ha="center",
+                va="center",
+                fontsize=8,
+                color="black",
+            )
 fig.colorbar(im, ax=ax, shrink=0.8)
 
 # %% [markdown]
@@ -245,7 +263,10 @@ disagree = (wc != wc_merged).squeeze()
 disagree.sum()
 
 # %%
-fig, ax, = plt.subplots(figsize=(8, 8))
+(
+    fig,
+    ax,
+) = plt.subplots(figsize=(8, 8))
 ax.imshow(disagree, cmap="Reds", interpolation="nearest")
 ax.set_title(f"A vs B disagreement - {float(disagree.mean()) * 100:.2f}% of pixels")
 ax.axis("off")
@@ -256,6 +277,7 @@ ax.axis("off")
 #
 # We will now visualize the WorldCover dataset covering our AOI by using the same colors used in their website:
 
+
 # %%
 def normalize_rgb(rgb):
     return tuple([x / 255 for x in rgb])
@@ -263,15 +285,31 @@ def normalize_rgb(rgb):
 
 # %%
 n = len(WORLDCOVER_CLASSES.items())
-colors = [normalize_rgb(WORLDCOVER_CLASSES.get(i, ("", (0, 0, 0)))[1]) for i in range(n)]
+colors = [
+    normalize_rgb(WORLDCOVER_CLASSES.get(i, ("", (0, 0, 0)))[1]) for i in range(n)
+]
 cmap = mcolors.ListedColormap(colors)
 norm = mcolors.BoundaryNorm(boundaries=range(n + 1), ncolors=n)
 patches = [
-    mpatches.Patch(color=normalize_rgb(color), label=f"{_label}") for (_label, color) in WORLDCOVER_CLASSES.values()
+    mpatches.Patch(color=normalize_rgb(color), label=f"{_label}")
+    for (_label, color) in WORLDCOVER_CLASSES.values()
 ]
 
 # %%
-CLASS_MAPPING = { 0: 0, 10: 1, 20: 2, 30: 3, 40: 4, 50: 5, 60: 6, 70: 7, 80: 8, 90: 9, 95: 10, 100: 11 }
+CLASS_MAPPING = {
+    0: 0,
+    10: 1,
+    20: 2,
+    30: 3,
+    40: 4,
+    50: 5,
+    60: 6,
+    70: 7,
+    80: 8,
+    90: 9,
+    95: 10,
+    100: 11,
+}
 
 # %% [markdown]
 # We first need to change the classes used by WorldCover into sequential class numbers starting from 0 to 11:
@@ -295,7 +333,7 @@ np.unique(wc_merged_reclassed), len(np.unique(wc_merged_reclassed))
 # Our area of interest does not contain all the classes.
 
 # %%
-fig, ax = plt.subplots(ncols=2, figsize=(14, 6),  gridspec_kw={"width_ratios": [3, 2]})
+fig, ax = plt.subplots(ncols=2, figsize=(14, 6), gridspec_kw={"width_ratios": [3, 2]})
 
 wc_reclassed.plot(ax=ax[0], cmap=cmap, norm=norm)
 ax[0].set_title("WorldCover raster over AOI", fontweight="bold")
@@ -315,7 +353,7 @@ ax[1].axis("off")
 _wc = rxr.open_rasterio("../data/labels/worldcover_classes.tif")
 
 # %%
-fig, ax = plt.subplots(ncols=2, figsize=(14, 6),  gridspec_kw={"width_ratios": [3, 2]})
+fig, ax = plt.subplots(ncols=2, figsize=(14, 6), gridspec_kw={"width_ratios": [3, 2]})
 
 _wc.plot(ax=ax[0], cmap=cmap, norm=norm)
 ax[0].set_title("WorldCover raster over AOI", fontweight="bold")

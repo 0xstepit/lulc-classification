@@ -28,14 +28,14 @@ import sys
 sys.path.append(os.path.abspath(".."))
 
 # %%
-from pathlib import Path
 
 import numpy as np
-from src.io import SEASONAL_SCENES, GLOBAL_CONFIG, WORLDCOVER_LABELS
-from src.config import load_config
-from src.constants import  seasonal_band_names, SEASONS_ORDER
 import rasterio
 import rioxarray as rxr
+
+from lulc.config import load_config
+from lulc.constants import SEASONS_ORDER, seasonal_band_names
+from lulc.io import GLOBAL_CONFIG, SEASONAL_SCENES, WORLDCOVER_LABELS
 
 # %%
 cfg = load_config(GLOBAL_CONFIG)
@@ -134,7 +134,9 @@ labels.attrs["legend"]
 # %%
 legend = {
     int(k): v
-    for k, v in (line.split(maxsplit=1) for line in labels.attrs["legend"].strip().splitlines())
+    for k, v in (
+        line.split(maxsplit=1) for line in labels.attrs["legend"].strip().splitlines()
+    )
 }
 legend
 
@@ -149,7 +151,9 @@ new_legend
 "\n".join([f"{k} {v}" for k, v in new_legend.items()])
 
 # %%
-labels = labels.rio.update_attrs({"legend": "\n".join([f"{k} {v}" for k, v in new_legend.items()])})
+labels = labels.rio.update_attrs(
+    {"legend": "\n".join([f"{k} {v}" for k, v in new_legend.items()])}
+)
 
 # %%
 labels.attrs["legend"]
