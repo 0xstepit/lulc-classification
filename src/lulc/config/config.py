@@ -1,9 +1,12 @@
+"""Configuration structures and loaders."""
+
 import tomllib
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Self
 
 from lulc.config.dataset import PatchesConfig
+from lulc.constants import SCL_BAND_NAME
 from lulc.domain import BoundingBox
 
 
@@ -50,6 +53,7 @@ class AoiConfig:
     single_tile: bool = True
 
     def __post_init__(self) -> None:
+        """Perform validation on the instance values."""
         if len(self.candidates) == 0:
             raise ValueError("There should be at least one area of interest specified")
 
@@ -95,6 +99,7 @@ class StacConfig:
     )  # needed because frozen class
 
     def __post_init__(self) -> None:
+        """Perform validation on the instance values."""
         if self.url == "":
             raise ValueError("STAC endpoint URL cannot be empty")
 
@@ -108,59 +113,128 @@ class IndicesConfig:
 
     Attributes
     ----------
-    bands_to_channels : dictionary mapping the band name to the position in the scene channel
-                        dimension for each indices considered.
+    bands_to_channels : map from the band name to the position in
+    the scene channel dimension for each indices considered.
     """
 
     bands_to_channels: dict[str, dict[str, int]]
 
     def get_channel(self, index: str, band: str) -> int:
-        """Returns the channel associated with the provided band and index."""
+        """Return the channel associated with the provided band and index."""
         return self.bands_to_channels[index][band]
 
+    @classmethod
+    def from_band_names(
+        cls, indices: dict[str, dict[str, str]], msi: MSIConfig
+    ) -> Self:
+        """Resolve canonical band names into channel positions.
 
-@dataclass
+        Parameters
+        ----------
+        indices : dict[str, dict[str, str]]
+            Index name -> {role: canonical band name}. The role is the argument
+            the index formula expects, e.g. NDBI consumes `swir` and `nir`, and
+            its `swir` role is filled by the `swir1` band.
+        msi : MSIConfig
+            Supplies the canonical channel order.
+
+        Returns
+        -------
+        IndicesConfig
+            The configuration with every band name resolved to its channel.
+        """
+        return cls(
+            bands_to_channels={
+                index: {role: msi.channel_index(band) for role, band in roles.items()}
+                for index, roles in indices.items()
+            }
+        )
+
+
+@dataclass(frozen=True)
 class MSIConfig:
-    """Configuraion class for the MultiSpectral images of the Sentinel2 mission.
+    """Configuration for the MultiSpectral Instrument of the Sentinel-2 mission.
 
     Attributes
     ----------
-    target_resolution : the resolution used in the generation of raster.
-    bands : maps each band name to the associated original resolution.
-    scl_mask_classes : the classes in the SCL band to mask out
-    scl_band_index : the position in the bands of the SCL mask in the downloaded scenes.
-    bands_names : a map between the band names used in the project, and the names used
-    in the data provider.
+    target_resolution : resolution, in metres, every band is resampled to.
+    scl_mask_classes : Scene Classification Layer classes to mask out.
+    band_order : canonical band names, in the order channels are written.
+    bands : native resolution -> {provider asset name: canonical band name}.
     """
 
     target_resolution: int
     scl_mask_classes: list[int]
-    scl_band_index: int
-    bands: dict
-    band_names: dict
+    band_order: list[str]
+    bands: dict[int, dict[str, str]]
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
+        """Perform validation on the instance values."""
+        if len(set(self.band_order)) != len(self.band_order):
+            raise ValueError(f"band_order contains duplicates: {self.band_order}")
 
-        if self.target_resolution not in list(self.bands.keys()):
+        if self.target_resolution not in self.bands:
             raise ValueError(
                 f"target resolution {self.target_resolution} is not in the analysed bands"
             )
 
-        if len(self.band_names.keys()) != self.num_bands:
+        mapped = {name for assets in self.bands.values() for name in assets.values()}
+        declared = set(self.band_order)
+        if mapped != declared:
             raise ValueError(
-                "band names is different than number of bands, "
-                f"expected {self.num_bands} but got {len(self.band_names.keys())}"
+                "band_order and the provider band mapping must describe the same "
+                f"bands; only in band_order: {sorted(declared - mapped)}, "
+                f"only in bands: {sorted(mapped - declared)}"
             )
+
+        if SCL_BAND_NAME not in declared:
+            raise ValueError(f"band_order must contain the {SCL_BAND_NAME!r} band")
 
     @property
     def num_bands(self) -> int:
         """Total number of Sentinel-2 bands across every resolution."""
-        return sum(len(bands) for bands in self.bands.values())
+        return len(self.band_order)
 
-    # TODO: make it a property
+    @property
+    def band_names(self) -> dict[str, str]:
+        """Provider asset name to canonical band name, flattened over resolutions."""
+        return {
+            asset: name
+            for assets in self.bands.values()
+            for asset, name in assets.items()
+        }
+
+    @property
+    def scl_band_index(self) -> int:
+        """Channel index of the Scene Classification Layer in a downloaded scene."""
+        return self.channel_index(SCL_BAND_NAME)
+
+    def channel_index(self, band: str) -> int:
+        """Return the channel index of a canonical band name."""
+        try:
+            return self.band_order.index(band)
+        except ValueError:
+            raise ValueError(
+                f"unknown band {band!r}; configured bands are {self.band_order}"
+            ) from None
+
     def get_bands_list(self) -> list[str]:
-        """Returns the sorted list of Sentinel-2 bands used in the analysis."""
-        return sorted([band for res in self.bands for band in self.bands[res]])
+        """Return the provider asset names, ordered by the canonical channel order."""
+        asset_by_name = {name: asset for asset, name in self.band_names.items()}
+        return [asset_by_name[name] for name in self.band_order]
+
+    def reference_asset(self, resolution: int) -> str:
+        """Return any provider asset at the given native resolution.
+
+        Used to probe a rasterio profile before a scene is assembled, so which
+        asset it is does not matter as long as the resolution matches.
+        """
+        if resolution not in self.bands:
+            raise ValueError(
+                f"no bands configured at resolution {resolution}; "
+                f"available: {sorted(self.bands)}"
+            )
+        return next(iter(self.bands[resolution]))
 
 
 @dataclass(frozen=True)
@@ -184,6 +258,7 @@ class CompositesConfig:
     skip_partial_blocks: bool
 
     def __post_init__(self):
+        """Perform validation on the instance values."""
         for name, dates in self.seasons.items():
             if len(dates) != 2:
                 raise ValueError(f"season {name} should have exactly two dates")
@@ -191,6 +266,8 @@ class CompositesConfig:
 
 @dataclass(frozen=True)
 class WorldCoverConfig:
+    """Configuration class for the WorldCover data."""
+
     url: str
     grid_url: str
     version: str
@@ -201,6 +278,7 @@ class WorldCoverConfig:
     class_names: dict[int, str]
 
     def __post_init__(self):
+        """Perform validation on the instance values."""
         # We need to bypass the frozen class because TOML keys are always string:
         object.__setattr__(
             self,
@@ -221,6 +299,8 @@ class WorldCoverConfig:
 
 @dataclass(frozen=True)
 class Config:
+    """Project configuration class."""
+
     aoi: AoiConfig
     stac: StacConfig
     msi: MSIConfig
@@ -246,7 +326,7 @@ def load_config(file_path: Path) -> Config:
     if not file_path.exists():
         raise FileNotFoundError(f"file {file_path} does not exists")
 
-    with open(file_path, "rb") as f:
+    with Path.open(file_path, "rb") as f:
         _cfg = tomllib.load(f)
 
         aoi = AoiConfig.from_dict(_cfg.pop("aoi"))
@@ -257,8 +337,9 @@ def load_config(file_path: Path) -> Config:
         msi_data["bands"] = {int(k): v for k, v in msi_data["bands"].items()}
         msi = MSIConfig(**msi_data)
 
+        indices = IndicesConfig.from_band_names(_cfg.pop("indices")["bands"], msi)
+
         composites = CompositesConfig(**_cfg.pop("composites"))
-        indices = IndicesConfig(**_cfg.pop("indices"))
         worldcover = WorldCoverConfig(**_cfg.pop("worldcover"))
         patches = PatchesConfig(**_cfg.pop("patches"))
 

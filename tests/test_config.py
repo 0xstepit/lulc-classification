@@ -15,6 +15,7 @@ from lulc.config.config import (
     load_config,
 )
 from lulc.config.dataset import PatchesConfig
+from lulc.constants import SCL_BAND_NAME
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
@@ -41,15 +42,17 @@ collection = "sentinel-2-l2a"
 url        = "https://stac.dataspace.copernicus.eu/v1"
 
 [msi]
-scl_mask_classes  = [0, 1, 3, 7, 8, 9, 10, 11]
 target_resolution = 10
-scl_band_index = 10
+scl_mask_classes  = [0, 1, 3, 7, 8, 9, 10, 11]
+band_order = ["blue", "green", "red", "red_edge1", "red_edge2", "red_edge3", "nir", "narrow_nir", "swir1", "swir2", "scl"]
 
-[msi.band_names]
+[msi.bands.10]
 "B02_10m" = "blue"
 "B03_10m" = "green"
 "B04_10m" = "red"
 "B08_10m" = "nir"
+
+[msi.bands.20]
 "B05_20m" = "red_edge1"
 "B06_20m" = "red_edge2"
 "B07_20m" = "red_edge3"
@@ -57,10 +60,6 @@ scl_band_index = 10
 "B11_20m" = "swir1"
 "B12_20m" = "swir2"
 "SCL_20m" = "scl"
-
-[msi.bands]
-10 = ["B02_10m", "B03_10m", "B04_10m", "B08_10m"]
-20 = ["B05_20m", "B06_20m", "B07_20m", "B8A_20m", "B11_20m", "B12_20m", "SCL_20m"]
 
 [composites]
 max_scenes_per_season = 10
@@ -71,9 +70,10 @@ skip_partial_blocks   = true
 DJF = ["2021-12-01", "2022-02-28"]
 JJA = ["2022-06-01", "2022-08-31"]
 
-[indices.bands_to_channels]
-ndvi = { "nir" = 6, "red" = 2 }
-ndwi = { "green" = 1, "nir" = 6 }
+[indices.bands]
+ndbi = { "swir" = "swir1", "nir" = "nir" }
+ndvi = { "nir" = "nir", "red" = "red" }
+ndwi = { "green" = "green", "nir" = "nir" }
 
 [worldcover]
 grid_url     = "https://example.invalid/grid.geojson"
@@ -153,9 +153,6 @@ class TestLoadConfig:
         assert cfg.patches.split == {"test": 0.15, "train": 0.7, "val": 0.15}
 
     def test_converts_the_toml_string_band_resolutions_to_int(self, tmp_path):
-        # TOML keys are always strings, so `[msi.bands] 10 = [...]` parses as
-        # "10". The coercion lives in the loader rather than in MSIConfig, which
-        # is what lets MSIConfig stay frozen.
         cfg = load_config(_write_toml(tmp_path))
 
         assert set(cfg.msi.bands) == {10, 20}
@@ -261,72 +258,64 @@ class TestStacConfig:
 
 
 class TestIndicesConfig:
-    def test_get_channel_returns_the_mapped_position(self, bands_to_channels):
-        cfg = IndicesConfig(bands_to_channels=bands_to_channels)
+    def test_resolves_band_names_through_the_canonical_order(self, make_msi):
+        msi = make_msi()
+        cfg = IndicesConfig.from_band_names(
+            {"ndbi": {"swir": "swir1", "nir": "nir"}}, msi
+        )
 
-        assert cfg.get_channel("ndvi", "nir") == 6
-        assert cfg.get_channel("ndvi", "red") == 2
-        assert cfg.get_channel("ndwi", "green") == 1
+        assert cfg.get_channel("ndbi", "swir") == msi.channel_index("swir1")
+        assert cfg.get_channel("ndbi", "nir") == msi.channel_index("nir")
 
-    def test_raises_for_an_unknown_index(self, bands_to_channels):
-        cfg = IndicesConfig(bands_to_channels=bands_to_channels)
-
-        with pytest.raises(KeyError):
-            cfg.get_channel("ndbi", "swir")
-
-    def test_raises_for_a_band_missing_from_the_index(self, bands_to_channels):
-        cfg = IndicesConfig(bands_to_channels=bands_to_channels)
-
-        with pytest.raises(KeyError):
-            cfg.get_channel("ndvi", "swir")
+    def test_raises_when_an_index_names_an_unknown_band(self, make_msi):
+        with pytest.raises(ValueError, match="unknown band 'swir3'"):
+            IndicesConfig.from_band_names({"ndbi": {"swir": "swir3"}}, make_msi())
 
 
 class TestMSIConfig:
-    def test_counts_every_band_across_the_resolutions(self, make_msi):
+    def test_channel_index_follows_the_declared_order(self, make_msi):
         cfg = make_msi()
 
-        assert cfg.num_bands == 11
+        assert cfg.channel_index("blue") == 0
+        assert cfg.channel_index("nir") == 6
+        assert cfg.scl_band_index == cfg.num_bands - 1
 
-    def test_raises_when_the_target_resolution_has_no_bands(self, make_msi):
-        with pytest.raises(ValueError, match="target resolution 60"):
-            make_msi(target_resolution=60)
-
-    def test_raises_when_band_names_number_wrong(self, make_msi, msi_kwargs):
-        without_red = {
-            key: value
-            for key, value in msi_kwargs["band_names"].items()
-            if value != "red"
-        }
-
-        with pytest.raises(
-            ValueError, match="band names is different than number of bands"
-        ):
-            make_msi(band_names=without_red)
-
-    def test_get_bands_list_is_flat_and_sorted(self, make_msi):
-        cfg = make_msi()
-
-        assert cfg.get_bands_list() == [
-            "B02_10m",
-            "B03_10m",
-            "B04_10m",
-            "B05_20m",
-            "B06_20m",
-            "B07_20m",
-            "B08_10m",
-            "B11_20m",
-            "B12_20m",
-            "B8A_20m",
-            "SCL_20m",
+    def test_scl_index_tracks_a_reordered_band_order(self, make_msi, msi_kwargs):
+        # The point of the design: moving a band moves its index, with nothing
+        # else to update.
+        reordered = [SCL_BAND_NAME] + [
+            n for n in msi_kwargs["band_order"] if n != SCL_BAND_NAME
         ]
 
-    def test_scl_index_points_at_the_scl_band(self, make_msi):
-        # scl_band_index is configured rather than derived, so it can drift away
-        # from the band ordering the download script actually writes. This is
-        # the guard against that drift.
+        assert make_msi(band_order=reordered).scl_band_index == 0
+
+    def test_get_bands_list_follows_the_canonical_order(self, make_msi):
         cfg = make_msi()
 
         assert cfg.get_bands_list()[cfg.scl_band_index] == "SCL_20m"
+        assert cfg.get_bands_list()[cfg.channel_index("nir")] == "B08_10m"
+
+    def test_raises_when_a_declared_band_is_never_mapped(self, make_msi, msi_kwargs):
+        with pytest.raises(ValueError, match="only in band_order"):
+            make_msi(band_order=[*msi_kwargs["band_order"], "cirrus"])
+
+    def test_raises_on_duplicate_band_order(self, make_msi, msi_kwargs):
+        with pytest.raises(ValueError, match="duplicates"):
+            make_msi(band_order=[*msi_kwargs["band_order"], "blue"])
+
+    def test_raises_without_an_scl_band(self, make_msi, msi_kwargs):
+        without_scl = {
+            res: {a: n for a, n in assets.items() if n != SCL_BAND_NAME}
+            for res, assets in msi_kwargs["bands"].items()
+        }
+        order = [n for n in msi_kwargs["band_order"] if n != SCL_BAND_NAME]
+
+        with pytest.raises(ValueError, match="must contain the 'scl' band"):
+            make_msi(band_order=order, bands=without_scl)
+
+    def test_channel_index_raises_for_an_unknown_band(self, make_msi):
+        with pytest.raises(ValueError, match="unknown band 'cirrus'"):
+            make_msi().channel_index("cirrus")
 
 
 class TestCompositesConfig:

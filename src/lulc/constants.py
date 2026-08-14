@@ -6,8 +6,6 @@ imports this module for `SEASONS_ORDER` — does not end up sitting above the
 configuration package in the dependency graph.
 """
 
-from __future__ import annotations
-
 from typing import TYPE_CHECKING
 
 # We need it to reference to MSIConfig in the annotation without actually
@@ -28,16 +26,22 @@ SEASON_MONTHS = {
 
 INDEX_NAMES = ["NDVI", "NDBI", "NDWI"]
 
+# Canonical name of the Scene Classification Layer. It is the one band that is
+# consumed during masking rather than carried into the composites.
+SCL_BAND_NAME = "scl"
+
 
 def seasonal_band_names(cfg: MSIConfig) -> list[str]:
-    # Well, yes the SCL band is hardcoded..
-    ordered_bands = [
-        cfg.band_names[band]
-        for band in cfg.get_bands_list()
-        if "scl" not in band.lower()
-    ]
-    return ordered_bands + INDEX_NAMES
+    """Return the channel names of a seasonal composite, in write order.
+
+    The spectral bands come first, in the canonical order declared by
+    `[msi] band_order`, minus the SCL layer which masking consumes. The spectral
+    indices are appended afterwards.
+    """
+    spectral = [name for name in cfg.band_order if name != SCL_BAND_NAME]
+    return spectral + INDEX_NAMES
 
 
 def composite_band_names(cfg: MSIConfig, num_seasons: int) -> list[str]:
+    """Return the position of the season bands in the all season raster."""
     return seasonal_band_names(cfg) * num_seasons

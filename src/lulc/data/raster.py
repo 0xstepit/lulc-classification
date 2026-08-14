@@ -75,7 +75,10 @@ def create_seasonal_profile(
 def create_masked_bands_and_indices_tile(
     cfg: Config, src: rasterio.DatasetReader, window: Window
 ) -> np.ndarray:
-    """Apply SCL mask to a windowed tile of the source file and stack bands and indices. The SCL channel is removed from the tile.
+    """Create a raster with SCL mask applied and stacked spectral indices.
+
+    The raster is created only for the window provided and the SCL channel is removed
+    from the bands in the tile.
 
     Parameters
     ----------

@@ -11,13 +11,15 @@ wheels/
 # Secrets
 .env
 
-# Project
-**/raw/**
-**/processed/**
-**/labels/**
-**/patches/**
-**/images/**
+# Project data
+data/raw/
+data/processed/
+data/labels/
+data/patches/
+data/reports/
+
+# Project artifacts
+assets/images/
 
 # MacOS
 .DS_Store
-data/reports/

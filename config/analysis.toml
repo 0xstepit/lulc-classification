@@ -32,18 +32,12 @@ lombardy   = [10.0509, 45.6435]
 # =================================================================================================
 
 [stac]
-backoff_factor = 1.5 # exponential backoff base between retries in [s]
-collection = "sentinel-2-l2a"
-max_retries = 6 # maximum number of retries for the items query.
-page_size = 20
-retry_statuses = [
-    429,
-    500,
-    502,
-    503,
-    504,
-] # list of statuses for which the retry must be executed.
-timeout = 90.0 # [s]
+backoff_factor = 1.5                       # exponential backoff base between retries in [s]
+collection     = "sentinel-2-l2a"
+max_retries    = 6                         # maximum number of retries for the items query.
+page_size      = 20
+retry_statuses = [429, 500, 502, 503, 504] # list of statuses for which the retry must be executed.
+timeout        = 90.0                      # [s]
 # Notice that by updating this URL, also the associated bands in [msi] must be updated accordingly.
 url = "https://stac.dataspace.copernicus.eu/v1" # STAC catalog location.
 
@@ -52,38 +46,29 @@ url = "https://stac.dataspace.copernicus.eu/v1" # STAC catalog location.
 # =================================================================================================
 
 [msi] # Configuration for the MultiSpectral Instrument of Sentinel-2 satellites.
-scl_mask_classes = [
-    0,
-    1,
-    3,
-    7,
-    8,
-    9,
-    10,
-    11,
-] # classes used to filter rasters with the SCL mask.
+scl_mask_classes = [0, 1, 3, 7, 8, 9, 10, 11] # classes used to filter rasters with the SCL mask.
 target_resolution = 10 # target resolution for the composite in [m]
-scl_band_index = 10
-
-[msi.bands]
-# 10: blue, green, red, NIR.
-# 20: red edge 1, red edge 2, red edge 3, narrow NIR, SWIR 1, SWIR 2, SCL.
-10 = ["B02_10m", "B03_10m", "B04_10m", "B08_10m"]
-20 = [
-    "B05_20m",
-    "B06_20m",
-    "B07_20m",
-    "B8A_20m",
-    "B11_20m",
-    "B12_20m",
-    "SCL_20m",
+band_order = [ # band order is defined in ascending wavelength order.
+    "blue",
+    "green",
+    "red",
+    "red_edge1",
+    "red_edge2",
+    "red_edge3",
+    "nir",
+    "narrow_nir",
+    "swir1",
+    "swir2",
+    "scl",
 ]
 
-[msi.band_names]
+[msi.bands.10]
 "B02_10m" = "blue"
 "B03_10m" = "green"
 "B04_10m" = "red"
 "B08_10m" = "nir"
+
+[msi.bands.20]
 "B05_20m" = "red_edge1"
 "B06_20m" = "red_edge2"
 "B07_20m" = "red_edge3"
@@ -92,6 +77,16 @@ scl_band_index = 10
 "B12_20m" = "swir2"
 "SCL_20m" = "scl"
 
+# =================================================================================================
+# Spectral indices
+# =================================================================================================
+
+# A map from the spectral index to the associated bands. The band position is resolved against the
+# canonical band order specified in the [msi] section.
+[indices.bands]
+ndbi = { "swir" = "swir1", "nir" = "nir" }  # notice that for the swir, swir1 is used.
+ndvi = { "nir" = "nir", "red" = "red" }
+ndwi = { "green" = "green", "nir" = "nir" }
 # =================================================================================================
 # Composites
 # =================================================================================================
@@ -102,25 +97,12 @@ tiles_size            = 1024 # size of the tiles when the raster is stored on di
 skip_partial_blocks   = true
 
 [composites.seasons]
-DJF = [
-    "2021-12-01",
-    "2022-02-28",
-] # alway use sequential seasons (december is from the previous year)
+DJF = ["2021-12-01", "2022-02-28"] # alway use sequential seasons (december is from the previous year)
 JJA = ["2022-06-01", "2022-08-31"]
 MAM = ["2022-03-01", "2022-05-31"]
 SON = ["2022-09-01", "2022-11-30"]
 # indices = ["NDVI", "NDBI", "NDWI"] # Computed per season
 
-# =================================================================================================
-# Spectral indices
-# =================================================================================================
-
-# A map from the band name to the raster channel for each spectral index
-# The bands are sorted alphabetically in the script, this is why we have this mapping
-[indices.bands_to_channels]
-ndbi = { "swir" = 7, "nir" = 6 }  # B08 and B04
-ndvi = { "nir" = 6, "red" = 2 }   # B11 and B08
-ndwi = { "green" = 1, "nir" = 6 } #B03 and B08
 
 # =================================================================================================
 # WorldCover
@@ -182,17 +164,14 @@ year         = 2021                                                             
 # =================================================================================================
 
 [patches]
-block_size = 1024 # dimension of each block of patches for a dataset subset [pixels]
-buffer = 1000 # buffer to apply between adjacent dataset subset [m]
-max_nan_fraction = 0.5 # maximum number of nan percentage supported in a patch. [%]
-normalization_percentiles = [
-    1,
-    99,
-] # percentiles to use in the normalization of the data.
-seed = 3
-seed_candidates = 200 # number of seeds to evaluate for the dataset split operation.
-size = 256 # patch size [pixel]
-stats_retention_fraction = 0.25 # percentage of pixels to accumulate for the statistic computation [%]
+block_size                = 1024    # dimension of each block of patches for a dataset subset [pixels]
+buffer                    = 1000    # buffer to apply between adjacent dataset subset [m]
+max_nan_fraction          = 0.5     # maximum number of nan percentage supported in a patch. [%]
+normalization_percentiles = [1, 99] # percentiles to use in the normalization of the data.
+seed                      = 3
+seed_candidates           = 200     # number of seeds to evaluate for the dataset split operation.
+size                      = 256     # patch size [pixel]
+stats_retention_fraction  = 0.25    # percentage of pixels to accumulate for the statistic computation [%]
 
 [patches.split] # dataset split fractions [%]
 test  = 0.15

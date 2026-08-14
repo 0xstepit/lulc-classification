@@ -41,35 +41,40 @@ def msi_kwargs() -> dict:
     return {
         "target_resolution": 10,
         "scl_mask_classes": [0, 1, 3, 7, 8, 9, 10, 11],
-        "scl_band_index": 10,
+        "band_order": [
+            "blue",
+            "green",
+            "red",
+            "red_edge1",
+            "red_edge2",
+            "red_edge3",
+            "nir",
+            "narrow_nir",
+            "swir1",
+            "swir2",
+            "scl",
+        ],
         "bands": {
-            10: ["B02_10m", "B03_10m", "B04_10m", "B08_10m"],
-            20: [
-                "B05_20m",
-                "B06_20m",
-                "B07_20m",
-                "B8A_20m",
-                "B11_20m",
-                "B12_20m",
-                "SCL_20m",
-            ],
-        },
-        "band_names": {
-            "B02_10m": "blue",
-            "B03_10m": "green",
-            "B04_10m": "red",
-            "B08_10m": "nir",
-            "B05_20m": "red_edge1",
-            "B06_20m": "red_edge2",
-            "B07_20m": "red_edge3",
-            "B8A_20m": "narrow_nir",
-            "B11_20m": "swir1",
-            "B12_20m": "swir2",
-            "SCL_20m": "scl",
+            10: {
+                "B02_10m": "blue",
+                "B03_10m": "green",
+                "B04_10m": "red",
+                "B08_10m": "nir",
+            },
+            20: {
+                "B05_20m": "red_edge1",
+                "B06_20m": "red_edge2",
+                "B07_20m": "red_edge3",
+                "B8A_20m": "narrow_nir",
+                "B11_20m": "swir1",
+                "B12_20m": "swir2",
+                "SCL_20m": "scl",
+            },
         },
     }
 
 
+# Pytest factory fixture pattern.
 @pytest.fixture
 def make_msi(msi_kwargs: dict) -> Callable[..., MSIConfig]:
     """Build an `MSIConfig`, replacing individual fields by keyword.

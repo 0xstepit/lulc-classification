@@ -49,7 +49,7 @@ def main():  # noqa: D103
     # to take into account the AOI, and then update it with the desired custom
     # profile properties.
     items = client.search_items(bbox, grid_code=cfg.aoi.selected.tile)
-    target_item = cfg.msi.bands[target_resolution][0]
+    target_item = cfg.msi.reference_asset(target_resolution)
     ref_item = items[0].assets[target_item].href
     profile = get_data_profile(ref_item)
 
