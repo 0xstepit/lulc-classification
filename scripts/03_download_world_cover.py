@@ -48,37 +48,40 @@ def main():  # noqa: D103
     if WORLDCOVER_LABELS.exists():
         logger.info(f"[{WORLDCOVER_LABELS}] file already exists, skipping.")
         return
+    try:
+        grid = gpd.read_file(cfg.worldcover.grid_url)
+        if cfg.aoi.selected.bounding_box is None:
+            raise ValueError("the AOI bounding box must be specified for this script")
+        tiles = get_worldcover_tile_ids(grid, cfg.aoi.selected.bounding_box)
 
-    grid = gpd.read_file(cfg.worldcover.grid_url)
-    if cfg.aoi.selected.bounding_box is None:
-        raise ValueError("the AOI bounding box must be specified for this script")
-    tiles = get_worldcover_tile_ids(grid, cfg.aoi.selected.bounding_box)
-
-    reporter.add("tiles_selection", tiles, bounding_box=cfg.aoi.selected.bounding_box)
-
-    logger.info(f"AOI intersects with WorldCover tiles: [{tiles}]")
-
-    composite = rxr.open_rasterio(SEASONAL_SCENES[0])
-    if not isinstance(composite, xr.DataArray):  # to make basedpyright happy...
-        raise TypeError(f"expected [{SEASONAL_SCENES[0]}] to open as a DataArray")
-
-    labels = create_worldcover_tile(cfg.worldcover, tiles, composite)
-    # Remap the classes stored in the legend:
-    legend = {
-        int(k): v
-        for k, v in (
-            line.split(maxsplit=1)
-            for line in labels.attrs["legend"].strip().splitlines()
+        reporter.add(
+            "tiles_selection", tiles, bounding_box=cfg.aoi.selected.bounding_box
         )
-    }
-    new_legend = {}
-    for index, name in legend.items():
-        new_legend[cfg.worldcover.class_mapping[index]] = name
-    labels = labels.rio.update_attrs(
-        {"legend": "\n".join([f"{k} {v}" for k, v in new_legend.items()])}
-    )
 
-    labels.rio.to_raster(WORLDCOVER_LABELS)
+        logger.info(f"AOI intersects with WorldCover tiles: [{tiles}]")
+
+        composite = rxr.open_rasterio(SEASONAL_SCENES[0])
+        if not isinstance(composite, xr.DataArray):  # to make basedpyright happy...
+            raise TypeError(f"expected [{SEASONAL_SCENES[0]}] to open as a DataArray")
+
+        labels = create_worldcover_tile(cfg.worldcover, tiles, composite)
+        # Remap the classes stored in the legend:
+        legend = {
+            int(k): v
+            for k, v in (
+                line.split(maxsplit=1)
+                for line in labels.attrs["legend"].strip().splitlines()
+            )
+        }
+        new_legend = {}
+        for index, name in legend.items():
+            new_legend[cfg.worldcover.class_mapping[index]] = name
+        labels = labels.rio.update_attrs(
+            {"legend": "\n".join([f"{k} {v}" for k, v in new_legend.items()])}
+        )
+        labels.rio.to_raster(WORLDCOVER_LABELS)
+    except Exception:
+        raise
 
     with rasterio.open(WORLDCOVER_LABELS, "r+") as dst:
         stamp(
@@ -88,6 +91,7 @@ def main():  # noqa: D103
             stage="worldcover_labels",
             worldcover_version=cfg.worldcover.version,
             worldcover_year=str(cfg.worldcover.year),
+            worldcover_tiles=str(tiles),
             clas_legend="; ".join(
                 f"{k}={v}" for k, v in sorted(cfg.worldcover.class_names.items())
             ),
