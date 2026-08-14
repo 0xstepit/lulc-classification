@@ -1,12 +1,12 @@
+<div align="center">
+  <img src="assets/logo.png" alt="LULC classification logo" width="250" height="auto" />
+</div>
+
 ![Static Badge](https://img.shields.io/badge/status-WIP-yellow)
 [![Python](https://img.shields.io/badge/python-3.14%2B-blue.svg)](https://www.python.org/downloads/)
 [![Unit Tests](https://img.shields.io/github/actions/workflow/status/0xstepit/lulc-classification/tests.yaml?style=flat&logo=githubactions&logoColor=white&label=tests&labelColor=grey)](https://github.com/0xstepit/lu-lc-classification-with-unet/actions/workflows/tests.yml)
 [![Lint](https://img.shields.io/github/actions/workflow/status/0xstepit/lulc-classification/lint_and_format.yaml?style=flat&logo=githubactions&logoColor=white&label=lint&labelColor=grey&job=lint)](https://github.com/0xstepit/lu-lc-classification-with-unet/actions/workflows/lint.yml)
 [![Format](https://img.shields.io/github/actions/workflow/status/0xstepit/lulc-classification/lint_and_format.yaml?style=flat&logo=githubactions&logoColor=white&label=format&labelColor=grey&job=format)](https://github.com/0xstepit/lu-lc-classification-with-unet/actions/workflows/lint.yml)
-
-<div align="center">
-  <img src="assets/logo.png" alt="LULC classification logo" width="250" height="auto" />
-</div>
 
 # LULC Classification
 
