@@ -106,4 +106,5 @@ dev = [
     "geodataset>=0.3.2",
     "geodatasets>=2026.5.1",
     "dvc>=3.67.1",
+    "pytest-cov>=7.1.0",
 ]
