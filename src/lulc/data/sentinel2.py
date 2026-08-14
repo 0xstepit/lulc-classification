@@ -205,20 +205,13 @@ def get_scene(
     resampling_method = resampling_strategy.get_method()
 
     with rasterio.open(item_path) as src:
-        scaled_window = Window(
-            window.col_off / resampling_factor,  # type: ignore[call-arg]
-            window.row_off / resampling_factor,
-            window.width / resampling_factor,
-            window.height / resampling_factor,
-        )
-
-        # An output shape is always created and used, so it should be ok to always set it here,
-        # even with the original size.
-        # https://github.com/rasterio/rasterio/blob/4e5bce88ea3c84b41a394244fe1cad6a5b8eb854/rasterio/_io.pyx#L544-L547
         return src.read(
             1,
-            window=scaled_window,
-            out_shape=(int(window.height), int(window.width)),
+            window=window,
+            out_shape=(
+                int(window.height * resampling_factor),
+                int(window.width * resampling_factor),
+            ),
             resampling=resampling_method,
         )
 

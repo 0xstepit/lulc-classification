@@ -67,8 +67,9 @@ require-lazy = { include = "all" }
 
 # Ignore all pydocstyle rules for tests.
 [tool.ruff.lint.per-file-ignores]
-"tests/**/*"   = ["D"]
-"notebooks/**" = ["D", "E402", "F821", "T20"]
+"tests/**/*"     = ["D"]
+"notebooks/**"   = ["D", "E402", "F821", "T20"]
+"notebooks/*.py" = ["B018"]                     # allow printed lines in .py associated with jupytext-style notebooks.
 
 [tool.ruff.format]
 docstring-code-format      = true
