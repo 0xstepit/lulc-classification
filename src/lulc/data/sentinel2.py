@@ -261,10 +261,9 @@ def create_all_bands_scene(
         Additional provenance tags, e.g. the originating STAC item id.
     """
     # Open a file in write mode with rasterio and the provided profile.
+    logger.info(f"opening file {out_file.name}")
     with rasterio.open(out_file, "w", **profile) as dst:
         for idx, band in enumerate(bands):
-            logger.info(f"starting download for band ({band}) and index {idx}")
-
             resolution = get_resolution_from_band_name(band)
 
             # Resampling strategy is bilinear for continuous variables and nearest
