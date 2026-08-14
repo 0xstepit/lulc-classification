@@ -27,7 +27,6 @@
 # %%
 
 import matplotlib.pyplot as plt
-import numpy as np
 import rasterio
 from dotenv import load_dotenv
 from rasterio import transform, warp
@@ -37,7 +36,7 @@ from rasterio.windows import from_bounds
 from lulc.config.viz import load_viz_config
 from lulc.data.sentinel2 import ResamplingStrategy, get_scene
 from lulc.io import VIZ_CONFIG
-from lulc.viz.images import set_matplotlib_global_config
+from lulc.viz.images import robust_plot, set_matplotlib_global_config
 
 load_dotenv()
 viz_cfg = load_viz_config(VIZ_CONFIG)
@@ -95,23 +94,6 @@ bounds_tile_deg
 
 # %% [markdown]
 # Let's first visualize the original tile:
-
-
-# %%
-def robust_plot(data, bounds) -> None:
-    """
-    Plot the provided data with the Viridis cmap and min/max values given
-    by the 2nd and 98th percentiles of the data.
-    """
-    vmin, vmax = np.percentile(data, [2, 98])
-    left, bottom, right, top = bounds
-    plt.imshow(
-        data,
-        vmin=vmin,
-        vmax=vmax,
-        extent=[left, right, bottom, top],
-        cmap="gray",
-    )
 
 
 # %%
