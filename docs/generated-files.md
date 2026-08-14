@@ -196,3 +196,26 @@ are nothing but the rasters for the labels and the stacked seasons divided into
 small chunks, with each chunk associated with a dataset subset. Since these data
 will be used directly by PyTorch or another Python library, they are stored in
 `.npy` files, and we cannot use GDAL to extract information from them.
+
+For patches, each patch is dispatched in one of the 3 subsets used during model
+training, and the metadata associated with all of them are contained in the
+`patches_metadata.json`. For example, we can see what all the 52 bands in the
+feature patch represent:
+
+```json
+...
+"channel_names": [
+    "DJF_blue",
+    "DJF_green",
+    "DJF_red",
+    "DJF_red_edge1",
+    "DJF_red_edge2",
+    "DJF_red_edge3",
+    "DJF_nir",
+    ...
+]
+...
+```
+
+The file contains also information associated with the seasons considered, the
+labelling for the label patches, and more.
