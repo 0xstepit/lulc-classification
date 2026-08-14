@@ -142,6 +142,9 @@ How to handle nan values:
 - Median of the entire image if all the bands are nan. Better doing it at patch
   level and not at block level.
 
+Notice that the median across many images can create bands for which the
+combination of the reflactances can never happen in reality.
+
 ## References
 
 - https://eos.com/make-an-analysis/ndwi/

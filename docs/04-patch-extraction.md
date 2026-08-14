@@ -111,3 +111,14 @@ The other important information is that our data is stored with
 values for the first band 1 sequential, then band 2, and so on. Is it the best
 approach for our dataset creation or would it be better to have the
 `INTERLEAVE=PIXEL`?
+
+## Seed selection
+
+When we create the patches and apply the buffered filter, we remove in an
+unpredictable way patches from each set. By iterating over multiple seeds, we
+can check that each class in the targets is appropriately distributed across all
+the sets.
+
+## References
+
+https://github.com/rasterio/rasterio/discussions/2427

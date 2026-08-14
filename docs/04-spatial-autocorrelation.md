@@ -90,4 +90,18 @@ The normalization of the dataset is done by clipping each band to its p1 and p99
 computed only over the training blocks and then rescaling everything within
 $\[0, 1\]$.
 
+## Chebyshev distance
+
+To apply the buffer around the created blocks in the dataset, we use the
+[Chebyshev distance][chebyshevdistance2026], also called $L\_{\\infty}$ metric.
+This metric defines a notion of distance between two points as the greatest of
+the differences along all the coordinates. The metric is defined as:
+
+$$ D(a, b) = \\lim\_{p \\rightarrow \\infty}\\Big( \\sum\_{i=1}^n \\lvert a_i -
+b_i \\rvert^p \\Big)^{1/p} $$
+
+More simply stated, in a Cartesian system, the metric is defined as the max
+between the distances along $x$ and $y$.
+
+[chebyshevdistance2026]: https://en.wikipedia.org/w/index.php?title=Chebyshev_distance&oldid=1356335765 "Chebyshev Distance"
 [kattenbornspatiallyautocorrelatedtraining2022]: https://linkinghub.elsevier.com/retrieve/pii/S2667393222000072 "Spatially Autocorrelated Training and Validation Samples Inflate Performance Assessment of Convolutional Neural Networks"
