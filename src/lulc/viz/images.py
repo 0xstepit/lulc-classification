@@ -1,7 +1,10 @@
+"""Collection of functions to simplify plotting with uniform style."""
+
 from pathlib import Path
 
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import numpy as np
 from cycler import cycler
 from matplotlib.figure import Figure
 
@@ -54,3 +57,16 @@ def set_matplotlib_global_config(cfg: VizConfig) -> None:
     mpl.rcParams["axes.titlesize"] = cfg.font.size["subtitle"]
     mpl.rcParams["axes.labelsize"] = cfg.font.size["labels"]
     return
+
+
+def robust_plot(data, bounds: list[float], cmap: str = "gray") -> None:
+    """Plot the provided data with using P2 and P98 percentiles."""
+    vmin, vmax = np.percentile(data, [2, 98])
+    left, bottom, right, top = bounds
+    plt.imshow(
+        data,
+        vmin=vmin,
+        vmax=vmax,
+        extent=(left, right, bottom, top),
+        cmap=cmap,
+    )
