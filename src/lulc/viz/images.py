@@ -2,13 +2,10 @@
 
 from pathlib import Path
 
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
-from cycler import cycler
 from matplotlib.figure import Figure
 
-from lulc.config.viz import VizConfig
 from lulc.io import IMGS_DIR
 
 
@@ -42,28 +39,12 @@ def store_figure(
     return dir
 
 
-def set_matplotlib_global_config(cfg: VizConfig) -> None:
-    """Set the matplotlib parameters in the provided configuration as global params.
-
-    Parameters
-    ----------
-    cfg : VizConfig
-        The config instance containing global params.
-    """
-    prop_cycle_colors = cfg.colors.prop_cycle
-    colors = [prop_cycle_colors[idx] for idx in range(len(prop_cycle_colors.keys()))]
-    mpl.rcParams["axes.prop_cycle"] = cycler(color=colors)
-    mpl.rcParams["figure.titlesize"] = cfg.font.size["title"]
-    mpl.rcParams["axes.titlesize"] = cfg.font.size["subtitle"]
-    mpl.rcParams["axes.labelsize"] = cfg.font.size["labels"]
-    return
-
-
 def robust_plot(data, bounds: list[float], cmap: str = "gray") -> None:
     """Plot the provided data with using P2 and P98 percentiles."""
+    _, ax = plt.subplots(figsize=(6, 6))
     vmin, vmax = np.percentile(data, [2, 98])
     left, bottom, right, top = bounds
-    plt.imshow(
+    ax.imshow(
         data,
         vmin=vmin,
         vmax=vmax,
