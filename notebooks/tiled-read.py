@@ -1,6 +1,7 @@
 # ---
 # jupyter:
 #   jupytext:
+#     formats: ipynb,py:percent
 #     text_representation:
 #       extension: .py
 #       format_name: percent
@@ -24,16 +25,18 @@
 # %autoreload 2
 
 # %%
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import rasterio
+from dotenv import load_dotenv
 
-from lulc.config.viz import load_viz_config
-from lulc.io import RAW_DATA_DIR, VIZ_CONFIG
-from lulc.viz.images import robust_plot, set_matplotlib_global_config
+from lulc.io import RAW_DATA_DIR
+from lulc.viz.images import robust_plot
 
-viz_cfg = load_viz_config(VIZ_CONFIG)
-set_matplotlib_global_config(viz_cfg)
+# %%
+load_dotenv()
+matplotlib.rc_file(matplotlib.matplotlib_fname())
 
 # %%
 root, target = next(
@@ -124,5 +127,3 @@ plt.tight_layout(pad=1)
 
 # %%
 print("\n".join(windows_info))
-
-# %%

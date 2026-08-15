@@ -13,7 +13,7 @@
 # ---
 
 # %% [markdown]
-# ## Areas of interest
+# ## Candidates viz
 #
 # Simple visualization of the candidate area of interest in a World map.
 
@@ -22,28 +22,21 @@
 # %autoreload 2
 
 # %%
-import os
-import sys
-
-sys.path.append(os.path.abspath(".."))
-
-# %%
 import geodatasets
 import geopandas as gpd
+import matplotlib
 import matplotlib.pyplot as plt
+from dotenv import load_dotenv
 from shapely.geometry import Point
 
 from lulc.config import load_config
-from lulc.config.viz import load_viz_config
-from lulc.io import GLOBAL_CONFIG, VIZ_CONFIG
-from lulc.viz.images import set_matplotlib_global_config, store_figure
+from lulc.io import GLOBAL_CONFIG
+from lulc.viz.images import store_figure
 
 # %%
+load_dotenv()
+matplotlib.rc_file(matplotlib.matplotlib_fname())
 cfg = load_config(GLOBAL_CONFIG)
-
-# %%
-viz_cfg = load_viz_config(VIZ_CONFIG)
-set_matplotlib_global_config(viz_cfg)
 
 # %%
 aois = cfg.aoi.candidates
@@ -76,7 +69,7 @@ title = "Areas of interest (Europe)"
 fig, ax = plt.subplots(
     ncols=2,
     figsize=(12, 6),
-    gridspec_kw={"width_ratios": [2] + [1]},
+    gridspec_kw={"width_ratios": [2, 1]},
     constrained_layout=True,
 )
 
@@ -101,6 +94,6 @@ ax[1].set_ylabel("latitude [deg]")
 # Add some space as fraction of the entire width.
 fig.get_layout_engine().set(wspace=0.1)
 
-_ = fig.suptitle(title, fontweight="bold", y=0.9)
+_ = fig.suptitle(title, y=0.9)
 
 store_figure(title)

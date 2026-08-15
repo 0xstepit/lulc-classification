@@ -13,7 +13,7 @@
 # ---
 
 # %% [markdown]
-# # Windowing and Resampling
+# # Windowing and resampling
 #
 # In this notebook, we are going to investigate how to use `rasterio` to load a windowed and resized area of interest (AOI) out of a bigger raster. These functionalities allow us to perform useful pre-processing operations like:
 #
@@ -25,7 +25,7 @@
 # %autoreload 2
 
 # %%
-
+import matplotlib
 import matplotlib.pyplot as plt
 import rasterio
 from dotenv import load_dotenv
@@ -33,14 +33,12 @@ from rasterio import transform, warp
 from rasterio.enums import Resampling
 from rasterio.windows import from_bounds
 
-from lulc.config.viz import load_viz_config
 from lulc.data.sentinel2 import ResamplingStrategy, get_scene
-from lulc.io import VIZ_CONFIG
-from lulc.viz.images import robust_plot, set_matplotlib_global_config
+from lulc.viz.images import robust_plot
 
+# %%
 load_dotenv()
-viz_cfg = load_viz_config(VIZ_CONFIG)
-set_matplotlib_global_config(viz_cfg)
+matplotlib.rc_file(matplotlib.matplotlib_fname())
 
 # %% [markdown]
 # As a reference tile, we are going to use a region of Andalusia (Spain), the same as that analyzed across the entire project. The URL points to the green band at 10 m resolution.
@@ -164,7 +162,7 @@ scene_oversampled = get_scene(href_andalusia, window, resampling)
 scene_oversampled.shape
 
 # %%
-robust_plot(new, bounds_aoi_m)
+robust_plot(scene_oversampled, bounds_aoi_m)
 plt.suptitle("Green band upsampling AOI")
 plt.title("Andalusia (Spain)")
 plt.xlabel("longitude [m]")

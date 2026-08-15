@@ -42,7 +42,7 @@ def store_figure(
 def robust_plot(data, bounds: list[float], cmap: str = "gray") -> None:
     """Plot the provided data with using P2 and P98 percentiles."""
     _, ax = plt.subplots(figsize=(6, 6))
-    vmin, vmax = np.percentile(data, [2, 98])
+    vmin, vmax = np.nanpercentile(data, [2, 98])
     left, bottom, right, top = bounds
     ax.imshow(
         data,
